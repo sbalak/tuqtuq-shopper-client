@@ -1,5 +1,6 @@
 import  { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 export const API_URL = "https://shoppingcart-sandbox.azurewebsites.net";
 const TOKEN_KEY = "accessToken";
@@ -24,7 +25,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
     useEffect(() => {
         const loadToken = async () => {
-            const token = null; //await AsyncStorage.getItem(TOKEN_KEY);
+            const token = await SecureStore.getItemAsync(TOKEN_KEY);
             console.log("Stored Token: ", token);
             
             if (token) {
@@ -54,7 +55,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         try {
             const response = await axios.post(`${API_URL}/login`, { email, password });
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
-            //await AsyncStorage.setItem(TOKEN_KEY, response.data.accessToken);
+            await SecureStore.setItem(TOKEN_KEY, response.data.accessToken);
 
             setAuthState({
                 token: response.data.accessToken,
@@ -70,6 +71,8 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
     const logout = async () => {
         try {
+            await SecureStore.deleteItemAsync(TOKEN_KEY);
+
             setAuthState({
                 token: null,
                 authenticated: false

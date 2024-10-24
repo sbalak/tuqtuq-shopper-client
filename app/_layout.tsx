@@ -1,3 +1,4 @@
+import CustomHeader from "@/components/CustomHeader";
 import AuthProvider, { useAuth } from "@/hooks/useAuth";
 import { router, Slot, Stack } from "expo-router";
 import { useEffect } from "react";
@@ -23,6 +24,10 @@ const RootLayout = () => {
   });
 
   return (
-    <Slot />
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ header: () => <CustomHeader /> }} />
+      <Stack.Screen name="settings" options={{ headerShown: false }} />
+      <Stack.Screen name="auth" options={{ headerShown: false }} />
+    </Stack>
   );
 }

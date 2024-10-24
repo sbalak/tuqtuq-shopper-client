@@ -3,8 +3,7 @@ import React from 'react'
 import { useFocusEffect } from 'expo-router';
 import axios from 'axios';
 
-export default function index() {
-  
+export default function store() {
   const load = async() => {
     const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/restaurant/list`);
     console.log(response);
@@ -15,9 +14,10 @@ export default function index() {
       load();
     }, [])
   );
+
   return (
     <View>
-      <Text>index</Text>
+      <Text>Store Dashboard</Text>
     </View>
   )
 }

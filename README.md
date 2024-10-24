@@ -10,4 +10,4 @@ PROJECT SETUP
 DEPENDENCIES
 
 1. npm install axios
-2. TODO: npx expo install expo-secure-store
+2. npx expo install expo-secure-store
