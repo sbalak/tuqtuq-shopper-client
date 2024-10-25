@@ -17,7 +17,7 @@ export default function index() {
   }
 
   return (
-    <View style={{ paddingTop: 50 }}>
+    <View style={{ paddingTop: 150 }}>
       <Text>Settings Landing Page</Text>
       <TouchableOpacity onPress={handleLogout}>
         <Text>Logout</Text>

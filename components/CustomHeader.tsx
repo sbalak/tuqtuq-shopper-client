@@ -4,7 +4,7 @@ import { Link, Redirect, router } from 'expo-router'
 
 const CustomHeader = () => {
   return (
-    <View style={{ paddingTop: 50 }}>
+    <View style={{ paddingTop: 150 }}>
         <TouchableOpacity onPress={() => router.push('/settings')}>
             <Text>Settings</Text>
         </TouchableOpacity>

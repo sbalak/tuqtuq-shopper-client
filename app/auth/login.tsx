@@ -12,34 +12,44 @@ export const Login = () => {
   const handleLogin = async () => {
     try {
       const result = await login(email, password);
-      if (result && result.error) {
-        Alert.alert('Error', "Unauthorized, please check your email and password.");
+      if (!email || !password) {
+        Alert.alert('Error!', "Please enter your email and password.");
       }
+      else{
+        if (result && result.error) {
+          Alert.alert('Error!', "Unauthorized, please check your email and password.");
+        }
+      }      
     } catch (error) {
-      Alert.alert('Error', "Something went wrong, please try again later.");
+      Alert.alert('Error!', "Something went wrong, please try again later.");
     }
   }
 
   return (
     <View style={styles.container}>
+    <View style={styles.brandContainer}>
+      <Text style={styles.brandTitle}>Takku</Text>
+    </View>
+    <View style={styles.loginContainer}>
       <Text style={styles.title}>Login</Text>
       <Text style={styles.subTitle}>Hello there, welcome back!</Text>
       <View style={styles.textInputSection}>
         <Text style={styles.textInputTitle}>Email Address</Text>
-        <View style={styles.textInputBox}>
-          <TextInput style={styles.width_100} placeholderTextColor='#666' placeholder='Enter your email address' value={email} onChangeText={(text: string) => setEmail(text)}></TextInput>
+        <View style={styles.textInput}>
+          <TextInput style={styles.textInputBox} placeholderTextColor='#666' placeholder='Enter your email address' value={email} onChangeText={(text: string) => setEmail(text)}></TextInput>
         </View>
       </View>
       <View style={styles.textInputSection}>
         <Text style={styles.textInputTitle}>Password</Text>
-        <View style={styles.textInputBox}>
-          <TextInput style={styles.width_100} placeholderTextColor='#666' placeholder='Enter your password' value={password} onChangeText={(text: string) => setPassword(text)} secureTextEntry={true}></TextInput>
+        <View style={styles.textInput}>
+          <TextInput style={styles.textInputBox} placeholderTextColor='#666' placeholder='Enter your password' value={password} onChangeText={(text: string) => setPassword(text)} secureTextEntry={true}></TextInput>
         </View>        
       </View>              
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
       <Text style={styles.registerText}>Don't have an account already? <Text style={styles.registerButton} onPress={() => router.navigate("/auth/register")}>Register</Text></Text>
+    </View>
     </View>
   )
 }
@@ -48,16 +58,34 @@ export default Login;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1, 
+    backgroundColor: '#FFF'
+  },
+  brandContainer: {
+    alignItems: "center",
+    backgroundColor: Colors.Primary,
+    paddingTop: 100,
+    paddingBottom: 30,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20
+  },
+  brandTitle: {
+    color: '#FFF',
+    fontFamily: 'dynapuff-semi',
+    fontSize: 32,
+  },
+  loginContainer: {
+    fontFamily: 'outfit',
     backgroundColor: '#FFF',
     padding: 20
   },
   title: { 
+    fontFamily: 'outfit-bold',
     fontSize: 24, 
-    fontWeight: 'bold', 
     marginVertical: 20,
   },
   subTitle: {
+    fontFamily: 'outfit-medium',
     fontSize: 16,
     marginBottom: 20
   },
@@ -65,10 +93,11 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   textInputTitle: {
+    fontFamily: 'outfit',
     fontSize: 16,  
     marginVertical: 10
   },
-  textInputBox: { 
+  textInput: {
     width: "100%", 
     height: 50, 
     borderColor: '#e0e0e0', 
@@ -78,6 +107,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     paddingLeft: 20, 
     paddingRight: 20 
+  },
+  textInputBox: {
+    fontFamily: 'outfit',
+    width: "100%"
   },
   loginButton: {
     marginBottom: 20,
@@ -89,18 +122,17 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   loginButtonText: {
+    fontFamily: 'outfit',
     color: '#FFF',
     fontSize: 16,
     fontWeight: 'bold'
   },
   registerText: {
+    fontFamily: 'outfit',
     fontSize: 16, 
     textAlign: 'center'
   },
   registerButton: {
     color: Colors.Primary
-  },
-  width_100: {
-    width: "100%"
   }
 });
