@@ -1,6 +1,7 @@
 import { View, Text, Touchable, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useAuth } from '@/hooks/useAuth';
+import { Link, router } from 'expo-router';
 
 export default function index() {
 
@@ -21,6 +22,8 @@ export default function index() {
       <TouchableOpacity onPress={handleLogout}>
         <Text>Logout</Text>
       </TouchableOpacity>
+
+      <Text style={{ color: '#000', fontWeight: 'bold' }} onPress={() => router.navigate("/settings/profile")}>Profile Edit</Text>
     </View>
   )
 }
