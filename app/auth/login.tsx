@@ -1,8 +1,9 @@
-import { View, TextInput, Button, Text, TouchableOpacity, Alert, StyleSheet } from 'react-native'
+import { View, TextInput, Button, Text, TouchableOpacity, Alert, StyleSheet, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import { useAuth } from '@/hooks/useAuth';
 import { router } from 'expo-router';
 import { Colors } from '@/constants/Colors';
+import { Ionicons } from '@expo/vector-icons';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -27,29 +28,32 @@ export const Login = () => {
 
   return (
     <View style={styles.container}>
-    <View style={styles.brandContainer}>
-      <Text style={styles.brandTitle}>Takku</Text>
-    </View>
-    <View style={styles.loginContainer}>
-      <Text style={styles.title}>Login</Text>
-      <Text style={styles.subTitle}>Hello there, welcome back!</Text>
-      <View style={styles.textInputSection}>
-        <Text style={styles.textInputTitle}>Email Address</Text>
-        <View style={styles.textInput}>
-          <TextInput style={styles.textInputBox} placeholderTextColor='#666' placeholder='Enter your email address' value={email} onChangeText={(text: string) => setEmail(text)}></TextInput>
-        </View>
+      <View style={styles.brandContainer}>
+        <Text style={styles.brandTitle}>Takku</Text>
       </View>
-      <View style={styles.textInputSection}>
-        <Text style={styles.textInputTitle}>Password</Text>
-        <View style={styles.textInput}>
-          <TextInput style={styles.textInputBox} placeholderTextColor='#666' placeholder='Enter your password' value={password} onChangeText={(text: string) => setPassword(text)} secureTextEntry={true}></TextInput>
-        </View>        
-      </View>              
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.loginButtonText}>Login</Text>
-      </TouchableOpacity>
-      <Text style={styles.registerText}>Don't have an account already? <Text style={styles.registerButton} onPress={() => router.navigate("/auth/register")}>Register</Text></Text>
-    </View>
+      <View style={styles.loginContainer}>
+        <Text style={styles.title}>Login</Text>
+        <Text style={styles.subTitle}>Hello there, welcome back!</Text>
+        <View style={styles.textInputSection}>
+          <Text style={styles.textInputTitle}>Email Address</Text>
+          <View style={styles.textInput}>
+            <TextInput style={styles.textInputBox} placeholderTextColor={Colors.LightGrey} placeholder='Enter your email address' value={email} onChangeText={(text: string) => setEmail(text)}></TextInput>
+          </View>
+        </View>
+        <View style={styles.textInputSection}>
+          <Text style={styles.textInputTitle}>Password</Text>
+          <View style={styles.textInput}>
+            <TextInput style={styles.textInputBox} placeholderTextColor={Colors.LightGrey} placeholder='Enter your password' value={password} onChangeText={(text: string) => setPassword(text)} secureTextEntry={true}></TextInput>
+          </View>        
+        </View>              
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+          <Ionicons name="log-in-outline" size={24} color={Colors.White} /> 
+          <Text style={styles.loginButtonText}>
+            Login
+          </Text>
+        </TouchableOpacity>
+        <Text style={styles.registerText}>Don't have an account already? <Text style={styles.registerButton} onPress={() => router.navigate("/auth/register")}>Register</Text></Text>
+      </View>
     </View>
   )
 }
@@ -59,34 +63,34 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex:1, 
-    backgroundColor: '#FFF'
+    backgroundColor: Colors.White
   },
   brandContainer: {
     alignItems: "center",
     backgroundColor: Colors.Primary,
-    paddingTop: 100,
+    paddingTop: 70,
     paddingBottom: 30,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25
   },
   brandTitle: {
-    color: '#FFF',
+    color: Colors.White,
     fontFamily: 'dynapuff-semi',
-    fontSize: 32,
+    fontSize: 40,
   },
   loginContainer: {
     fontFamily: 'outfit',
-    backgroundColor: '#FFF',
+    backgroundColor: Colors.White,
     padding: 20
   },
   title: { 
     fontFamily: 'outfit-bold',
-    fontSize: 24, 
-    marginVertical: 20,
+    fontSize: 28, 
+    marginVertical: 10,
   },
   subTitle: {
     fontFamily: 'outfit-medium',
-    fontSize: 16,
+    fontSize: 20,
     marginBottom: 20
   },
   textInputSection: {
@@ -100,7 +104,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: "100%", 
     height: 50, 
-    borderColor: '#e0e0e0', 
+    borderColor: Colors.LighterGrey, 
     borderWidth: 1, 
     borderRadius: 10, 
     alignItems: 'center', 
@@ -117,14 +121,16 @@ const styles = StyleSheet.create({
     height: 50,
     width: "100%",
     backgroundColor: Colors.Primary,
+    borderRadius: 10,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10
+    justifyContent: 'center'
   },
   loginButtonText: {
     fontFamily: 'outfit',
-    color: '#FFF',
-    fontSize: 16,
+    color: Colors.White,
+    fontSize: 18,
+    marginLeft: 10,
     fontWeight: 'bold'
   },
   registerText: {
