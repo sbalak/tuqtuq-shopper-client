@@ -60,9 +60,7 @@ const styles = StyleSheet.create({
       fontFamily: 'outfit-medium'
   },
   searchButton: {
-      backgroundColor: Colors.LighterGrey,
-      padding: 10,
-      borderRadius: 50
+      padding: 10
   },
   profileButton: {
       backgroundColor: Colors.LighterGrey,
