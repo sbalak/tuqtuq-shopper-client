@@ -1,9 +1,7 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
-import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import RestaurantNearbyCard from './RestaurantNearbyCard';
-import { useFocusEffect } from 'expo-router';
 
 export default function RestaurantNearby({restaurants}: {restaurants: any}) {
   return (

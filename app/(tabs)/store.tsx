@@ -1,9 +1,7 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import React, { useState } from 'react'
-import { router, useFocusEffect } from 'expo-router';
+import { useFocusEffect } from 'expo-router';
 import axios from 'axios';
-import { Colors } from '@/constants/Colors';
-import RestaurantRecentCard from '@/components/store/RestaurantRecentCard';
 import RestaurantNearby from '@/components/store/RestaurantNearby';
 import RestaurantRecent from '@/components/store/RestaurantRecent';
 
