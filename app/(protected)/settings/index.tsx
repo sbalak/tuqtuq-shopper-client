@@ -9,10 +9,10 @@ export default function index() {
   
   const handleLogout = async () => {
     try {
-      const result = await logout();
+      await logout();
     }
     catch (error) {
-      console.log("line-14 -> settings/index.tsx: [EXCEPTION] ", error);
+      console.log(error);
     }
   }
 

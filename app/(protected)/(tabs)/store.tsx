@@ -13,8 +13,8 @@ export default function store() {
       const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/restaurant/list`);
       setRestaurants(response.data);
     }
-    catch(err) {
-      console.log(err)
+    catch(error) {
+      console.log(error);
     } 
   }
 

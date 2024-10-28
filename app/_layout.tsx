@@ -25,23 +25,17 @@ export default function _layout() {
 
 const RootLayout = () => {
   const { authState } = useAuth();
-   
+
   useEffect(() => {
     if (authState.authenticated) {
       router.replace('/store'); 
     }
-    else{ 
-      router.replace('/auth/login');
+    else{
+      router.replace('/login');
     }
   }, [authState.authenticated]);
 
   return (
-    <Stack>
-      <Stack.Screen name="auth" options={{ headerShown: false }} /> 
-      <Stack.Screen name="(tabs)" options={{ header: () => <CustomHeader /> }} />
-      <Stack.Screen name="settings" options={{ headerShown: false }} />
-      <Stack.Screen name="store" options={{ headerShown: false }} />
-      <Stack.Screen name="order" options={{ headerShown: false }} />
-    </Stack>
+    <Slot />
   );
 }

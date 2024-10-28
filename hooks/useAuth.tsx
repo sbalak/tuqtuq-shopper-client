@@ -1,6 +1,7 @@
 import  { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
+import { router } from 'expo-router';
 
 export const API_URL = "https://shoppingcart-sandbox.azurewebsites.net";
 const TOKEN_KEY = "accessToken";
@@ -34,8 +35,8 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
                 setAuthState({
                     token: token,
                     authenticated: true
-                });
-            }
+                });        
+            }    
         };
 
         loadToken();
@@ -61,7 +62,6 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
                 token: response.data.accessToken,
                 authenticated: true
             });
-            console.log("Login Response: ", response);
 
             return response;
         } catch (error) {
@@ -76,7 +76,8 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
             setAuthState({
                 token: null,
                 authenticated: false
-            });            
+            });          
+            router.replace('/login');  
         } catch (error) {
             return { error: true, message: (error as any).response.data };
         }

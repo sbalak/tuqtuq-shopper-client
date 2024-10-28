@@ -1,17 +1,13 @@
+import { useAuth } from "@/hooks/useAuth";
+import { Redirect, router } from "expo-router";
+import { useEffect } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
-  return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" color="#0000ff" />
-    </View>
+      
+  const { authState } = useAuth();  
+
+  return (  
+    (authState.authenticated) ?  <Redirect href="/store" /> : <Redirect href="/login" />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  }
-})
