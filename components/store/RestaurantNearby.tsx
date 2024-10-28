@@ -10,7 +10,7 @@ export default function RestaurantNearby({restaurants}: {restaurants: any}) {
           <Text style={styles.title}># Nearby Hotspots</Text>
           <Text style={styles.viewAll}>View All</Text>
       </View>
-      <FlatList data={restaurants} renderItem={({item, index})=>(<RestaurantNearbyCard restaurant={item} key={index} />)} />
+      <FlatList data={restaurants} scrollEnabled={false} renderItem={({item, index})=>(<RestaurantNearbyCard restaurant={item} key={index} />)} />
     </View>
   )
 }

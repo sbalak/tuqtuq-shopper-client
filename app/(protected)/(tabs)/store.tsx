@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import React, { useState } from 'react'
 import { useFocusEffect } from 'expo-router';
 import axios from 'axios';
@@ -12,6 +12,7 @@ export default function store() {
     try {
       const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/restaurant/list`);
       setRestaurants(response.data);
+      console.log(response.data);
     }
     catch(error) {
       console.log(error);
@@ -25,9 +26,9 @@ export default function store() {
   );
   
   return (
-    <View>
+    <ScrollView>
       <RestaurantRecent restaurants={restaurants} />
       <RestaurantNearby restaurants={restaurants} />
-    </View>
+    </ScrollView>
   )
 }
