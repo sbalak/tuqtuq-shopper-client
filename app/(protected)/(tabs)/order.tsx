@@ -1,14 +1,12 @@
-import { View, Text, Button, TouchableOpacity } from 'react-native'
+import { ScrollView } from 'react-native'
 import React from 'react'
-import { router } from 'expo-router'
+import OrderList from '@/components/order/OrderList';
 
-export default function order() {
+export default function history() {
+  
   return (
-    <View>
-      <Text>Order List</Text>
-      <TouchableOpacity style={{ marginBottom: 20 }}>
-          <Button color='#000' title="Order Details" onPress={() => router.navigate("/order/2")} ></Button>
-        </TouchableOpacity>
-    </View>
+    <ScrollView>
+      <OrderList />
+    </ScrollView>
   )
 }
