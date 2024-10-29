@@ -2,8 +2,28 @@ import { View, Text, FlatList, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { Colors } from '@/constants/Colors';
 import RestaurantNearbyCard from './RestaurantNearbyCard';
+import axios from 'axios';
+import { useFocusEffect } from 'expo-router';
 
-export default function RestaurantNearby({restaurants}: {restaurants: any}) {
+export default function RestaurantNearby() {
+  const [restaurants, setRestaurants] = useState([]);
+
+  const loadNearbyRestaurants = async() => {
+    try {
+      const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/restaurant/list`);
+      setRestaurants(response.data);
+    }
+    catch(error) {
+      console.log(error);
+    } 
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      loadNearbyRestaurants();
+    }, [])
+  );
+
   return (
     <View>
       <View style={styles.titleContainer}>

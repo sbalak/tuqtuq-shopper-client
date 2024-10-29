@@ -52,7 +52,7 @@ export const Login = () => {
             Login
           </Text>
         </TouchableOpacity>
-        <Text style={styles.registerText}>Don't have an account already? <Text style={styles.registerButton} onPress={() => router.navigate("/auth/register")}>Register</Text></Text>
+        <Text style={styles.registerText}>Don't have an account already? <Text style={styles.registerButton} onPress={() => router.navigate("/register")}>Register</Text></Text>
       </View>
     </View>
   )

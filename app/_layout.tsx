@@ -3,6 +3,8 @@ import AuthProvider, { useAuth } from "@/hooks/useAuth";
 import { router, Slot, Stack } from "expo-router";
 import { useEffect } from "react";
 import { useFonts } from 'expo-font';
+import { View } from "react-native";
+import { Text } from "react-native";
 
 export default function _layout() {
   let [fontsLoaded] = useFonts({
@@ -27,11 +29,16 @@ const RootLayout = () => {
   const { authState } = useAuth();
 
   useEffect(() => {
-    if (authState.authenticated) {
-      router.replace('/store'); 
+    if (authState.authenticated === null) {
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", }}><Text>Loading Now...</Text></View>
     }
-    else{
-      router.replace('/login');
+    else {
+      if (authState.authenticated) {
+        router.replace('/store'); 
+      }
+      else{
+        router.replace('/login');
+      }
     }
   }, [authState.authenticated]);
 
