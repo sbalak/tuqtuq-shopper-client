@@ -36,7 +36,13 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
                     token: token,
                     authenticated: true
                 });        
-            }    
+            }
+            else {
+                setAuthState({
+                    token: null, 
+                    authenticated: false
+                });
+            }  
         };
 
         loadToken();

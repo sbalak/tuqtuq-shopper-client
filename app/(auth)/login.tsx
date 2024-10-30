@@ -69,9 +69,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.Primary,
     paddingTop: 70,
-    paddingBottom: 30,
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25
+    paddingBottom: 30
   },
   brandTitle: {
     color: Colors.White,
