@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native'
+import { ScrollView  } from 'react-native'
 import React from 'react'
+import CartDetails from '@/components/cart/CartDetails';
 
-export default function cart() {
+export default function cart() {  
   return (
-    <View>
-      <Text>Cart Details</Text>
-    </View>
+    <ScrollView>
+      <CartDetails />
+    </ScrollView>    
   )
 }

@@ -25,7 +25,7 @@ export default function RestaurantNearby() {
   );
 
   return (
-    <View>
+    <View style={styles.restaurantNearbyContainer}>
       <View style={styles.titleContainer}>
           <Text style={styles.title}># Nearby Hotspots</Text>
           <Text style={styles.viewAll}>View All</Text>
@@ -36,6 +36,10 @@ export default function RestaurantNearby() {
 }
 
 const styles = StyleSheet.create({
+  restaurantNearbyContainer: {
+    marginTop: 10,
+    marginBottom: 10
+  },
   titleContainer: {
     paddingLeft: 20,
     paddingRight: 20,

@@ -26,7 +26,7 @@ export default function OrderList() {
     );
 
   return (
-    <View>
+    <View style={styles.orderListContainer}>
       <View style={styles.titleContainer}>
           <Text style={styles.title}>Past Orders</Text>
       </View>
@@ -36,6 +36,10 @@ export default function OrderList() {
 }
 
 const styles = StyleSheet.create({
+  orderListContainer: {
+    marginTop: 10,
+    marginBottom: 10
+  },
   titleContainer: {
     paddingLeft: 20,
     paddingRight: 20,
