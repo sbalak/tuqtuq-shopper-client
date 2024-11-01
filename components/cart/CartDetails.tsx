@@ -4,6 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 export default function CartDetails() {
     const [cart, setCart] = useState([]);
@@ -12,6 +13,21 @@ export default function CartDetails() {
     try {
       const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/Cart/Details?userId=1`);
       setCart(response.data);
+    }
+    catch(error) {
+      console.log(error);
+    } 
+  }
+  
+  const handleCheckout = async(userId: string) => {
+    try {
+      const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/Order/Confirm`,
+        {
+          params: {
+            userId: '1'
+          },
+        });
+        router.replace('/order');
     }
     catch(error) {
       console.log(error);
@@ -106,6 +122,11 @@ export default function CartDetails() {
                     <Text style={styles.billValue}>₹18.58</Text>
                     <Text style={styles.billValue}>₹408.58</Text>
                 </View>
+            </View>
+            <View style={styles.checkoutButton}>
+              <TouchableOpacity onPress={() => handleCheckout('1')}>
+                <Text style={styles.checkoutButtonText}>Checkout</Text>
+              </TouchableOpacity>
             </View>
         </View>
     </View>
@@ -211,5 +232,17 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: Colors.LightGrey,
         textAlign: 'right'
+    },
+    checkoutButton: {
+      marginLeft: 20,
+      marginRight: 20,
+      borderRadius: 20,
+      padding:10,
+      backgroundColor: Colors.Primary,
+      flex: 1, justifyContent: "center", alignItems: "center"
+    },
+    checkoutButtonText: {
+      fontFamily: 'outfit',
+      color: Colors.LighterGrey,
     }
 })
