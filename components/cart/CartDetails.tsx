@@ -11,7 +11,7 @@ export default function CartDetails() {
 
   const load = async() => {
     try {
-      const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/Cart/Details?userId=1`);
+      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Details?userId=1`);
       setCart(response.data);
     }
     catch(error) {
@@ -21,7 +21,7 @@ export default function CartDetails() {
   
   const handleCheckout = async(userId: string) => {
     try {
-      const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/Order/Confirm`,
+      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Order/Confirm`,
         {
           params: {
             userId: '1'
@@ -36,7 +36,7 @@ export default function CartDetails() {
   
   const handleAddItem = async(userId: string, restaurantId: string, foodId: string) => {
     try {
-      const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/Cart/Add`,
+      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Add`,
         {
           params: {
             userId: '1',
@@ -53,7 +53,7 @@ export default function CartDetails() {
   
   const handleRemoveItem = async(userId: string, restaurantId: string, foodId: string) => {
     try {
-      const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/Cart/Remove`,
+      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Remove`,
         {
           params: {
             userId: '1',

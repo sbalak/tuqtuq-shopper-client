@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
 
-export const API_URL = "https://shoppingcart-sandbox.azurewebsites.net";
+export const API_URL = "https://shopper-development-api.azurewebsites.net";
 const TOKEN_KEY = "accessToken";
 
 const initialState = {

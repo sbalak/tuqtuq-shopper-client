@@ -11,7 +11,7 @@ export default function OrderList() {
   
     const load = async() => {
       try {
-        const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/order/list?userId=1`);
+        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/order/list?userId=1`);
         setOrders(response.data);
       }
       catch(error) {

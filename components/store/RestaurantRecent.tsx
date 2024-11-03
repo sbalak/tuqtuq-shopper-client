@@ -10,7 +10,7 @@ export default function RestaurantRecent() {
 
   const loadRecentRestaurants = async() => {
     try {
-      const response = await axios.get(`https://shoppingcart-sandbox.azurewebsites.net/api/restaurant/list`);
+      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/list`);
       setRestaurants(response.data);
     }
     catch(error) {
