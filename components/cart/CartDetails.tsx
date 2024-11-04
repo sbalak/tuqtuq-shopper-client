@@ -92,11 +92,11 @@ export default function CartDetails() {
                         <View style={styles.cartItem}>
                             <Text style={styles.itemPrice}>₹{item.itemPrice}</Text>
                             <View style={styles.cartButtonContainer}>
-                                <TouchableOpacity onPress={() => handleRemoveItem('1', cart.restaurantId, item.foodId)}>
+                                <TouchableOpacity onPress={() => handleRemoveItem('1', cart.restaurantId, item.foodItemId)}>
                                     <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
                                 </TouchableOpacity>
                                 <Text style={styles.cartButtonText}>{item.quantity}</Text>
-                                <TouchableOpacity onPress={() => handleAddItem('1', cart.restaurantId, item.foodId)}>
+                                <TouchableOpacity onPress={() => handleAddItem('1', cart.restaurantId, item.foodItemId)}>
                                     <Text style={styles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
                                 </TouchableOpacity>
                             </View>
