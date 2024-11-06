@@ -12,3 +12,4 @@ DEPENDENCIES
 1. npm install axios
 2. npx expo install expo-secure-store
 3. npx expo install expo-font
+4. npx expo install expo-location
