@@ -1,17 +1,18 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Colors } from '@/constants/Colors';
+import { router } from 'expo-router';
 
 export default function RestaurantNearbyCard({restaurant}: {restaurant: any}) {
   return (    
-    <View style={styles.restaurantContainer}>
+    <TouchableOpacity style={styles.restaurantContainer} onPress={() => router.push('/store/'+restaurant.id)}>
         <Image source={{uri:restaurant.photo}} style={styles.restaurantImage} />
         <View style={styles.restaurantInfo}>
             <Text style={styles.restaurantTitle}>{restaurant.name}</Text>
             <Text style={styles.restaurantSubtitle}>{restaurant.locality}</Text>
             <Text style={styles.restaurantSubtitle}>{restaurant.cuisine} • 0.4 km</Text>
         </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
