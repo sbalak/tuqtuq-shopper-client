@@ -1,6 +1,6 @@
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import { useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,6 +20,43 @@ export default function StoreDetails() {
         console.log(error);
       } 
     }
+    
+  
+    const handleAddItem = async(userId: string, restaurantId: string, foodId: string) => {
+      try {
+        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Add`,
+          {
+            params: {
+              userId: '1',
+              restaurantId: restaurantId,
+              foodId: foodId
+            },
+          });
+        loadRestaurantDetails();
+      }
+      catch(error) {
+        console.log(error);
+      } 
+    }
+    
+    const handleRemoveItem = async(userId: string, restaurantId: string, foodId: string) => {
+      try {
+        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Remove`,
+          {
+            params: {
+              userId: '1',
+              restaurantId: restaurantId,
+              foodId: foodId
+            },
+          });
+          loadRestaurantDetails();
+      }
+      catch(error) {
+        console.log(error);
+      } 
+    }
+  
+
   
     useFocusEffect(
       React.useCallback(() => {
@@ -40,8 +77,54 @@ export default function StoreDetails() {
               </View>
           </View>
           <FlatList data={restaurant.foodItems} scrollEnabled={false} renderItem={({item, index}) => (
-            (item.photo ? <FoodItemWithPhoto food={item} key={index} /> : <FoodItemWithoutPhoto food={item} key={index} />)
+            (item.photo ? 
+              (
+                <View style={styles.foodContainer}>
+                    <View style={styles.foodDetailsContainer}>
+                        <Text style={styles.foodTitle}>{item.name}</Text>
+                        <Text style={styles.foodSubtitle}>₹ {item.itemPrice}</Text>
+                    </View>
+                    <View>
+                        <Image source={{uri:item.photo}} style={styles.foodImage} />
+                        <View style={[styles.cartButtonContainer, styles.cartButtonWPContainer]}>
+                            <TouchableOpacity onPress={() => handleRemoveItem('1', restaurant.id, item.id)}>
+                                <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
+                            </TouchableOpacity>
+                            <Text style={styles.cartButtonText}>{item.quantity}</Text>
+                            <TouchableOpacity onPress={() => handleAddItem('1', restaurant.id, item.id)}>
+                                <Text style={styles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+
+              ) : (
+                <View style={styles.foodContainer}>
+                  <View>
+                      <Text style={styles.foodTitle}>{item.name}</Text>
+                      <Text style={styles.foodSubtitle}>₹ {item.itemPrice}</Text>
+                  </View>
+                  <View>
+                      <View style={[styles.cartButtonContainer, styles.cartButtonWOPContainer]}>
+                          <TouchableOpacity onPress={() => handleRemoveItem('1', restaurant.id, item.id)}>
+                              <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
+                          </TouchableOpacity>
+                          <Text style={styles.cartButtonText}>{item.quantity}</Text>
+                          <TouchableOpacity onPress={() => handleAddItem('1', restaurant.id, item.id)}>
+                              <Text style={styles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
+                          </TouchableOpacity>
+                      </View>
+                  </View>
+                </View>
+              )
+            )
           )} />
+          
+          <View style={styles.checkoutButton}>
+            <TouchableOpacity onPress={() => router.push('/cart')}>
+              <Text style={styles.checkoutButtonText}>Checkout</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
     )
 }
@@ -79,5 +162,78 @@ const styles = StyleSheet.create({
         fontFamily: 'outfit',
         fontSize: 14,
         color: Colors.LightGrey
-    }
+    },
+    foodContainer: {
+      backgroundColor: Colors.White,
+      marginLeft: 20,
+      marginRight: 20,
+      marginBottom: 10,
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    },
+    foodDetailsContainer: {
+      paddingTop: 17,
+    },
+    foodTitle: {
+        fontFamily: 'outfit-medium',
+        fontSize: 18
+    },
+    foodSubtitle: {
+        fontFamily: 'outfit',
+        fontSize: 16,
+        color: Colors.LightGrey
+    },
+    foodImage: {
+        width: 130,
+        height: 100,
+        marginLeft:0,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15
+    },
+    cartButtonContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      gap: 15, 
+      backgroundColor: Colors.Primary, 
+      paddingLeft: 15, 
+      paddingRight: 15,
+      borderBottomLeftRadius: 15,
+      borderBottomRightRadius: 15
+  },
+  cartButtonWOPContainer: {
+    width: 130,
+    borderRadius: 15
+  },
+  cartButtonWPContainer: {
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15
+  },
+  cartButton: {
+      fontFamily: 'outfit',
+      fontSize: 20,
+      color: Colors.LighterGrey
+  },
+  cartButtonText: {
+      fontFamily: 'outfit',
+      marginTop: 4,
+      fontSize: 14,
+      color: Colors.LighterGrey
+  },
+  checkoutButton: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
+    borderRadius: 20,
+    padding:10,
+    backgroundColor: Colors.Primary,
+    flex: 1, justifyContent: "center", alignItems: "center"
+  },
+  checkoutButtonText: {
+    fontFamily: 'outfit',
+    color: Colors.LighterGrey,
+  }
 })

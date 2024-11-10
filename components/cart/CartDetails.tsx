@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
     checkoutButton: {
       marginLeft: 20,
       marginRight: 20,
+      marginBottom: 20,
       borderRadius: 20,
       padding:10,
       backgroundColor: Colors.Primary,
