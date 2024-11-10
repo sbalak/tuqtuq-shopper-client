@@ -72,7 +72,7 @@ export default function StoreDetails() {
                   <View style={styles.restaurantInfo}>
                       <Text style={styles.restaurantTitle}>{restaurant.name}</Text>
                       <Text style={styles.restaurantSubtitle}>{restaurant.locality} • {restaurant.city}</Text>
-                      <Text style={styles.restaurantSubtitle}>{restaurant.cuisine} • 0.4 km</Text>
+                      <Text style={styles.restaurantSubtitle}>{restaurant.cuisine}</Text>
                   </View>
               </View>
           </View>
