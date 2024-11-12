@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { Link, router } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/build/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function index() {
 
@@ -19,8 +20,7 @@ export default function index() {
   }
 
   return (
-    <View>
-      
+    <SafeAreaView>      
       <View style={styles.titleContainer}>
           <Text style={styles.title}>Your Profile</Text>
       </View>
@@ -36,7 +36,7 @@ export default function index() {
           <Text style={styles.logoutButtonText}>Logout</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 

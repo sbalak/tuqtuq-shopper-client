@@ -1,15 +1,16 @@
-import { ScrollView, View } from 'react-native'
-import React, { useState } from 'react'
-import { useFocusEffect } from 'expo-router';
-import axios from 'axios';
+import { ScrollView } from 'react-native'
+import React from 'react'
 import RestaurantNearby from '@/components/store/RestaurantNearby';
 import RestaurantRecent from '@/components/store/RestaurantRecent';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function store() {  
   return (
-    <ScrollView>
-      <RestaurantRecent />
-      <RestaurantNearby />
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView>
+        <RestaurantRecent />
+        <RestaurantNearby />
+      </ScrollView>
+    </SafeAreaView>
   )
 }

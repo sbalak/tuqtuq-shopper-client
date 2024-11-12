@@ -6,6 +6,7 @@ import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import FoodItemWithPhoto from '@/components/store/FoodItemWithPhoto';
 import FoodItemWithoutPhoto from '@/components/store/FoodItemWithoutPhoto';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function StoreDetails() {
     const { id } = useLocalSearchParams();
@@ -56,8 +57,6 @@ export default function StoreDetails() {
       } 
     }
   
-
-  
     useFocusEffect(
       React.useCallback(() => {
         loadRestaurantDetails();
@@ -65,6 +64,7 @@ export default function StoreDetails() {
     );
 
     return (
+      <SafeAreaView>
         <ScrollView>
           <View style={styles.restaurantcontainer}>
               <View style={styles.restaurantCard} >
@@ -126,6 +126,7 @@ export default function StoreDetails() {
             </TouchableOpacity>
           </View>
         </ScrollView>
+      </SafeAreaView>
     )
 }
 

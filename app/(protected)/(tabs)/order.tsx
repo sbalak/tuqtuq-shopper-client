@@ -1,12 +1,15 @@
 import { ScrollView } from 'react-native'
 import React from 'react'
 import OrderList from '@/components/order/OrderList';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function history() {
   
   return (
-    <ScrollView>
-      <OrderList />
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView>
+        <OrderList />
+      </ScrollView>
+    </SafeAreaView>
   )
 }

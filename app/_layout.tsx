@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 import { View } from "react-native";
 import { Text } from "react-native";
 import LocationProvider from "@/hooks/useLocation";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function _layout() {
   let [fontsLoaded] = useFonts({
@@ -20,9 +21,11 @@ export default function _layout() {
   }
 
   return (
-    <AuthProvider>
-      <RootLayout />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <RootLayout />
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }
 
@@ -37,7 +40,7 @@ const RootLayout = () => {
       if (authState.authenticated) {
         router.replace('/store'); 
       }
-      else{
+      else {
         router.replace('/login');
       }
     }
