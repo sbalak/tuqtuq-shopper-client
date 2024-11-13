@@ -5,9 +5,6 @@ export const Colors = {
   Quaternary: '',
 
   White: '#FFFFFF',
-
-  LightGrey: '#666666',
-  LighterGrey: '#EFEAFF',
-  
+  LightGrey: '#666666',  
   Black: '#000000'
 };

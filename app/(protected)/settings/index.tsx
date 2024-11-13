@@ -88,6 +88,6 @@ const styles = StyleSheet.create({
   },
   logoutButtonText: {
     fontFamily: 'outfit',
-    color: Colors.LighterGrey
+    color: Colors.Tertiary
   }
 })

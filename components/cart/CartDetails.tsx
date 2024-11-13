@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     cartButtonContainer: {
         flexDirection: 'row', 
         gap: 15, 
-        backgroundColor: Colors.Primary, 
+        backgroundColor: Colors.Tertiary, 
         paddingLeft: 15, 
         paddingRight: 15, 
         marginTop:5, 
@@ -198,13 +198,13 @@ const styles = StyleSheet.create({
     cartButton: {
         fontFamily: 'outfit',
         fontSize: 20,
-        color: Colors.LighterGrey
+        color: Colors.Primary
     },
     cartButtonText: {
         fontFamily: 'outfit',
         marginTop: 4,
         fontSize: 14,
-        color: Colors.LighterGrey
+        color: Colors.Primary
     },
     itemPrice: {
         marginTop: 7,
@@ -244,6 +244,6 @@ const styles = StyleSheet.create({
     },
     checkoutButtonText: {
       fontFamily: 'outfit',
-      color: Colors.LighterGrey,
+      color: Colors.Tertiary,
     }
 })

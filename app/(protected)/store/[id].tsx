@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       gap: 15, 
-      backgroundColor: Colors.Primary, 
+      backgroundColor: Colors.Tertiary, 
       paddingLeft: 15, 
       paddingRight: 15,
       borderBottomLeftRadius: 15,
@@ -216,13 +216,13 @@ const styles = StyleSheet.create({
   cartButton: {
       fontFamily: 'outfit',
       fontSize: 20,
-      color: Colors.LighterGrey
+      color: Colors.Primary
   },
   cartButtonText: {
       fontFamily: 'outfit',
       marginTop: 4,
       fontSize: 14,
-      color: Colors.LighterGrey
+      color: Colors.Primary
   },
   checkoutButton: {
     marginLeft: 20,
@@ -235,6 +235,6 @@ const styles = StyleSheet.create({
   },
   checkoutButtonText: {
     fontFamily: 'outfit',
-    color: Colors.LighterGrey,
+    color: Colors.Tertiary,
   }
 })

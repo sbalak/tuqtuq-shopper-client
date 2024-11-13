@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
       padding: 10
   },
   profileButton: {
-      backgroundColor: Colors.LighterGrey,
+      backgroundColor: Colors.Tertiary,
       padding: 10,
       borderRadius: 50
   },

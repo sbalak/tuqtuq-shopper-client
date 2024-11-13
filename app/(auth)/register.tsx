@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: "100%", 
     height: 50, 
-    borderColor: Colors.LighterGrey, 
+    borderColor: Colors.Tertiary, 
     borderWidth: 1, 
     borderRadius: 10, 
     alignItems: 'center', 
