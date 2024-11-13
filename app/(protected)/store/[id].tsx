@@ -21,11 +21,10 @@ export default function StoreDetails() {
       } 
     }
 
-    const filterRestaurantDetails = async() => {
+    const filterRestaurantDetails = async(searchText: string) => {
       try {
-        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/details?userId=1&restaurantId=2`);
+        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/filter?userId=1&restaurantId=`+id+`&searchText=`+searchText);
         setRestaurant(response.data);
-         console.log("Setting Search: " + search);
       }
       catch(error) {
         console.log(error);
@@ -42,7 +41,7 @@ export default function StoreDetails() {
               foodId: foodId
             },
           });
-        loadRestaurantDetails();
+         search ? filterRestaurantDetails(search) :  loadRestaurantDetails();
       }
       catch(error) {
         console.log(error);
@@ -59,7 +58,7 @@ export default function StoreDetails() {
               foodId: foodId
             },
           });
-          loadRestaurantDetails();
+          search ? filterRestaurantDetails(search) :  loadRestaurantDetails();
       }
       catch(error) {
         console.log(error);
@@ -101,7 +100,7 @@ export default function StoreDetails() {
                   fontFamily: 'outfit',
                   fontSize: 18,
                   paddingRight:40
-                }} placeholderTextColor={Colors.LightGrey} placeholder='Search' value={search} onChangeText={(text: string) => {setSearch(text); filterRestaurantDetails();}} ></TextInput>
+                }} placeholderTextColor={Colors.LightGrey} placeholder='Search' value={search} onChangeText={(text: string) => {setSearch(text); filterRestaurantDetails(text)}} ></TextInput>
               </View>
             </View>
           </View>
