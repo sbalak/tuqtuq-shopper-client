@@ -4,8 +4,6 @@ import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import FoodItemWithPhoto from '@/components/store/FoodItemWithPhoto';
-import FoodItemWithoutPhoto from '@/components/store/FoodItemWithoutPhoto';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function StoreDetails() {
