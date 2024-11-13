@@ -18,17 +18,14 @@ export default function RestaurantNearbyCard({restaurant}: {restaurant: any}) {
 
 const styles = StyleSheet.create({
     restaurantContainer: {
-        marginLeft: 20,
-        marginRight: 20,
+        backgroundColor: Colors.White,
         marginBottom: 10,
         padding: 10,
-        backgroundColor: '#fff',
         borderRadius: 15,
         flexDirection: 'row',
-        
     },
     restaurantImage: {
-        width: 130,
+        width: 120,
         height: 80,
         borderRadius:15
     },

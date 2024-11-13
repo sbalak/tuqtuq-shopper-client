@@ -6,11 +6,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function store() {  
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <RestaurantRecent />
-        <RestaurantNearby />
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={{paddingHorizontal: 10}}>
+      <RestaurantRecent />
+      <RestaurantNearby />
+    </ScrollView>
   )
 }

@@ -37,17 +37,13 @@ export default function RestaurantRecent() {
 
 const styles = StyleSheet.create({
     recentVisitContainer: {
-      marginTop: 10,
-      marginBottom: 10
+      marginVertical: 5
     },
     titleContainer: {
-      paddingLeft: 20,
-      paddingRight: 20,
-      marginBottom:10,
+      marginVertical: 10,
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop:10
     },
     title: {
       fontSize:20,

@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { router } from 'expo-router';
+import { Colors } from '@/constants/Colors';
 
 export default function RestaurantRecentCard({restaurant}: {restaurant: any}) {
   return (    
@@ -17,14 +17,14 @@ export default function RestaurantRecentCard({restaurant}: {restaurant: any}) {
 
 const styles = StyleSheet.create({
     restaurantContainer: {
-        marginLeft: 20,
+        backgroundColor: Colors.White,
+        marginRight: 10,
         padding: 10,
-        backgroundColor: '#fff',
         borderRadius: 15
     },
     restaurantImage: {
-        width: 130,
-        height: 80,
+        width: 180,
+        height: 120,
         borderRadius:15
     },
     restaurantInfo: {
@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     },
     restaurantTitle: {
         fontFamily: 'outfit-bold',
-        fontSize: 16
+        fontSize: 14
     },
     restaurantSubtitle: {
         fontFamily: 'outfit',
         fontSize: 12,
-        color: Colors.Gray
+        color: Colors.LightGrey
     }
 });

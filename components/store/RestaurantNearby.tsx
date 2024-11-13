@@ -37,17 +37,13 @@ export default function RestaurantNearby() {
 
 const styles = StyleSheet.create({
   restaurantNearbyContainer: {
-    marginTop: 10,
-    marginBottom: 10
+    marginVertical: 5
   },
   titleContainer: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    marginBottom:10,
+    marginVertical: 10,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop:10
+    justifyContent: 'space-between'
   },
   title: {
     fontSize:20,
