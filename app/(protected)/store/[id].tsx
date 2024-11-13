@@ -1,4 +1,4 @@
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import axios from 'axios';
@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function StoreDetails() {
     const { id } = useLocalSearchParams();
     const [restaurant, setRestaurant] = useState([]);
+    const [search, setSearch] = useState('');
   
     const loadRestaurantDetails = async() => {
       try {
@@ -19,8 +20,18 @@ export default function StoreDetails() {
         console.log(error);
       } 
     }
+
+    const filterRestaurantDetails = async() => {
+      try {
+        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/details?userId=1&restaurantId=2`);
+        setRestaurant(response.data);
+         console.log("Setting Search: " + search);
+      }
+      catch(error) {
+        console.log(error);
+      }
+    }
     
-  
     const handleAddItem = async(userId: string, restaurantId: string, foodId: string) => {
       try {
         const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Add`,
@@ -62,24 +73,45 @@ export default function StoreDetails() {
     );
 
     return (
-      <SafeAreaView>
-        <ScrollView>
+      <SafeAreaView style={{flex:1}}>
+        <ScrollView stickyHeaderIndices={[1]}>
           <View style={styles.restaurantcontainer}>
               <View style={styles.restaurantCard} >
-                  <Image source={{uri:restaurant.photo}} style={styles.restaurantImage} />
-                  <View style={styles.restaurantInfo}>
-                      <Text style={styles.restaurantTitle}>{restaurant.name}</Text>
-                      <Text style={styles.restaurantSubtitle}>{restaurant.locality} • {restaurant.city}</Text>
-                      <Text style={styles.restaurantSubtitle}>{restaurant.cuisine}</Text>
-                  </View>
+                <Text style={styles.restaurantTitle}>{restaurant.name}</Text>
+                <Text style={styles.restaurantSubtitle}>{restaurant.locality} • {restaurant.city} • 0.22 kms</Text>
+                <Text style={styles.restaurantSubtitle}>{restaurant.cuisine}</Text>
               </View>
           </View>
-          <FlatList data={restaurant.foodItems} scrollEnabled={false} renderItem={({item, index}) => (
+          <View>
+            <View style={{
+                backgroundColor: Colors.White,
+                paddingHorizontal: 10,
+                marginBottom: 10,
+            }}>
+              <View style={{ 
+                padding: 10,
+                marginVertical: 10,
+                flexDirection: 'row',
+                gap:10,
+                borderRadius: 10,
+                backgroundColor: Colors.LighterGrey,
+              }}>
+                <Ionicons name="search" size={30} color={Colors.Primary} /> 
+                <TextInput style={{
+                  fontFamily: 'outfit',
+                  fontSize: 18,
+                  paddingRight:40
+                }} placeholderTextColor={Colors.LightGrey} placeholder='Search' value={search} onChangeText={(text: string) => {setSearch(text); filterRestaurantDetails();}} ></TextInput>
+              </View>
+            </View>
+          </View>
+          <FlatList data={restaurant.foodItems} scrollEnabled={false} renderItem={({item, index})  => (
             (item.photo ? 
               (
                 <View style={styles.foodContainer}>
-                    <View style={styles.foodDetailsContainer}>
+                    <View>
                         <Text style={styles.foodTitle}>{item.name}</Text>
+                        <Text style={styles.foodSubtitle}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
                         <Text style={styles.foodSubtitle}>₹ {item.itemPrice}</Text>
                     </View>
                     <View>
@@ -100,6 +132,7 @@ export default function StoreDetails() {
                 <View style={styles.foodContainer}>
                   <View>
                       <Text style={styles.foodTitle}>{item.name}</Text>
+                      <Text style={styles.foodSubtitle}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
                       <Text style={styles.foodSubtitle}>₹ {item.itemPrice}</Text>
                   </View>
                   <View>
@@ -117,91 +150,77 @@ export default function StoreDetails() {
               )
             )
           )} />
-          
+        </ScrollView>
+        {restaurant.totalQuantity > 0 ? (
           <View style={styles.checkoutButton}>
             <TouchableOpacity onPress={() => router.push('/cart')}>
-              <Text style={styles.checkoutButtonText}>Checkout</Text>
+              <Text style={styles.checkoutButtonText}>{restaurant.totalQuantity} item{restaurant.totalQuantity > 1 ? 's': null} added</Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
+        ) : null}
       </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-    restaurantcontainer: {
-      backgroundColor: Colors.Primary,
-      paddingTop: 50,
-      paddingBottom: 10,
-      marginBottom:20
-    },
-    restaurantCard: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginBottom: 10,
-        padding: 10,
-        backgroundColor: '#fff',
-        borderRadius: 15,
-        flexDirection: 'row',
-    },
-    restaurantImage: {
-        width: 80,
-        height: 80,
-        borderRadius:15
-    },
-    restaurantInfo: {
-        marginTop: 7,
-        marginLeft: 10
-    },
-    restaurantTitle: {
-        fontFamily: 'outfit-bold',
-        fontSize: 18
-    },
-    restaurantSubtitle: {
-        fontFamily: 'outfit',
-        fontSize: 14,
-        color: Colors.LightGrey
-    },
-    foodContainer: {
-      backgroundColor: Colors.White,
-      marginLeft: 20,
-      marginRight: 20,
-      marginBottom: 10,
-      padding: 10,
-      borderRadius: 15,
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between'
-    },
-    foodDetailsContainer: {
-      paddingTop: 17,
-    },
-    foodTitle: {
-        fontFamily: 'outfit-medium',
-        fontSize: 18
-    },
-    foodSubtitle: {
-        fontFamily: 'outfit',
-        fontSize: 16,
-        color: Colors.LightGrey
-    },
-    foodImage: {
-        width: 130,
-        height: 100,
-        marginLeft:0,
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15
-    },
-    cartButtonContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      gap: 15, 
-      backgroundColor: Colors.Tertiary, 
-      paddingLeft: 15, 
-      paddingRight: 15,
-      borderBottomLeftRadius: 15,
-      borderBottomRightRadius: 15
+  restaurantcontainer: {
+    backgroundColor: Colors.Primary,
+    paddingVertical: 10,
+  },
+  restaurantCard: {
+    backgroundColor: '#fff',
+    marginHorizontal: 10,
+    padding: 10,
+    borderRadius: 10,
+  },
+  restaurantTitle: {
+    fontFamily: 'outfit-bold',
+    fontSize: 18
+  },
+  restaurantSubtitle: {
+    fontFamily: 'outfit',
+    fontSize: 14,
+    color: Colors.LightGrey
+  },
+  foodContainer: {
+    backgroundColor: Colors.White,
+    marginHorizontal: 10,
+    marginBottom: 10,
+    padding: 10,
+    borderRadius: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  foodTitle: {
+      fontFamily: 'outfit-medium',
+      width:225,
+      fontSize: 17
+  },
+  foodSubtitle: {
+      fontFamily: 'outfit',
+      fontSize: 14,
+      width:225,
+      marginTop:5,
+      color: Colors.LightGrey
+  },
+  foodImage: {
+      width: 130,
+      height: 100,
+      marginLeft:0,
+      borderTopLeftRadius: 15,
+      borderTopRightRadius: 15
+  },
+  cartButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 15, 
+    backgroundColor: Colors.Tertiary, 
+    paddingLeft: 15, 
+    paddingRight: 15,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15
   },
   cartButtonWOPContainer: {
     width: 130,
@@ -212,27 +231,24 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 15
   },
   cartButton: {
-      fontFamily: 'outfit',
-      fontSize: 20,
-      color: Colors.Primary
+    fontFamily: 'outfit',
+    fontSize: 20,
+    color: Colors.Primary
   },
   cartButtonText: {
-      fontFamily: 'outfit',
-      marginTop: 4,
-      fontSize: 14,
-      color: Colors.Primary
+    fontFamily: 'outfit',
+    marginTop: 4,
+    fontSize: 14,
+    color: Colors.Primary
   },
   checkoutButton: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 20,
-    borderRadius: 20,
-    padding:10,
-    backgroundColor: Colors.Primary,
-    flex: 1, justifyContent: "center", alignItems: "center"
+    padding:20,
+    height: 70,
+    backgroundColor: Colors.Primary, justifyContent: "center", alignItems: "center"
   },
   checkoutButtonText: {
-    fontFamily: 'outfit',
+    fontFamily: 'outfit-medium',
+    fontSize: 18,
     color: Colors.Tertiary,
   }
 })
