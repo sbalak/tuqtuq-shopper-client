@@ -26,7 +26,9 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     useEffect(() => {
         const loadAccessToken = async () => {
             const accessToken = await SecureStore.getItemAsync('accessToken');
-            console.log("Stored Token: ", accessToken);
+            const refreshToken = await SecureStore.getItemAsync('refreshToken');
+            console.log("Stored Access Token: ", accessToken);
+            console.log("Stored Refresh Token: ", refreshToken);
             
             if (accessToken) {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
@@ -82,6 +84,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
             const response = await axios.post(`${API_URL}/login`, { email, password });
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
             await SecureStore.setItem('accessToken', response.data.accessToken);
+            await SecureStore.setItem('refreshToken', response.data.refreshToken);
 
             setAuthState({
                 token: response.data.accessToken,
@@ -97,6 +100,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     const logout = async () => {
         try {
             await SecureStore.deleteItemAsync('accessToken');
+            await SecureStore.deleteItemAsync('refreshToken');
 
             setAuthState({
                 token: null,
