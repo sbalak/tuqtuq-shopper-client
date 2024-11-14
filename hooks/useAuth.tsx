@@ -4,7 +4,6 @@ import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
 
 export const API_URL = "https://shopper-development-api.azurewebsites.net";
-const TOKEN_KEY = "accessToken";
 
 const initialState = {
     authState: { token: null, authenticated: null }, register: async () => {}, login: async () => {}, logout: async () => {}
@@ -25,15 +24,15 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     const [authState, setAuthState] = useState<{ token: string | null, authenticated: boolean | null }>({ token: null, authenticated: null });
 
     useEffect(() => {
-        const loadToken = async () => {
-            const token = await SecureStore.getItemAsync(TOKEN_KEY);
-            console.log("Stored Token: ", token);
+        const loadAccessToken = async () => {
+            const accessToken = await SecureStore.getItemAsync('accessToken');
+            console.log("Stored Token: ", accessToken);
             
-            if (token) {
-                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            if (accessToken) {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
                 setAuthState({
-                    token: token,
+                    token: accessToken,
                     authenticated: true
                 });        
             }
@@ -45,7 +44,27 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
             }  
         };
 
-        loadToken();
+        // Add a request interceptor
+        axios.interceptors.request.use(function (config) {
+            console.log("Request Log: Do something before request is sent");
+            return config;
+        }, function (error) {
+            console.log("Request Error: Do something with request error")
+            return Promise.reject(error);
+        });
+
+        // Add a response interceptor
+        axios.interceptors.response.use(function (response) {
+            console.log("Response Log: Any status code that lie within the range of 2xx cause this function to trigger")
+            // Do something with response data
+            return response;
+        }, function (error) {
+            console.log("Response Error: Any status codes that falls outside the range of 2xx cause this function to trigger")
+            // Do something with response error
+            return Promise.reject(error);
+        });
+
+        loadAccessToken();
     }, []);
 
     const register = async (email: string, password: string) => {
@@ -62,7 +81,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         try {
             const response = await axios.post(`${API_URL}/login`, { email, password });
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
-            await SecureStore.setItem(TOKEN_KEY, response.data.accessToken);
+            await SecureStore.setItem('accessToken', response.data.accessToken);
 
             setAuthState({
                 token: response.data.accessToken,
@@ -77,7 +96,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
     const logout = async () => {
         try {
-            await SecureStore.deleteItemAsync(TOKEN_KEY);
+            await SecureStore.deleteItemAsync('accessToken');
 
             setAuthState({
                 token: null,
