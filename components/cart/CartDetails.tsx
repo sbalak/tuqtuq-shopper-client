@@ -86,11 +86,11 @@ export default function CartDetails() {
                     <View>
                         <View style={styles.dataRow}>
                             <Text style={styles.dataName}>{item.foodName}</Text>
-                            <Text style={styles.dataValue}>₹{item.totalPrice}</Text>
+                            <Text style={styles.dataValue}>₹{item.amount}</Text>
                         </View>
                         
                         <View style={styles.cartItem}>
-                            <Text style={styles.itemPrice}>₹{item.itemPrice}</Text>
+                            <Text style={styles.itemPrice}>₹{item.price}</Text>
                             <View style={styles.cartButtonContainer}>
                                 <TouchableOpacity onPress={() => handleRemoveItem('1', cart.restaurantId, item.foodItemId)}>
                                     <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
@@ -116,7 +116,7 @@ export default function CartDetails() {
                     <Text style={styles.billName}>Total (Incl. GST)</Text>
                 </View>
                 <View style={styles.billColumn}>
-                    <Text style={styles.billValue}>₹{cart.totalPrice}</Text>
+                    <Text style={styles.billValue}>₹{cart.amount}</Text>
                     <Text style={styles.billValue}>₹9.29</Text>
                     <Text style={styles.billValue}>₹9.29</Text>
                     <Text style={styles.billValue}>₹18.58</Text>

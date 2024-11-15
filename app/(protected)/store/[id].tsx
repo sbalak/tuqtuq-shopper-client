@@ -111,7 +111,7 @@ export default function StoreDetails() {
                     <View>
                         <Text style={styles.foodTitle}>{item.name}</Text>
                         <Text style={styles.foodSubtitle}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
-                        <Text style={styles.foodSubtitle}>₹ {item.itemPrice}</Text>
+                        <Text style={styles.foodSubtitle}>₹ {item.price}</Text>
                     </View>
                     <View>
                         <Image source={{uri:item.photo}} style={styles.foodImage} />
@@ -132,7 +132,7 @@ export default function StoreDetails() {
                   <View>
                       <Text style={styles.foodTitle}>{item.name}</Text>
                       <Text style={styles.foodSubtitle}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
-                      <Text style={styles.foodSubtitle}>₹ {item.itemPrice}</Text>
+                      <Text style={styles.foodSubtitle}>₹ {item.price}</Text>
                   </View>
                   <View>
                       <View style={[styles.cartButtonContainer, styles.cartButtonWOPContainer]}>
