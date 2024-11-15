@@ -62,25 +62,23 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
             async (error) => {
                 const originalRequest = error.config;
                 let retry = 0;
-                if (error.response.status === 401 && !originalRequest._retry) {
-                    console.log("Response Error: Any status codes that falls outside the range of 2xx cause this function to trigger");
-                    
+                if (error.response.status === 401 && !originalRequest._retry) {                    
                     const refreshToken = await SecureStore.getItemAsync('refreshToken');
+                    
                     const response = await axios.post(`${API_URL}/refresh`, { refreshToken });
+
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
+                    originalRequest.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
+
                     await SecureStore.setItem('accessToken', response.data.accessToken);
                     await SecureStore.setItem('refreshToken', response.data.refreshToken);
 
                     originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
 
-                    console.log(JSON.stringify(error))
-
                     const retryRequest = await axios(originalRequest);
 
-                    console.log("retry = ", retry)
                     return retryRequest; // Retry the original request with the new access token.
                 }
-                
                 return Promise.reject(error);
             }
         );
