@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         color: Colors.LightGrey, 
-        fontFamily: 'outfit'
+        fontFamily: 'nunito-medium'
     },
     detailsContainer: {
         marginLeft: 20,
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',   
     },
     dataRow: {
-        fontFamily: 'outfit-medium',
+        fontFamily: 'nunito-bold',
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
@@ -170,16 +170,16 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     dataName: {
-        fontFamily: 'outfit-medium',
+        fontFamily: 'nunito-bold',
         fontSize: 16
     },
     dataValue: {
-        fontFamily: 'outfit-medium',
+        fontFamily: 'nunito-bold',
         fontSize: 16,
         color: Colors.LightGrey
     },
     cartItem: {
-        fontFamily: 'outfit',
+        fontFamily: 'nunito-medium',
         marginLeft: 10,
         marginRight: 10,
         marginBottom: 15,
@@ -196,24 +196,24 @@ const styles = StyleSheet.create({
         borderRadius: 15
     },
     cartButton: {
-        fontFamily: 'outfit',
+        fontFamily: 'nunito-medium',
         fontSize: 20,
         color: Colors.Primary
     },
     cartButtonText: {
-        fontFamily: 'outfit',
+        fontFamily: 'nunito-medium',
         marginTop: 4,
         fontSize: 14,
         color: Colors.Primary
     },
     itemPrice: {
         marginTop: 7,
-        fontFamily: 'outfit',
+        fontFamily: 'nunito-medium',
         fontSize: 16,
         color: Colors.LightGrey
     },
     billColumn: {
-        fontFamily: 'outfit-medium',
+        fontFamily: 'nunito-bold',
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
@@ -223,12 +223,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     billName: {
-        fontFamily: 'outfit-medium',
+        fontFamily: 'nunito-bold',
         fontSize: 14,
         paddingBottom: 5,
     },
     billValue: {
-        fontFamily: 'outfit-medium',
+        fontFamily: 'nunito-bold',
         fontSize: 14,
         color: Colors.LightGrey,
         textAlign: 'right'
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
       flex: 1, justifyContent: "center", alignItems: "center"
     },
     checkoutButtonText: {
-      fontFamily: 'outfit',
+      fontFamily: 'nunito-medium',
       color: Colors.Tertiary,
     }
 })

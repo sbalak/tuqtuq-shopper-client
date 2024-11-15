@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     restaurantSubtitle: {
-        fontFamily: 'outfit',
+        fontFamily: 'nunito-medium',
         fontSize: 14,
         color: Colors.LightGrey
     }

@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   loginContainer: {
-    fontFamily: 'outfit',
+    fontFamily: 'nunito-medium',
     backgroundColor: Colors.White,
     padding: 20
   },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   subTitle: {
-    fontFamily: 'outfit-medium',
+    fontFamily: 'nunito-bold',
     fontSize: 20,
     marginBottom: 20
   },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   textInputTitle: {
-    fontFamily: 'outfit',
+    fontFamily: 'nunito-medium',
     fontSize: 16,  
     marginVertical: 10
   },
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     paddingRight: 20 
   },
   textInputBox: {
-    fontFamily: 'outfit',
+    fontFamily: 'nunito-medium',
     width: "100%"
   },
   registerButton: {
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   registerButtonText: {
-    fontFamily: 'outfit',
+    fontFamily: 'nunito-medium',
     color: Colors.White,
     fontSize: 18,
     marginLeft: 10,

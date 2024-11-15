@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   title: {
       fontSize: 14,
-      fontFamily: 'outfit',
+      fontFamily: 'nunito-bold',
       color: Colors.LightGrey
   },
   locationName: {
@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
       alignItems: 'center'
   },
   subtitle: {
-      fontSize: 16,
-      fontFamily: 'outfit-medium'
+      fontSize: 14,
+      fontFamily: 'nunito-bold'
   },
   orderButton: {
       padding: 10

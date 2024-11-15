@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
       marginLeft: 10
   },
   profileTitle: {
-      fontFamily: 'outfit-medium',
+      fontFamily: 'nunito-bold',
       fontSize: 18
   },
   profileSubtitle: {
-      fontFamily: 'outfit',
+      fontFamily: 'nunito-medium',
       fontSize: 14,
       color: Colors.LightGrey
   },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   logoutButtonText: {
-    fontFamily: 'outfit',
+    fontFamily: 'nunito-medium',
     color: Colors.Tertiary
   }
 })

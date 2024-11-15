@@ -97,7 +97,7 @@ export default function StoreDetails() {
               }}>
                 <Ionicons name="search" size={30} color={Colors.Primary} /> 
                 <TextInput style={{
-                  fontFamily: 'outfit',
+                  fontFamily: 'nunito-medium',
                   fontSize: 18,
                   paddingRight:40
                 }} placeholderTextColor={Colors.LightGrey} placeholder='Search' value={search} onChangeText={(text: string) => {setSearch(text); filterRestaurantDetails(text)}} ></TextInput>
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   restaurantSubtitle: {
-    fontFamily: 'outfit',
+    fontFamily: 'nunito-medium',
     fontSize: 14,
     color: Colors.LightGrey
   },
@@ -192,12 +192,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   foodTitle: {
-      fontFamily: 'outfit-medium',
+      fontFamily: 'nunito-bold',
       width:225,
       fontSize: 17
   },
   foodSubtitle: {
-      fontFamily: 'outfit',
+      fontFamily: 'nunito-medium',
       fontSize: 14,
       width:225,
       marginTop:5,
@@ -230,12 +230,12 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 15
   },
   cartButton: {
-    fontFamily: 'outfit',
+    fontFamily: 'nunito-medium',
     fontSize: 20,
     color: Colors.Primary
   },
   cartButtonText: {
-    fontFamily: 'outfit',
+    fontFamily: 'nunito-medium',
     marginTop: 4,
     fontSize: 14,
     color: Colors.Primary
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Primary, justifyContent: "center", alignItems: "center"
   },
   checkoutButtonText: {
-    fontFamily: 'outfit-medium',
+    fontFamily: 'nunito-bold',
     fontSize: 18,
     color: Colors.Tertiary,
   }

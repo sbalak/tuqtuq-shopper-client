@@ -27,8 +27,6 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         const loadAccessToken = async () => {
             const accessToken = await SecureStore.getItemAsync('accessToken');
             const refreshToken = await SecureStore.getItemAsync('refreshToken');
-            console.log("Stored Access Token: ", accessToken);
-            console.log("Stored Refresh Token: ", refreshToken);
             
             if (accessToken) {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;

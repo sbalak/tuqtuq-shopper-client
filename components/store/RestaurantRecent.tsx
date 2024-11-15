@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
       },
     viewAll: {
       color: Colors.Primary, 
-      fontFamily: 'outfit-medium'
+      fontFamily: 'nunito-bold'
     }
   })
   

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     orderSubtitle: {
-        fontFamily: 'outfit',
+        fontFamily: 'nunito-medium',
         fontSize: 14,
         color: Colors.LightGrey
     }
