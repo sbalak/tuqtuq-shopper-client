@@ -46,25 +46,44 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
             }  
         };
 
-        // Add a request interceptor
-        axios.interceptors.request.use(function (config) {
-            console.log("Request Log: Do something before request is sent");
-            return config;
-        }, function (error) {
-            console.log("Request Error: Do something with request error")
+        axios.interceptors.request.use(async (request) => {
+            const accessToken = await SecureStore.getItemAsync('accessToken');
+            if (accessToken) {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+            }
+            return request;
+          }, error => {
             return Promise.reject(error);
-        });
+          });
 
         // Add a response interceptor
-        axios.interceptors.response.use(function (response) {
-            console.log("Response Log: Any status code that lie within the range of 2xx cause this function to trigger")
-            // Do something with response data
-            return response;
-        }, function (error) {
-            console.log("Response Error: Any status codes that falls outside the range of 2xx cause this function to trigger")
-            // Do something with response error
-            return Promise.reject(error);
-        });
+        axios.interceptors.response.use(
+            response => response, 
+            async (error) => {
+                const originalRequest = error.config;
+                let retry = 0;
+                if (error.response.status === 401 && !originalRequest._retry) {
+                    console.log("Response Error: Any status codes that falls outside the range of 2xx cause this function to trigger");
+                    
+                    const refreshToken = await SecureStore.getItemAsync('refreshToken');
+                    const response = await axios.post(`${API_URL}/refresh`, { refreshToken });
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
+                    await SecureStore.setItem('accessToken', response.data.accessToken);
+                    await SecureStore.setItem('refreshToken', response.data.refreshToken);
+
+                    originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
+
+                    console.log(JSON.stringify(error))
+
+                    const retryRequest = await axios(originalRequest);
+
+                    console.log("retry = ", retry)
+                    return retryRequest; // Retry the original request with the new access token.
+                }
+                
+                return Promise.reject(error);
+            }
+        );
 
         loadAccessToken();
     }, []);
