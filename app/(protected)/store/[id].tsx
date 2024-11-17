@@ -1,4 +1,4 @@
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native'
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput, SectionList } from 'react-native'
 import React, { useState } from 'react'
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import axios from 'axios';
@@ -9,6 +9,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function StoreDetails() {
     const { id } = useLocalSearchParams();
     const [restaurant, setRestaurant] = useState([]);
+    const [restaurantMenu, setRestaurantMenu] = useState([]);
+    const [cartValue, setCartValue] = useState([]);
     const [search, setSearch] = useState('');
   
     const loadRestaurantDetails = async() => {
@@ -20,17 +22,33 @@ export default function StoreDetails() {
         console.log(error);
       } 
     }
-
-    const filterRestaurantDetails = async(searchText: string) => {
+    
+    const loadRestaurantMenu = async (searchText: string) => {
       try {
-        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/filter?userId=1&restaurantId=`+id+`&searchText=`+searchText);
-        setRestaurant(response.data);
+        if (!searchText) {
+          const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/fooditems?userId=1&restaurantId=`+id);
+          setRestaurantMenu(response.data);
+        }
+        else {
+          const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/fooditems?userId=1&restaurantId=`+id+`&searchText=`+searchText);
+          setRestaurantMenu(response.data);
+        }
       }
       catch(error) {
         console.log(error);
-      }
+      } 
     }
     
+    const loadCartValue = async() => {
+      try {
+        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/cart/value?userId=1&restaurantId=`+id);
+        setCartValue(response.data);
+      }
+      catch(error) {
+        console.log(error);
+      } 
+    }
+
     const handleAddItem = async(userId: string, restaurantId: string, foodId: string) => {
       try {
         const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Add`,
@@ -41,7 +59,11 @@ export default function StoreDetails() {
               foodId: foodId
             },
           });
-         search ? filterRestaurantDetails(search) :  loadRestaurantDetails();
+         //search ? filterRestaurantDetails(search) :  loadRestaurantDetails();
+         
+         loadRestaurantDetails();
+         loadRestaurantMenu();
+         loadCartValue();
       }
       catch(error) {
         console.log(error);
@@ -58,7 +80,11 @@ export default function StoreDetails() {
               foodId: foodId
             },
           });
-          search ? filterRestaurantDetails(search) :  loadRestaurantDetails();
+          //search ? filterRestaurantDetails(search) :  loadRestaurantDetails();
+          
+         loadRestaurantDetails();
+         loadRestaurantMenu();
+         loadCartValue();
       }
       catch(error) {
         console.log(error);
@@ -68,6 +94,8 @@ export default function StoreDetails() {
     useFocusEffect(
       React.useCallback(() => {
         loadRestaurantDetails();
+        loadRestaurantMenu();
+        loadCartValue();
       }, [])
     );
 
@@ -82,60 +110,32 @@ export default function StoreDetails() {
               </View>
           </View>
           <View>
-            <View style={{
-                backgroundColor: Colors.White,
-                paddingHorizontal: 10,
-                marginBottom: 10,
-            }}>
-              <View style={{ 
-                padding: 10,
-                marginVertical: 10,
-                flexDirection: 'row',
-                gap:10,
-                borderRadius: 10,
-                backgroundColor: Colors.LighterGrey,
-              }}>
+            <View style={styles.searchContainer}>
+              <View style={styles.searchTextInputContainer}>
                 <Ionicons name="search" size={30} color={Colors.Primary} /> 
-                <TextInput style={{
-                  fontFamily: 'nunito-medium',
-                  fontSize: 18,
-                  paddingRight:40
-                }} placeholderTextColor={Colors.LightGrey} placeholder='Search' value={search} onChangeText={(text: string) => {setSearch(text); filterRestaurantDetails(text)}} ></TextInput>
+                <TextInput style={styles.searchTextInput} placeholderTextColor={Colors.LightGrey} placeholder='Search' value={search} onChangeText={(text: string) => {setSearch(text); loadRestaurantMenu(text);}} ></TextInput>
               </View>
             </View>
           </View>
-          <FlatList data={restaurant.foodItems} scrollEnabled={false} renderItem={({item, index})  => (
-            (item.photo ? 
-              (
-                <View style={styles.foodContainer}>
-                    <View>
-                        <Text style={styles.foodTitle}>{item.name}</Text>
-                        <Text style={styles.foodSubtitle}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
-                        <Text style={styles.foodSubtitle}>₹ {item.price}</Text>
-                    </View>
-                    <View>
-                        <Image source={{uri:item.photo}} style={styles.foodImage} />
-                        <View style={[styles.cartButtonContainer, styles.cartButtonWPContainer]}>
-                            <TouchableOpacity onPress={() => handleRemoveItem('1', restaurant.id, item.id)}>
-                                <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
-                            </TouchableOpacity>
-                            <Text style={styles.cartButtonText}>{item.quantity}</Text>
-                            <TouchableOpacity onPress={() => handleAddItem('1', restaurant.id, item.id)}>
-                                <Text style={styles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-
-              ) : (
-                <View style={styles.foodContainer}>
+          <SectionList            
+            sections={restaurantMenu}
+            renderSectionHeader={({section}) => (
+              <Text style={{
+                fontFamily: 'outfit-bold',
+                padding: 20,
+                fontSize: 18
+              }}>{section.title}</Text>
+            )}
+            renderItem={({item}) =>(
+              <View style={styles.foodContainer}>
                   <View>
                       <Text style={styles.foodTitle}>{item.name}</Text>
                       <Text style={styles.foodSubtitle}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
                       <Text style={styles.foodSubtitle}>₹ {item.price}</Text>
                   </View>
                   <View>
-                      <View style={[styles.cartButtonContainer, styles.cartButtonWOPContainer]}>
+                      <Image source={{uri:item.photo}} style={styles.foodImage} />
+                      <View style={[styles.cartButtonContainer, styles.cartButtonWPContainer]}>
                           <TouchableOpacity onPress={() => handleRemoveItem('1', restaurant.id, item.id)}>
                               <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
                           </TouchableOpacity>
@@ -145,15 +145,16 @@ export default function StoreDetails() {
                           </TouchableOpacity>
                       </View>
                   </View>
-                </View>
-              )
-            )
-          )} />
+              </View>
+            )}
+            scrollEnabled={false}
+            keyExtractor={item => `${item.id}`}
+          />
         </ScrollView>
-        {restaurant.totalQuantity > 0 ? (
+        {cartValue.quantity > 0 ? (
           <View style={styles.checkoutButton}>
             <TouchableOpacity onPress={() => router.push('/cart')}>
-              <Text style={styles.checkoutButtonText}>{restaurant.totalQuantity} item{restaurant.totalQuantity > 1 ? 's': null} added</Text>
+              <Text style={styles.checkoutButtonText}>{cartValue.quantity} item{cartValue.quantity > 1 ? 's': null} added</Text>
             </TouchableOpacity>
           </View>
         ) : null}
@@ -180,6 +181,24 @@ const styles = StyleSheet.create({
     fontFamily: 'nunito-medium',
     fontSize: 14,
     color: Colors.LightGrey
+  },
+  searchContainer: {
+    backgroundColor: Colors.White,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+  },
+  searchTextInputContainer: { 
+    padding: 10,
+    marginVertical: 10,
+    flexDirection: 'row',
+    gap:10,
+    borderRadius: 10,
+    backgroundColor: Colors.LighterGrey,
+  },
+  searchTextInput: {
+    fontFamily: 'nunito-medium',
+    fontSize: 18,
+    paddingRight:40
   },
   foodContainer: {
     backgroundColor: Colors.White,
