@@ -62,7 +62,7 @@ export default function StoreDetails() {
          //search ? filterRestaurantDetails(search) :  loadRestaurantDetails();
          
          loadRestaurantDetails();
-         loadRestaurantMenu();
+         loadRestaurantMenu('');
          loadCartValue();
       }
       catch(error) {
@@ -83,7 +83,7 @@ export default function StoreDetails() {
           //search ? filterRestaurantDetails(search) :  loadRestaurantDetails();
           
          loadRestaurantDetails();
-         loadRestaurantMenu();
+         loadRestaurantMenu('');
          loadCartValue();
       }
       catch(error) {
@@ -94,7 +94,7 @@ export default function StoreDetails() {
     useFocusEffect(
       React.useCallback(() => {
         loadRestaurantDetails();
-        loadRestaurantMenu();
+        loadRestaurantMenu('');
         loadCartValue();
       }, [])
     );
@@ -102,19 +102,19 @@ export default function StoreDetails() {
     const renderItem: ListRenderItem<any> = ({item, index}) => (
       <View style={{backgroundColor: Colors.White, padding: 10, flexDirection: 'row'}}>
           <View style={{flex: 1}}>
-            <Text style={{fontFamily: 'nunito-bold'}}>{item.name}</Text>
-            <Text style={{fontFamily: 'nunito-medium', color: Colors.LightGrey}}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
-            <Text style={{fontFamily: 'nunito-medium', color: Colors.LightGrey}}>₹{item.price}</Text>
+            <Text style={foodStyles.foodTitle}>{item.name}</Text>
+            <Text style={foodStyles.foodSubtitle}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
+            <Text style={foodStyles.foodSubtitle}>₹{item.price}</Text>
           </View>
           <View>
-            <Image source={{uri:item.photo}} style={styles.foodImage} />
-            <View style={[styles.cartButtonContainer]}>
+            <Image source={{uri:item.photo}} style={foodStyles.foodImage} />
+            <View style={[cartStyles.cartButtonContainer]}>
               <TouchableOpacity onPress={() => handleRemoveItem('1', restaurant.id, item.id)}>
-                  <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
+                  <Text style={cartStyles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
               </TouchableOpacity>
-              <Text style={styles.cartButtonText}>{item.quantity}</Text>
+              <Text style={cartStyles.cartButtonText}>{item.quantity}</Text>
               <TouchableOpacity onPress={() => handleAddItem('1', restaurant.id, item.id)}>
-                  <Text style={styles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
+                  <Text style={cartStyles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -139,26 +139,26 @@ export default function StoreDetails() {
               }}>{title}</Text>
             )}
             ListHeaderComponent={() => (
-              <View style={styles.restaurantcontainer}>
-                <View style={styles.restaurantCard} >
-                  <Text style={styles.restaurantTitle}>{restaurant.name}</Text>
-                  <Text style={styles.restaurantSubtitle}>{restaurant.locality} • {restaurant.city} • 0.22 kms</Text>
-                  <Text style={styles.restaurantSubtitle}>{restaurant.cuisine}</Text>
+              <View style={restaurantStyles.restaurantcontainer}>
+                <View style={restaurantStyles.restaurantCard} >
+                  <Text style={restaurantStyles.restaurantTitle}>{restaurant.name}</Text>
+                  <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.locality} • {restaurant.city} • 0.22 kms</Text>
+                  <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.cuisine}</Text>
                 </View>
               </View>
             )}
             stickySectionHeadersEnabled={true}
           />
-          <View style={styles.searchContainer}>
-            <View style={styles.searchTextInputContainer}>
+          <View style={searchStyles.searchContainer}>
+            <View style={searchStyles.searchTextInputContainer}>
               <Ionicons name="search" size={30} color={Colors.Primary} /> 
-              <TextInput style={styles.searchTextInput} placeholderTextColor={Colors.LightGrey} placeholder='Search' value={search} onChangeText={(text: string) => {setSearch(text); loadRestaurantMenu(text);}} ></TextInput>
+              <TextInput style={searchStyles.searchTextInput} placeholderTextColor={Colors.LightGrey} placeholder='Search' value={search} onChangeText={(text: string) => {setSearch(text); loadRestaurantMenu(text);}} ></TextInput>
             </View>
           </View>
           {cartValue.quantity > 0 ? (
-            <View style={styles.checkoutButton}>
+            <View style={checkoutStyles.checkoutButton}>
               <TouchableOpacity onPress={() => router.push('/cart')}>
-                <Text style={styles.checkoutButtonText}>{cartValue.quantity} item{cartValue.quantity > 1 ? 's': null} added</Text>
+                <Text style={checkoutStyles.checkoutButtonText}>{cartValue.quantity} item{cartValue.quantity > 1 ? 's': null} added</Text>
               </TouchableOpacity>
             </View>
           ) : null}
@@ -166,7 +166,27 @@ export default function StoreDetails() {
     )
 }
 
-const styles = StyleSheet.create({
+const searchStyles = StyleSheet.create({
+  searchContainer: {
+    backgroundColor: Colors.White,
+    paddingHorizontal: 10,
+  },
+  searchTextInputContainer: { 
+    padding: 10,
+    marginVertical: 10,
+    flexDirection: 'row',
+    gap:10,
+    borderRadius: 10,
+    backgroundColor: Colors.LighterGrey,
+  },
+  searchTextInput: {
+    fontFamily: 'nunito-medium',
+    fontSize: 18,
+    paddingRight:40
+  }  
+});
+
+const restaurantStyles = StyleSheet.create({
   restaurantcontainer: {
     backgroundColor: Colors.Tertiary,
     paddingVertical: 10,
@@ -185,24 +205,10 @@ const styles = StyleSheet.create({
     fontFamily: 'nunito-medium',
     fontSize: 14,
     color: Colors.LightGrey
-  },
-  searchContainer: {
-    backgroundColor: Colors.White,
-    paddingHorizontal: 10,
-  },
-  searchTextInputContainer: { 
-    padding: 10,
-    marginVertical: 10,
-    flexDirection: 'row',
-    gap:10,
-    borderRadius: 10,
-    backgroundColor: Colors.LighterGrey,
-  },
-  searchTextInput: {
-    fontFamily: 'nunito-medium',
-    fontSize: 18,
-    paddingRight:40
-  },
+  }
+});
+
+const foodStyles = StyleSheet.create({
   foodContainer: {
     backgroundColor: Colors.White,
     marginHorizontal: 10,
@@ -215,8 +221,8 @@ const styles = StyleSheet.create({
   },
   foodTitle: {
       fontFamily: 'nunito-bold',
+      fontSize: 17,
       width:225,
-      fontSize: 17
   },
   foodSubtitle: {
       fontFamily: 'nunito-medium',
@@ -230,7 +236,10 @@ const styles = StyleSheet.create({
       height: 120,
       borderTopLeftRadius:15,
       borderTopRightRadius:15
-  },
+  }
+});
+
+const checkoutStyles = StyleSheet.create({
   checkoutButton: {
     padding:20,
     height: 70,
@@ -240,10 +249,10 @@ const styles = StyleSheet.create({
     fontFamily: 'nunito-bold',
     fontSize: 18,
     color: Colors.Tertiary,
-  },
+  }
+});
 
-
-  
+const cartStyles = StyleSheet.create({
   cartButtonContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -265,5 +274,5 @@ const styles = StyleSheet.create({
     marginTop: 4,
     fontSize: 14,
     color: Colors.Primary
-  },
-})
+  }
+});
