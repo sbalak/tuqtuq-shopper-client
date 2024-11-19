@@ -105,9 +105,13 @@ export default function StoreDetails() {
             <Text style={foodStyles.foodTitle}>{item.name}</Text>
             <Text style={foodStyles.foodSubtitle}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
             <Text style={foodStyles.foodSubtitle}>₹{item.price}</Text>
+            <Image style={foodStyles.foodType} source={require('@/assets/images/veg.png')} />
           </View>
           <View>
-            <Image source={{uri:item.photo}} style={foodStyles.foodImage} />
+              {item.photo ? 
+                (<Image source={{uri:item.photo}} style={foodStyles.foodImage} />) :
+                (<View style={foodStyles.emptyImage}></View>)
+              }
             <View style={[cartStyles.cartButtonContainer]}>
               <TouchableOpacity onPress={() => handleRemoveItem('1', restaurant.id, item.id)}>
                   <Text style={cartStyles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
@@ -131,12 +135,7 @@ export default function StoreDetails() {
             ItemSeparatorComponent={() => <View style={{height: 1, backgroundColor: Colors.LighterGrey}} />}
             SectionSeparatorComponent={() => <View style={{height: 1, backgroundColor: Colors.LighterGrey}} />}
             renderSectionHeader={({section: {title, index}}) => (
-              <Text style={{
-                fontFamily: 'outfit-bold',
-                padding: 10,
-                fontSize: 18,
-                backgroundColor: 'white'
-              }}>{title}</Text>
+              <Text style={sectionStyles.sectionHeader}>{title}</Text>
             )}
             ListHeaderComponent={() => (
               <View style={restaurantStyles.restaurantcontainer}>
@@ -221,7 +220,7 @@ const foodStyles = StyleSheet.create({
   },
   foodTitle: {
       fontFamily: 'nunito-bold',
-      fontSize: 17,
+      fontSize: 16,
       width:225,
   },
   foodSubtitle: {
@@ -231,11 +230,32 @@ const foodStyles = StyleSheet.create({
       marginTop:5,
       color: Colors.LightGrey
   },
+  foodType: {
+    height:20, 
+    width:20, 
+    marginTop:10
+  },
   foodImage: {
       width: 120,
       height: 120,
       borderTopLeftRadius:15,
       borderTopRightRadius:15
+  },  
+  emptyImage: {
+    width: 120,
+    height: 120,
+    backgroundColor: Colors.LighterGrey,
+    borderTopLeftRadius:15,
+    borderTopRightRadius:15
+  }
+});
+
+const sectionStyles = StyleSheet.create({
+  sectionHeader: {
+    fontFamily: 'outfit-bold',
+    padding: 10,
+    fontSize: 20,
+    backgroundColor: 'white'
   }
 });
 
@@ -243,7 +263,9 @@ const checkoutStyles = StyleSheet.create({
   checkoutButton: {
     padding:20,
     height: 70,
-    backgroundColor: Colors.Primary, justifyContent: "center", alignItems: "center"
+    backgroundColor: Colors.Primary, 
+    justifyContent: "center", 
+    alignItems: "center"
   },
   checkoutButtonText: {
     fontFamily: 'nunito-bold',
