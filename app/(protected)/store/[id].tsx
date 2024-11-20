@@ -126,7 +126,7 @@ export default function StoreDetails() {
     );
 
     return (
-      <SafeAreaView style={{flex:1}}>
+      <View style={{flex:1}}>
           <SectionList 
             keyExtractor={(item, index) => `${item.id + index}`} 
             showsVerticalScrollIndicator={false}
@@ -140,7 +140,6 @@ export default function StoreDetails() {
             ListHeaderComponent={() => (
               <View style={restaurantStyles.restaurantcontainer}>
                 <View style={restaurantStyles.restaurantCard} >
-                  <Text style={restaurantStyles.restaurantTitle}>{restaurant.name}</Text>
                   <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.locality} • {restaurant.city} • 0.22 kms</Text>
                   <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.cuisine}</Text>
                 </View>
@@ -159,9 +158,12 @@ export default function StoreDetails() {
               <TouchableOpacity onPress={() => router.push('/cart')}>
                 <Text style={checkoutStyles.checkoutButtonText}>{cartValue.quantity} item{cartValue.quantity > 1 ? 's': null} added</Text>
               </TouchableOpacity>
+              <TouchableOpacity onPress={() => router.push('/cart')}>
+                <Ionicons name="arrow-forward-circle" size={30} color={Colors.White} />
+              </TouchableOpacity>
             </View>
           ) : null}
-      </SafeAreaView>
+      </View>
     )
 }
 
@@ -179,7 +181,8 @@ const searchStyles = StyleSheet.create({
     backgroundColor: Colors.LighterGrey,
   },
   searchTextInput: {
-    fontFamily: 'nunito-medium',
+    flex:1,
+    fontFamily: 'nunito-bold',
     fontSize: 18,
     paddingRight:40
   }  
@@ -195,10 +198,6 @@ const restaurantStyles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 10,
     borderRadius: 10,
-  },
-  restaurantTitle: {
-    fontFamily: 'outfit-bold',
-    fontSize: 18
   },
   restaurantSubtitle: {
     fontFamily: 'nunito-medium',
@@ -263,8 +262,10 @@ const checkoutStyles = StyleSheet.create({
   checkoutButton: {
     padding:20,
     height: 70,
+    gap: 15,
     backgroundColor: Colors.Primary, 
-    justifyContent: "center", 
+    flexDirection:'row',
+    justifyContent: "space-between", 
     alignItems: "center"
   },
   checkoutButtonText: {
