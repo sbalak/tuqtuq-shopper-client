@@ -112,15 +112,15 @@ export default function CartDetails() {
                     <Text style={styles.billName}>Item Total</Text>
                     <Text style={styles.billName}>CGST @ 2.5%</Text>
                     <Text style={styles.billName}>CGST @ 2.5%</Text>
-                    <Text style={styles.billName}>Total</Text>
+                    <Text style={styles.billName}>Total Tax</Text>
                     <Text style={styles.billName}>Total (Incl. GST)</Text>
                 </View>
                 <View style={styles.billColumn}>
+                    <Text style={styles.billValue}>TBD</Text>
+                    <Text style={styles.billValue}>₹{cart.totalPrimaryTaxAmount}</Text>
+                    <Text style={styles.billValue}>₹{cart.totalSecondaryTaxAmount}</Text>
+                    <Text style={styles.billValue}>₹{cart.totalTaxAmount}</Text>
                     <Text style={styles.billValue}>₹{cart.totalAmount}</Text>
-                    <Text style={styles.billValue}>₹9.29</Text>
-                    <Text style={styles.billValue}>₹9.29</Text>
-                    <Text style={styles.billValue}>₹18.58</Text>
-                    <Text style={styles.billValue}>₹408.58</Text>
                 </View>
             </View>
             <View style={styles.checkoutButton}>
