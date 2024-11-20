@@ -11,7 +11,7 @@ export default function OrderCard({order}: {order: any}) {
             <FlatList data={order.orderItems} scrollEnabled={false} renderItem={({item, index})=>(
                 <Text style={styles.orderSubtitle}>{item.quantity} x {item.foodName}</Text>
             )} />
-            <Text style={styles.orderSubtitle}>₹{order.amount}</Text>
+            <Text style={styles.orderSubtitle}>₹{order.totalAmount}</Text>
         </View>
     </View>
   )

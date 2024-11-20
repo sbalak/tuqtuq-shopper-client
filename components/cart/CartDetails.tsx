@@ -82,7 +82,7 @@ export default function CartDetails() {
                 <Text style={styles.subTitle}>{cart.restaurantLocality}</Text>
             </View>
             <View style={styles.detailsContainer}>
-                <FlatList data={cart.foodItems} scrollEnabled={false} renderItem={({item, index})=>( 
+                <FlatList data={cart.cartItems} scrollEnabled={false} renderItem={({item, index})=>( 
                     <View>
                         <View style={styles.dataRow}>
                             <Text style={styles.dataName}>{item.foodName}</Text>
@@ -116,7 +116,7 @@ export default function CartDetails() {
                     <Text style={styles.billName}>Total (Incl. GST)</Text>
                 </View>
                 <View style={styles.billColumn}>
-                    <Text style={styles.billValue}>₹{cart.amount}</Text>
+                    <Text style={styles.billValue}>₹{cart.totalAmount}</Text>
                     <Text style={styles.billValue}>₹9.29</Text>
                     <Text style={styles.billValue}>₹9.29</Text>
                     <Text style={styles.billValue}>₹18.58</Text>
@@ -135,7 +135,6 @@ export default function CartDetails() {
 
 const styles = StyleSheet.create({
     cartDetailsContainer: {
-        marginTop: 10
     },
     titleContainer: {
         paddingLeft: 20,
