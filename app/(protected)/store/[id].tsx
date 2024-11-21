@@ -1,6 +1,6 @@
 import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput, SectionList, ListRenderItem, ImageBackground } from 'react-native'
-import React, { useState } from 'react'
-import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { router, useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,6 +12,7 @@ export default function StoreDetails() {
     const [restaurantMenu, setRestaurantMenu] = useState([]);
     const [cartValue, setCartValue] = useState([]);
     const [search, setSearch] = useState('');
+    const navigation = useNavigation();
   
     const loadRestaurantDetails = async() => {
       try {
@@ -91,6 +92,10 @@ export default function StoreDetails() {
       } 
     }
   
+    useEffect(() => {
+      navigation.setOptions({ headerTitle: restaurant.name });
+    }, [restaurant.name]);
+
     useFocusEffect(
       React.useCallback(() => {
         loadRestaurantDetails();

@@ -43,7 +43,12 @@ const styles = StyleSheet.create({
     gap: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',  
+    shadowColor: Colors.LightGrey,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity:  0.5,
+    shadowRadius: 5,
+    elevation: 5,
   },
   locator: {
       width: 30,

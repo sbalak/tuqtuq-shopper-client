@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 
 export default function CartDetails() {
     const [cart, setCart] = useState([]);
+    const navigation = useNavigation();
 
   const load = async() => {
     try {
@@ -67,6 +68,10 @@ export default function CartDetails() {
       console.log(error);
     } 
   }
+
+  useEffect(() => {
+    navigation.setOptions({ headerTitle: 'Cart' });
+  }, []);
 
   useFocusEffect(
     React.useCallback(() => {

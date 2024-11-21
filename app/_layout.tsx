@@ -1,11 +1,9 @@
-import CustomHeader from "@/components/CustomHeader";
 import AuthProvider, { useAuth } from "@/hooks/useAuth";
 import { router, Slot, Stack } from "expo-router";
 import { useEffect } from "react";
 import { useFonts } from 'expo-font';
 import { View } from "react-native";
 import { Text } from "react-native";
-import LocationProvider from "@/hooks/useLocation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function _layout() {
