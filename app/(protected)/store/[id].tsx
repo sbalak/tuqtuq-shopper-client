@@ -247,7 +247,7 @@ const foodStyles = StyleSheet.create({
   },  
   emptyImage: {
     width: 120,
-    height: 120,
+    height: 60,
     backgroundColor: Colors.LighterGrey,
     borderTopLeftRadius:15,
     borderTopRightRadius:15

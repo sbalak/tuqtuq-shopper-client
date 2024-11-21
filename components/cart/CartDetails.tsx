@@ -8,8 +8,7 @@ import { router, useNavigation } from 'expo-router';
 
 export default function CartDetails() {
     const [cart, setCart] = useState([]);
-    const navigation = useNavigation();
-
+    
   const load = async() => {
     try {
       const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Details?userId=1`);
@@ -69,10 +68,6 @@ export default function CartDetails() {
     } 
   }
 
-  useEffect(() => {
-    navigation.setOptions({ headerTitle: 'Cart' });
-  }, []);
-
   useFocusEffect(
     React.useCallback(() => {
       load();
@@ -81,66 +76,68 @@ export default function CartDetails() {
   
   return (
     <View>
-        <View style={styles.cartDetailsContainer}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>{cart.restaurantName}</Text>
-                <Text style={styles.subTitle}>{cart.restaurantLocality}</Text>
-            </View>
-            <View style={styles.detailsContainer}>
-                <FlatList data={cart.cartItems} scrollEnabled={false} renderItem={({item, index})=>( 
-                    <View>
-                        <View style={styles.dataRow}>
-                            <Text style={styles.dataName}>{item.foodName}</Text>
-                            <Text style={styles.dataValue}>₹{item.amount}</Text>
-                        </View>
-                        
-                        <View style={styles.cartItem}>
-                            <Text style={styles.itemPrice}>₹{item.price}</Text>
-                            <View style={styles.cartButtonContainer}>
-                                <TouchableOpacity onPress={() => handleRemoveItem('1', cart.restaurantId, item.foodItemId)}>
-                                    <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
-                                </TouchableOpacity>
-                                <Text style={styles.cartButtonText}>{item.quantity}</Text>
-                                <TouchableOpacity onPress={() => handleAddItem('1', cart.restaurantId, item.foodItemId)}>
-                                    <Text style={styles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                )} />
-            </View>
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>Bill Details</Text>
-            </View>
-            <View style={styles.detailsContainer}>
-                <View style={styles.billColumn}>
-                    <Text style={styles.billName}>Item Total</Text>
-                    <Text style={styles.billName}>CGST @ 2.5%</Text>
-                    <Text style={styles.billName}>CGST @ 2.5%</Text>
-                    <Text style={styles.billName}>Total Tax</Text>
-                    <Text style={styles.billName}>Total (Incl. GST)</Text>
-                </View>
-                <View style={styles.billColumn}>
-                    <Text style={styles.billValue}>TBD</Text>
-                    <Text style={styles.billValue}>₹{cart.totalPrimaryTaxAmount}</Text>
-                    <Text style={styles.billValue}>₹{cart.totalSecondaryTaxAmount}</Text>
-                    <Text style={styles.billValue}>₹{cart.totalTaxAmount}</Text>
-                    <Text style={styles.billValue}>₹{cart.totalAmount}</Text>
-                </View>
-            </View>
-            <View style={styles.checkoutButton}>
-              <TouchableOpacity onPress={() => handleCheckout('1')}>
-                <Text style={styles.checkoutButtonText}>Checkout</Text>
-              </TouchableOpacity>
-            </View>
-        </View>
+      <View style={styles.titleContainer}>
+          <Text style={styles.title}>{cart.restaurantName}</Text>
+          <Text style={styles.subTitle}>{cart.restaurantLocality}</Text>
+      </View>
+      <View style={styles.detailsContainer}>
+          <FlatList data={cart.cartItems} scrollEnabled={false} renderItem={({item, index})=>( 
+              <View>
+                  <View style={styles.dataRow}>
+                      <Text style={styles.dataName}>{item.foodName}</Text>
+                      <Text style={styles.dataValue}>₹{item.amount}</Text>
+                  </View>
+                  
+                  <View style={styles.cartItem}>
+                      <Text style={styles.itemPrice}>₹{item.price}</Text>
+                      <View style={styles.cartButtonContainer}>
+                          <TouchableOpacity onPress={() => handleRemoveItem('1', cart.restaurantId, item.foodItemId)}>
+                              <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
+                          </TouchableOpacity>
+                          <Text style={styles.cartButtonText}>{item.quantity}</Text>
+                          <TouchableOpacity onPress={() => handleAddItem('1', cart.restaurantId, item.foodItemId)}>
+                              <Text style={styles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
+                          </TouchableOpacity>
+                      </View>
+                  </View>
+              </View>
+          )} />
+      </View>
+      <View style={styles.titleContainer}>
+          <Text style={styles.title}>Detailed Bill</Text>
+      </View>
+      <View style={styles.detailsContainer}>
+          <View style={styles.billColumn}>
+              <Text style={styles.billName}>Total Bill</Text>
+              <Text style={styles.billName}>Inclusive of Taxes</Text>
+          </View>
+          <View style={styles.billColumn}>
+              <Text style={styles.billValue}>₹{cart.totalAmount}</Text>
+              <Text style={styles.billValue}>₹{cart.totalTaxAmount}</Text>
+          </View>
+      </View>
+      
+      <View style={styles.titleContainer}>
+          <Text style={styles.title}>Note</Text>
+      </View>
+      <View style={styles.detailsContainer}>
+        <Text style={{
+          fontFamily:'nunito-medium', 
+          fontSize: 14,
+          margin: 5
+        }}>Please review your cart carefully to avoid any cancellations</Text>
+      </View>
+      
+      <View style={styles.checkoutButton}>
+        <TouchableOpacity onPress={() => handleCheckout('1')}>
+          <Text style={styles.checkoutButtonText}>Checkout</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-    cartDetailsContainer: {
-    },
     titleContainer: {
         paddingLeft: 20,
         paddingRight: 20,
@@ -165,7 +162,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',   
     },
     dataRow: {
-        fontFamily: 'nunito-bold',
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
@@ -174,16 +170,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     dataName: {
-        fontFamily: 'nunito-bold',
+        fontFamily: 'nunito-medium',
         fontSize: 16
     },
     dataValue: {
-        fontFamily: 'nunito-bold',
+        fontFamily: 'nunito-medium',
         fontSize: 16,
         color: Colors.LightGrey
     },
     cartItem: {
-        fontFamily: 'nunito-medium',
         marginLeft: 10,
         marginRight: 10,
         marginBottom: 15,
@@ -217,7 +212,6 @@ const styles = StyleSheet.create({
         color: Colors.LightGrey
     },
     billColumn: {
-        fontFamily: 'nunito-bold',
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
@@ -227,12 +221,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     billName: {
-        fontFamily: 'nunito-bold',
+        fontFamily: 'nunito-medium',
         fontSize: 14,
         paddingBottom: 5,
     },
     billValue: {
-        fontFamily: 'nunito-bold',
+        fontFamily: 'nunito-medium',
         fontSize: 14,
         color: Colors.LightGrey,
         textAlign: 'right'

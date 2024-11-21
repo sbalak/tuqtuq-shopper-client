@@ -7,15 +7,19 @@ import { StyleSheet, Text, View } from 'react-native'
 
 export default function _layout() {
   return (
-    <Stack>
+    <Stack 
+      screenOptions={({ route }) => ({
+        title: 'Loading...',
+        headerTitle: route.params.headerTitle,
+        headerLeft: () => <Ionicons style={{paddingRight:20}} onPress={() => router.back()} name='chevron-back-outline' size={30} color={Colors.Primary} />,
+        headerTitleStyle: {
+          fontFamily: 'outfit-bold',
+          fontSize: 20
+        } 
+      })} 
+    >
       <Stack.Screen name="index" options={{ header: () => <StoreHeader /> }} />
-      <Stack.Screen name="[id]"  
-        options={({ route }) => ({ 
-          title: route.params.headerTitle,
-          headerLeft: () => <Ionicons style={styles.backButton} onPress={() => router.back()} name='chevron-back-outline' size={30} color={Colors.Primary} />,
-          headerTitleStyle: styles.headerTitle
-        })} 
-      />
+      <Stack.Screen name="[id]" />
     </Stack>
   )
 }
