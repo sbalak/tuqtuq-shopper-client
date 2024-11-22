@@ -4,7 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { router, useNavigation } from 'expo-router';
+import { router } from 'expo-router';
 
 export default function CartDetails() {
     const [cart, setCart] = useState([]);
@@ -76,61 +76,61 @@ export default function CartDetails() {
   
   return (
     <View>
-      <View style={styles.titleContainer}>
-          <Text style={styles.title}>{cart.restaurantName}</Text>
-          <Text style={styles.subTitle}>{cart.restaurantLocality}</Text>
+      <View style={titleStyle.container}>
+          <Text style={titleStyle.title}>{cart.restaurantName}</Text>
+          <Text style={titleStyle.subTitle}>{cart.restaurantLocality}</Text>
       </View>
       <View style={styles.detailsContainer}>
-          <FlatList data={cart.cartItems} scrollEnabled={false} renderItem={({item, index})=>( 
-              <View>
-                  <View style={styles.dataRow}>
-                      <Text style={styles.dataName}>{item.foodName}</Text>
-                      <Text style={styles.dataValue}>₹{item.amount}</Text>
-                  </View>
-                  
-                  <View style={styles.cartItem}>
-                      <Text style={styles.itemPrice}>₹{item.price}</Text>
-                      <View style={styles.cartButtonContainer}>
-                          <TouchableOpacity onPress={() => handleRemoveItem('1', cart.restaurantId, item.foodItemId)}>
-                              <Text style={styles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
-                          </TouchableOpacity>
-                          <Text style={styles.cartButtonText}>{item.quantity}</Text>
-                          <TouchableOpacity onPress={() => handleAddItem('1', cart.restaurantId, item.foodItemId)}>
-                              <Text style={styles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
-                          </TouchableOpacity>
+          <FlatList data={cart.cartItems} 
+                    scrollEnabled={false} 
+                    ItemSeparatorComponent={() => <View style={{ height:1, backgroundColor: Colors.LighterGrey, marginVertical: 10 }} />} 
+                    renderItem={({item, index})=>( 
+                      <View>
+                          <View style={styles.dataRow}>
+                              <Text style={styles.dataName}>{item.foodName}</Text>
+                              <Text style={styles.dataValue}>{item.amount}</Text>
+                          </View>
+                          
+                          <View style={cartStyles.cartItem}>
+                              <Text style={styles.itemPrice}>{item.price}</Text>
+                              <View style={cartStyles.cartButtonContainer}>
+                                  <TouchableOpacity onPress={() => handleRemoveItem('1', cart.restaurantId, item.foodItemId)}>
+                                      <Text style={cartStyles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
+                                  </TouchableOpacity>
+                                  <Text style={cartStyles.cartButtonText}>{item.quantity}</Text>
+                                  <TouchableOpacity onPress={() => handleAddItem('1', cart.restaurantId, item.foodItemId)}>
+                                      <Text style={cartStyles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
+                                  </TouchableOpacity>
+                              </View>
+                          </View>
                       </View>
-                  </View>
-              </View>
-          )} />
+                    )} 
+          />
       </View>
-      <View style={styles.titleContainer}>
-          <Text style={styles.title}>Detailed Bill</Text>
+      <View style={titleStyle.container}>
+        <Text style={titleStyle.title}>Detailed Bill</Text>
       </View>
       <View style={styles.detailsContainer}>
-          <View style={styles.billColumn}>
-              <Text style={styles.billName}>Total Bill</Text>
-              <Text style={styles.billName}>Inclusive of Taxes</Text>
+          <View style={billStyles.billColumn}>
+            <Text style={billStyles.billName}>Total Tax</Text>
+            <Text style={billStyles.billName}>Total Bill</Text>
           </View>
-          <View style={styles.billColumn}>
-              <Text style={styles.billValue}>₹{cart.totalAmount}</Text>
-              <Text style={styles.billValue}>₹{cart.totalTaxAmount}</Text>
+          <View style={billStyles.billColumn}>
+            <Text style={billStyles.billValue}>{cart.totalTaxAmount}</Text>
+            <Text style={billStyles.billValue}>{cart.totalAmount}</Text>
           </View>
       </View>
       
-      <View style={styles.titleContainer}>
-          <Text style={styles.title}>Note</Text>
+      <View style={titleStyle.container}>
+        <Text style={titleStyle.title}>Note</Text>
       </View>
       <View style={styles.detailsContainer}>
-        <Text style={{
-          fontFamily:'nunito-medium', 
-          fontSize: 14,
-          margin: 5
-        }}>Please review your cart carefully to avoid any cancellations</Text>
+        <Text style={{ fontFamily:'nunito-medium' }}>Please review your cart carefully to avoid any cancellations</Text>
       </View>
       
-      <View style={styles.checkoutButton}>
+      <View style={checkoutStyle.checkoutButton}>
         <TouchableOpacity onPress={() => handleCheckout('1')}>
-          <Text style={styles.checkoutButtonText}>Checkout</Text>
+          <Text style={checkoutStyle.checkoutButtonText}>Checkout</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -138,110 +138,102 @@ export default function CartDetails() {
 }
 
 const styles = StyleSheet.create({
-    titleContainer: {
-        paddingLeft: 20,
-        paddingRight: 20,
-        marginBottom:10,
-        marginTop:10
-    },
-    title: {
-        fontSize:20,
-        fontFamily: 'outfit-bold'
-    },
-    subTitle: {
-        color: Colors.LightGrey, 
-        fontFamily: 'nunito-medium'
-    },
     detailsContainer: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginBottom: 20,
+        marginHorizontal: 10,
+        marginBottom: 10,
         padding: 10,
         backgroundColor: '#fff',
-        borderRadius: 15,
+        borderRadius: 10,
         flexDirection: 'row',   
     },
     dataRow: {
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     dataName: {
         fontFamily: 'nunito-medium',
-        fontSize: 16
     },
     dataValue: {
         fontFamily: 'nunito-medium',
-        fontSize: 16,
         color: Colors.LightGrey
-    },
-    cartItem: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginBottom: 15,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    cartButtonContainer: {
-        flexDirection: 'row', 
-        gap: 15, 
-        backgroundColor: Colors.Tertiary, 
-        paddingLeft: 15, 
-        paddingRight: 15, 
-        marginTop:5, 
-        borderRadius: 15
-    },
-    cartButton: {
-        fontFamily: 'nunito-medium',
-        fontSize: 20,
-        color: Colors.Primary
-    },
-    cartButtonText: {
-        fontFamily: 'nunito-medium',
-        marginTop: 4,
-        fontSize: 14,
-        color: Colors.Primary
     },
     itemPrice: {
         marginTop: 7,
         fontFamily: 'nunito-medium',
-        fontSize: 16,
         color: Colors.LightGrey
     },
-    billColumn: {
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
-        width:100,
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-    },
-    billName: {
-        fontFamily: 'nunito-medium',
-        fontSize: 14,
-        paddingBottom: 5,
-    },
-    billValue: {
-        fontFamily: 'nunito-medium',
-        fontSize: 14,
-        color: Colors.LightGrey,
-        textAlign: 'right'
-    },
-    checkoutButton: {
-      marginLeft: 20,
-      marginRight: 20,
-      marginBottom: 20,
-      borderRadius: 20,
-      padding:10,
-      backgroundColor: Colors.Primary,
-      flex: 1, justifyContent: "center", alignItems: "center"
-    },
-    checkoutButtonText: {
+});
+
+const titleStyle = StyleSheet.create({
+  container: {
+      paddingHorizontal: 10,
+      marginVertical:10
+  },
+  title: {
+      fontSize:20,
+      fontFamily: 'outfit-bold'
+  },
+  subTitle: {
+      color: Colors.LightGrey, 
+      fontFamily: 'nunito-medium'
+  }
+});
+
+const cartStyles = StyleSheet.create({
+  cartItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  cartButtonContainer: {
+      flexDirection: 'row', 
+      gap: 15, 
+      backgroundColor: Colors.Tertiary, 
+      paddingHorizontal: 15,
+      marginTop:5, 
+      borderRadius: 15
+  },
+  cartButton: {
       fontFamily: 'nunito-medium',
-      color: Colors.Tertiary,
-    }
-})
+      color: Colors.Primary
+  },
+  cartButtonText: {
+      fontFamily: 'nunito-medium',
+      marginTop: 4,
+      color: Colors.Primary
+  }
+});
+
+const billStyles = StyleSheet.create({
+  billColumn: {
+    width:100,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  billName: {
+      fontFamily: 'nunito-medium',
+      paddingBottom: 5,
+  },
+  billValue: {
+      fontFamily: 'nunito-medium',
+      color: Colors.LightGrey,
+      textAlign: 'right'
+  }
+});
+
+const checkoutStyle = StyleSheet.create({
+  checkoutButton: {
+    margin: 10,
+    borderRadius: 15,
+    padding:10,
+    backgroundColor: Colors.Primary,
+    flex: 1, 
+    justifyContent: "center", 
+    alignItems: "center"
+  },
+  checkoutButtonText: {
+    fontFamily: 'nunito-bold',
+    color: Colors.Tertiary,
+  }
+});

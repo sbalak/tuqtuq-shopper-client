@@ -25,7 +25,7 @@ export default function RestaurantRecent() {
   );
 
   return (
-    <View style={styles.recentVisitContainer}>
+    <View>
         <View style={styles.titleContainer}>
             <Text style={styles.title}>Your Recent Visits</Text>
             <Text style={styles.viewAll}>View All</Text>
@@ -36,9 +36,6 @@ export default function RestaurantRecent() {
 }
 
 const styles = StyleSheet.create({
-    recentVisitContainer: {
-      marginVertical: 5
-    },
     titleContainer: {
       marginVertical: 10,
       display: 'flex',
