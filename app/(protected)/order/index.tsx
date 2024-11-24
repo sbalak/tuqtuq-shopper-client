@@ -12,7 +12,7 @@ export default function Index() {
   
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView style={{paddingHorizontal: 10}}>
         <OrderList />
       </ScrollView>
     </SafeAreaView>

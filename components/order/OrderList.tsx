@@ -36,15 +36,8 @@ export default function OrderList() {
 }
 
 const styles = StyleSheet.create({
-  orderListContainer: {
-    marginTop: 10,
-    marginBottom: 10
-  },
   titleContainer: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    marginBottom:10,
-    marginTop:10
+    paddingVertical:10
   },
   title: {
     fontSize:20,
