@@ -225,12 +225,12 @@ const foodStyles = StyleSheet.create({
   foodTitle: {
       fontFamily: 'nunito-bold',
       fontSize: 16,
-      width:225,
+      width:250,
   },
   foodSubtitle: {
       fontFamily: 'nunito-medium',
       fontSize: 14,
-      width:225,
+      width:250,
       marginTop:5,
       color: Colors.LightGrey
   },
