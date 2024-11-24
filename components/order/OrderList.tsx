@@ -26,7 +26,7 @@ export default function OrderList() {
     );
 
   return (
-    <View style={styles.orderListContainer}>
+    <View>
       <View style={styles.titleContainer}>
           <Text style={styles.title}>Past Orders</Text>
       </View>

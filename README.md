@@ -14,3 +14,4 @@ DEPENDENCIES
 3. npx expo install expo-font
 4. npx expo install expo-location
 5. npx expo install react-native-safe-area-context
+6. npm install -g npm-check-updates

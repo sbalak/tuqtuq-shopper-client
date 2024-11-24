@@ -1,7 +1,6 @@
-import { ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import OrderList from '@/components/order/OrderList';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Index() {

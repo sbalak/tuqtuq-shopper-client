@@ -11,7 +11,6 @@ export default function _layout() {
       screenOptions={({ route }) => ({
         title: 'Loading...',
         headerTitle: route.params.headerTitle,
-        headerLeft: () => <Ionicons style={{paddingRight:20}} onPress={() => router.back()} name='chevron-back-outline' size={30} color={Colors.Primary} />,
         headerTitleStyle: {
           fontFamily: 'outfit-bold',
           fontSize: 20
