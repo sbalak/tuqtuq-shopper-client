@@ -1,24 +1,24 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, Image, StyleSheet, Alert, Platform } from 'react-native'
 import React from 'react'
 import { Link, Redirect, router } from 'expo-router'
 import { Colors } from '@/constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
 import { useLocation } from '@/hooks/useLocation'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const StoreHeader = () => {
+    const { top } = useSafeAreaInsets();
     const { locationState, setLocality} = useLocation();
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={[styles.container, {paddingTop: top}]}>
             <TouchableOpacity onPress={() => {}}>
                 <Image style={styles.locator} source={require('@/assets/images/location.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.titleContainer} onPress={setLocality}>
                 <Text style={styles.title}>Pickup • Now</Text>
-                <View style={styles.locationName}>
-                    <Text style={styles.subtitle}>{locationState.locality}</Text>
-                </View>
+                <Text style={styles.subtitle}>{locationState.locality}</Text>
+            
             </TouchableOpacity>
             <TouchableOpacity style={styles.orderButton} onPress={() => router.push('/order')}>
                 <Ionicons name='receipt' size={20} color={Colors.Primary} />
@@ -29,7 +29,7 @@ const StoreHeader = () => {
             <TouchableOpacity style={styles.profileButton} onPress={() => router.push('/settings')}>
                 <Ionicons name='person' size={20} color={Colors.Primary} />
             </TouchableOpacity>
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -37,48 +37,52 @@ export default StoreHeader;
 
 const styles = StyleSheet.create({
   container: {
+    ...Platform.select({
+      ios: {
+        shadowColor: Colors.LightGrey,
+        shadowOffset: {width: 1, height: 1},
+        shadowOpacity: 0.2,
+      },
+      android: {
+        elevation: 5,
+      }
+    }),
     backgroundColor: Colors.White,
     paddingHorizontal: 10,
     paddingVertical: 10,
     gap: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',  
-    shadowColor: Colors.LightGrey,
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity:  0.5,
-    shadowRadius: 5,
-    elevation: 5,
+    justifyContent: 'space-between',
   },
   locator: {
       width: 30,
-      height: 30
+      height: 30,
+      marginTop:7
   },
   titleContainer: {
-      flex: 1
+      flex: 1,
+      paddingTop:7
   },
   title: {
-      fontSize: 14,
       fontFamily: 'nunito-bold',
       color: Colors.LightGrey
   },
-  locationName: {
-      flexDirection: 'row',
-      alignItems: 'center'
-  },
   subtitle: {
-      fontSize: 14,
       fontFamily: 'nunito-bold'
   },
   orderButton: {
-      padding: 10
+      padding: 10,
+      marginTop:7,
   },
   searchButton: {
-      padding: 10
+      padding: 10,
+      marginTop:7,
   },
   profileButton: {
       backgroundColor: Colors.Tertiary,
       padding: 10,
+      marginTop:7,
       borderRadius: 50
   },
 })

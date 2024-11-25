@@ -4,7 +4,6 @@ import { router, useFocusEffect, useLocalSearchParams, useNavigation } from 'exp
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function StoreDetails() {
     const { id } = useLocalSearchParams();
