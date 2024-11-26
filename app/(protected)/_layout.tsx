@@ -1,8 +1,6 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { Stack } from 'expo-router'
 import LocationProvider from '@/hooks/useLocation'
-import StoreHeader from '@/components/headers/StoreHeader'
 
 export default function _layout() {
   return (

@@ -33,7 +33,12 @@ export default function RestaurantRecent() {
               <Text style={styles.viewAll}>View All</Text>
             </TouchableOpacity>
         </View>
-        <FlatList data={restaurants} horizontal={true} showsHorizontalScrollIndicator={false} renderItem={({item, index})=>(<RestaurantRecentCard restaurant={item} key={index} />)} />
+        <FlatList data={restaurants} 
+                  horizontal={true} 
+                  showsHorizontalScrollIndicator={false} 
+                  renderItem={({item, index})=>(<RestaurantRecentCard restaurant={item} key={index} />)}
+                  keyExtractor={(item, index) => String(index)}
+        />
     </View> 
     : null
   )

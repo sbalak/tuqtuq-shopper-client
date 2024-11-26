@@ -32,7 +32,11 @@ export default function RestaurantNearby() {
             <Text style={styles.viewAll}>View All</Text>
           </TouchableOpacity>
       </View>
-      <FlatList data={restaurants} scrollEnabled={false} renderItem={({item, index})=>(<RestaurantNearbyCard restaurant={item} key={index} />)} />
+      <FlatList data={restaurants} 
+                scrollEnabled={false} 
+                renderItem={({item, index})=>(<RestaurantNearbyCard restaurant={item} key={index} />)}
+                keyExtractor={(item, index) => String(index)} 
+      />
     </View>
   )
 }
