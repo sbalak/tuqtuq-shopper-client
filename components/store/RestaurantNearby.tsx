@@ -1,9 +1,9 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { Colors } from '@/constants/Colors';
 import RestaurantNearbyCard from './RestaurantNearbyCard';
 import axios from 'axios';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 
 export default function RestaurantNearby() {
   const [restaurants, setRestaurants] = useState([]);
@@ -28,7 +28,9 @@ export default function RestaurantNearby() {
     <View>
       <View style={styles.titleContainer}>
           <Text style={styles.title}># Nearby Hotspots</Text>
-          <Text style={styles.viewAll}>View All</Text>
+          <TouchableOpacity onPress={() => (router.navigate('/store/list'))}>
+            <Text style={styles.viewAll}>View All</Text>
+          </TouchableOpacity>
       </View>
       <FlatList data={restaurants} scrollEnabled={false} renderItem={({item, index})=>(<RestaurantNearbyCard restaurant={item} key={index} />)} />
     </View>

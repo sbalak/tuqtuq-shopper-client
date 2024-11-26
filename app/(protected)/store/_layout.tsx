@@ -1,15 +1,12 @@
 import React from 'react'
 import StoreHeader from '@/components/headers/StoreHeader'
-import { router, Stack } from 'expo-router'
-import { Colors } from '@/constants/Colors'
-import { Ionicons } from '@expo/vector-icons'
-import { StyleSheet, Text, View } from 'react-native'
+import { Stack } from 'expo-router'
+import { StyleSheet } from 'react-native'
 
 export default function _layout() {
   return (
     <Stack 
       screenOptions={({ route }) => ({
-        title: 'Loading...',
         headerTitle: route.params.headerTitle,
         headerTitleStyle: {
           fontFamily: 'outfit-bold',
@@ -17,8 +14,10 @@ export default function _layout() {
         } 
       })} 
     >
-      <Stack.Screen name="index" options={{ header: () => <StoreHeader /> }} />
       <Stack.Screen name="[id]" />
+      <Stack.Screen name="index" options={{ header: () => <StoreHeader /> }} />
+      <Stack.Screen name="list" />
+      <Stack.Screen name="recent" />
     </Stack>
   )
 }
