@@ -1,10 +1,7 @@
 import  { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import * as SecureStore from 'expo-secure-store';
-import { router } from 'expo-router';
 import * as Location from "expo-location";
-
-export const API_URL = "https://shopper-development-api.azurewebsites.net";
+import {API_URL} from '@env';
 
 const initialState = {
     locationState: { locality: null }, setLocality: async () => {}

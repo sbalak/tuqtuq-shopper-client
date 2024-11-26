@@ -1,17 +1,18 @@
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import {API_URL} from '@env';
 
 export default function CartDetails() {
     const [cart, setCart] = useState([]);
     
   const load = async() => {
     try {
-      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Details?userId=1`);
+      const response = await axios.get(`${API_URL}/Cart/Details?userId=1`);
       setCart(response.data);
     }
     catch(error) {
@@ -21,7 +22,7 @@ export default function CartDetails() {
   
   const handleCheckout = async(userId: string) => {
     try {
-      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Order/Confirm`,
+      const response = await axios.get(`${API_URL}/Order/Confirm`,
         {
           params: {
             userId: '1'
@@ -36,7 +37,7 @@ export default function CartDetails() {
   
   const handleAddItem = async(userId: string, restaurantId: string, foodId: string) => {
     try {
-      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Add`,
+      const response = await axios.get(`${API_URL}/Cart/Add`,
         {
           params: {
             userId: '1',
@@ -53,7 +54,7 @@ export default function CartDetails() {
   
   const handleRemoveItem = async(userId: string, restaurantId: string, foodId: string) => {
     try {
-      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Remove`,
+      const response = await axios.get(`${API_URL}/Cart/Remove`,
         {
           params: {
             userId: '1',

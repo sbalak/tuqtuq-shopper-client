@@ -21,13 +21,3 @@ export default function _layout() {
     </Stack>
   )
 }
-
-const styles = StyleSheet.create({
-  headerTitle: {
-    fontFamily: 'outfit-bold',
-    fontSize: 20
-  },
-  backButton: {
-    paddingRight:20
-  }
-})

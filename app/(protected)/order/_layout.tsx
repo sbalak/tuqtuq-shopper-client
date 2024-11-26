@@ -1,8 +1,5 @@
-import { View, Text } from 'react-native'
 import React from 'react'
-import { router, Stack } from 'expo-router'
-import { Ionicons } from '@expo/vector-icons'
-import { Colors } from '@/constants/Colors'
+import { Stack } from 'expo-router'
 
 export default function _layout() {
   return (

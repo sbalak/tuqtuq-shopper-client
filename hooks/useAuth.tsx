@@ -2,8 +2,7 @@ import  { createContext, PropsWithChildren, useContext, useEffect, useState } fr
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
-
-export const API_URL = "https://shopper-development-api.azurewebsites.net";
+import {AUTH_URL} from '@env';
 
 const initialState = {
     authState: { token: null, authenticated: null }, register: async () => {}, login: async () => {}, logout: async () => {}
@@ -63,7 +62,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
                 if (error.response.status === 401 && !originalRequest._retry) {                    
                     const refreshToken = await SecureStore.getItemAsync('refreshToken');
                     
-                    const response = await axios.post(`${API_URL}/refresh`, { refreshToken });
+                    const response = await axios.post(`${AUTH_URL}/refresh`, { refreshToken });
 
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
                     originalRequest.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
@@ -86,7 +85,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
     const register = async (email: string, password: string) => {
         try {
-            const response = await axios.post(`${API_URL}/register`, { email, password });
+            const response = await axios.post(`${AUTH_URL}/register`, { email, password });
 
             return response;
         } catch (error) {
@@ -96,7 +95,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
     const login = async (email: string, password: string) => {
         try {
-            const response = await axios.post(`${API_URL}/login`, { email, password });
+            const response = await axios.post(`${AUTH_URL}/login`, { email, password });
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
             await SecureStore.setItem('accessToken', response.data.accessToken);
             await SecureStore.setItem('refreshToken', response.data.refreshToken);

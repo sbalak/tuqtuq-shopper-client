@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import RestaurantNearbyCard from '@/components/store/RestaurantNearbyCard';
+import {API_URL} from '@env';
 
 export default function list() {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +13,7 @@ export default function list() {
   const loadRecentRestaurants = async() => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/list?page=${currentPage}&pageSize=10`);
+      const response = await axios.get(`${API_URL}/restaurant/list?page=${currentPage}&pageSize=10`);
       if (response.data.length > 0) {
         setRestaurants((items) => items.concat(response.data));
         setCurrentPage(currentPage + 1);

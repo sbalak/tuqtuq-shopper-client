@@ -4,13 +4,14 @@ import { Colors } from '@/constants/Colors';
 import RestaurantNearbyCard from './RestaurantNearbyCard';
 import axios from 'axios';
 import { router, useFocusEffect } from 'expo-router';
+import {API_URL} from '@env';
 
 export default function RestaurantNearby() {
   const [restaurants, setRestaurants] = useState([]);
 
   const loadNearbyRestaurants = async() => {
     try {
-      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/list`);
+      const response = await axios.get(`${API_URL}/api/restaurant/list`);
       setRestaurants(response.data);
     }
     catch(error) {

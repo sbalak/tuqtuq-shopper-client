@@ -4,13 +4,14 @@ import { Colors } from '@/constants/Colors'
 import RestaurantRecentCard from './RestaurantRecentCard'
 import { router, useFocusEffect } from 'expo-router';
 import axios from 'axios';
+import {API_URL} from '@env';
 
 export default function RestaurantRecent() {
   const [restaurants, setRestaurants] = useState([]);
 
   const loadRecentRestaurants = async() => {
     try {
-      const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/recentlyvisited`);
+      const response = await axios.get(`${API_URL}/restaurant/recentlyvisited`);
       setRestaurants(response.data);
     }
     catch(error) {

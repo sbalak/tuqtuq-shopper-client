@@ -1,7 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import { Redirect, router } from "expo-router";
-import { useEffect } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 export default function Index() {
       

@@ -1,10 +1,10 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet, Alert, Platform } from 'react-native'
 import React from 'react'
-import { Link, Redirect, router } from 'expo-router'
+import { router } from 'expo-router'
 import { Colors } from '@/constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
 import { useLocation } from '@/hooks/useLocation'
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const StoreHeader = () => {
     const { top } = useSafeAreaInsets();

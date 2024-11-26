@@ -1,9 +1,10 @@
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput, SectionList, ListRenderItem, ImageBackground } from 'react-native'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, SectionList, ListRenderItem } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { router, useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import {API_URL} from '@env';
 
 export default function StoreDetails() {
     const { id } = useLocalSearchParams();
@@ -15,7 +16,7 @@ export default function StoreDetails() {
   
     const loadRestaurantDetails = async() => {
       try {
-        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/details?userId=1&restaurantId=`+id);
+        const response = await axios.get(`${API_URL}/restaurant/details?userId=1&restaurantId=`+id);
         setRestaurant(response.data);
       }
       catch(error) {
@@ -26,11 +27,11 @@ export default function StoreDetails() {
     const loadRestaurantMenu = async (searchText: string) => {
       try {
         if (!searchText) {
-          const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/fooditems?userId=1&restaurantId=`+id);
+          const response = await axios.get(`${API_URL}/restaurant/fooditems?userId=1&restaurantId=`+id);
           setRestaurantMenu(response.data);
         }
         else {
-          const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/restaurant/fooditems?userId=1&restaurantId=`+id+`&searchText=`+searchText);
+          const response = await axios.get(`${API_URL}/restaurant/fooditems?userId=1&restaurantId=`+id+`&searchText=`+searchText);
           setRestaurantMenu(response.data);
         }
       }
@@ -41,7 +42,7 @@ export default function StoreDetails() {
     
     const loadCartValue = async() => {
       try {
-        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/cart/value?userId=1&restaurantId=`+id);
+        const response = await axios.get(`${API_URL}/cart/value?userId=1&restaurantId=`+id);
         setCartValue(response.data);
       }
       catch(error) {
@@ -51,7 +52,7 @@ export default function StoreDetails() {
 
     const handleAddItem = async(userId: string, restaurantId: string, foodId: string) => {
       try {
-        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Add`,
+        const response = await axios.get(`${API_URL}/Cart/Add`,
           {
             params: {
               userId: '1',
@@ -72,7 +73,7 @@ export default function StoreDetails() {
     
     const handleRemoveItem = async(userId: string, restaurantId: string, foodId: string) => {
       try {
-        const response = await axios.get(`https://shopper-development-api.azurewebsites.net/api/Cart/Remove`,
+        const response = await axios.get(`${API_URL}/Cart/Remove`,
           {
             params: {
               userId: '1',
