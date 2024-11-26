@@ -11,7 +11,7 @@ export default function RestaurantNearby() {
 
   const loadNearbyRestaurants = async() => {
     try {
-      const response = await axios.get(`${API_URL}/api/restaurant/list`);
+      const response = await axios.get(`${API_URL}/restaurant/list`);
       setRestaurants(response.data);
     }
     catch(error) {
