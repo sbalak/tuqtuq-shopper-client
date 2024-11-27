@@ -2,14 +2,14 @@ import  { createContext, PropsWithChildren, useContext, useEffect, useState } fr
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
-import {AUTH_URL} from '@env';
+import {AUTH_URL, API_URL} from '@env';
 
 const initialState = {
-    authState: { token: null, authenticated: null }, register: async () => {}, login: async () => {}, logout: async () => {}
+    authState: { token: null, userId: null, authenticated: null }, register: async () => {}, login: async () => {}, logout: async () => {}
 }
 
 type AuthContextType = {
-    authState: { token: string | null, authenticated: boolean | null };
+    authState: { token: string | null, userId: string | null, authenticated: boolean | null };
     register: (email: string, password: string) => Promise<any>;
     login: (email: string, password: string) => Promise<any>;
     logout: () => Promise<any>;
@@ -20,24 +20,27 @@ const AuthContext = createContext<AuthContextType>(initialState);
 interface Props extends PropsWithChildren {}
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
-    const [authState, setAuthState] = useState<{ token: string | null, authenticated: boolean | null }>({ token: null, authenticated: null });
+    const [authState, setAuthState] = useState<{ token: string | null, userId: string | null, authenticated: boolean | null }>({ token: null, userId: null, authenticated: null });
 
     useEffect(() => {
         const loadAccessToken = async () => {
             const accessToken = await SecureStore.getItemAsync('accessToken');
             const refreshToken = await SecureStore.getItemAsync('refreshToken');
+            const userId = await SecureStore.getItemAsync('userId');
             
             if (accessToken) {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
                 setAuthState({
                     token: accessToken,
+                    userId: userId,
                     authenticated: true
                 });        
             }
             else {
                 setAuthState({
                     token: null, 
+                    userId: null,
                     authenticated: false
                 });
             }  
@@ -118,8 +121,13 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
             axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`;
 
+            const user = await axios.get(`${API_URL}/user/id?email=${email}`);
+
+            await SecureStore.setItem('userId', String(user.data));
+
             setAuthState({
                 token: data.accessToken,
+                userId: user.data,
                 authenticated: true
             });
 
@@ -133,9 +141,11 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         try {
             await SecureStore.deleteItemAsync('accessToken');
             await SecureStore.deleteItemAsync('refreshToken');
+            await SecureStore.deleteItemAsync('userId');
 
             setAuthState({
                 token: null,
+                userId: null,
                 authenticated: false
             });          
             router.replace('/login');  
