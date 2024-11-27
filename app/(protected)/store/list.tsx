@@ -56,7 +56,7 @@ export default function list() {
   }, []);
 
   return (
-    <View style={{paddingHorizontal:10}}>
+    <View style={{paddingHorizontal:10, flex:1}}>
       <FlatList data={restaurants}
                 renderItem={({item, index})=>(<RestaurantNearbyCard restaurant={item} key={index} />)}
                 keyExtractor={(item, index) => String(index)}
