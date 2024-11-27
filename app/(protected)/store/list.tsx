@@ -4,11 +4,17 @@ import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import RestaurantNearbyCard from '@/components/store/RestaurantNearbyCard';
 import {API_URL} from '@env';
+import { useNavigation } from 'expo-router';
 
 export default function list() {
   const [isLoading, setIsLoading] = useState(true);
   const [restaurants, setRestaurants] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const navigation = useNavigation();
+  
+  useEffect(() => {
+    navigation.setOptions({ headerTitle: 'Restaurants' });
+  }, []);
 
   const loadRecentRestaurants = async() => {
     try {

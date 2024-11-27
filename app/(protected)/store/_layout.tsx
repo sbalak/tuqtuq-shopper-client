@@ -1,6 +1,7 @@
 import React from 'react'
 import StoreHeader from '@/components/headers/StoreHeader'
 import { Stack } from 'expo-router'
+import CommonHeader from '@/components/headers/CommonHeader'
 
 export default function _layout() {
   return (
@@ -13,9 +14,9 @@ export default function _layout() {
         } 
       })} 
     >
-      <Stack.Screen name="[id]" />
+      <Stack.Screen name="[id]" options={{ header: (props) => <CommonHeader props={props} {...props} /> }} />
       <Stack.Screen name="index" options={{ header: () => <StoreHeader /> }} />
-      <Stack.Screen name="list" />
+      <Stack.Screen name="list" options={{ header: (props) => <CommonHeader props={props} {...props} /> }} />
     </Stack>
   )
 }
