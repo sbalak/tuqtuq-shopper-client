@@ -1,5 +1,5 @@
 import AuthProvider, { useAuth } from "@/hooks/useAuth";
-import { router, Slot, Stack } from "expo-router";
+import { router, Slot } from "expo-router";
 import { useEffect } from "react";
 import { useFonts } from 'expo-font';
 import { View } from "react-native";
