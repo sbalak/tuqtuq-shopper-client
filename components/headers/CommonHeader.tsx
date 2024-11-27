@@ -5,15 +5,15 @@ import { Colors } from '@/constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-const CommonHeader = () => {
+const CommonHeader = (props: any) => {
   const { top } = useSafeAreaInsets();
-
+  
   return (
     <View style={[styles.container, {paddingTop: top}]}>
       <TouchableOpacity onPress={() => {router.back()}}>
         <Ionicons name='arrow-back' style={styles.navigate} color={Colors.Primary} />
       </TouchableOpacity>
-      <Text style={styles.title}>Cart</Text>
+      <Text style={styles.title}>{props.options.headerTitle}</Text>
     </View>
   )
 }
