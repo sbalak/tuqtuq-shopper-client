@@ -5,8 +5,10 @@ import RestaurantRecentCard from './RestaurantRecentCard'
 import { router, useFocusEffect } from 'expo-router';
 import axios from 'axios';
 import {API_URL} from '@env';
+import { useLocation } from '@/hooks/useLocation';
 
 export default function RestaurantRecent() {
+  const { locationState } = useLocation();
   const [restaurants, setRestaurants] = useState([]);
 
   const loadRecentRestaurants = async() => {
@@ -22,7 +24,7 @@ export default function RestaurantRecent() {
   useFocusEffect(
     React.useCallback(() => {
       loadRecentRestaurants();
-    }, [])
+    }, [locationState.latitude, locationState.longitude])
   );
 
   return (

@@ -5,8 +5,10 @@ import RestaurantNearbyCard from './RestaurantNearbyCard';
 import axios from 'axios';
 import { router, useFocusEffect } from 'expo-router';
 import {API_URL} from '@env';
+import { useLocation } from '@/hooks/useLocation';
 
 export default function RestaurantNearby() {
+  const { locationState } = useLocation();
   const [restaurants, setRestaurants] = useState([]);
 
   const loadNearbyRestaurants = async() => {
@@ -22,7 +24,7 @@ export default function RestaurantNearby() {
   useFocusEffect(
     React.useCallback(() => {
       loadNearbyRestaurants();
-    }, [])
+    }, [locationState.latitude, locationState.longitude])
   );
 
   return (

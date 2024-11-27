@@ -5,11 +5,11 @@ import {API_URL} from '@env';
 import { useAuth } from './useAuth';
 
 const initialState = {
-    locationState: { locality: null }, setLocality: async () => {}
+    locationState: { locality: null, latitude: null, longitude: null }, setLocality: async () => {}
 }
 
 type LocationContextType = {
-    locationState: { locality: string | null };
+    locationState: { locality: string | null, latitude: string | null, longitude: string | null };
     setLocality: () => Promise<any>;
 }
 
@@ -19,7 +19,7 @@ interface Props extends PropsWithChildren {}
 
 const LocationProvider: React.FC<Props> = ({ children }) => {
     const { authState } = useAuth();
-    const [locationState, setLocationState] = useState<{ locality: string | null }>({ locality: "Loading..." });
+    const [locationState, setLocationState] = useState<{ locality: string | null, latitude: string | null, longitude: string | null }>({ locality: "Loading...", latitude: null, longitude: null });
     
     useEffect(() => {
         const loadLocality = async () => {
@@ -45,7 +45,9 @@ const LocationProvider: React.FC<Props> = ({ children }) => {
             const response = await axios.post(`${API_URL}/User/SetCoordinates?userId=${authState.userId}&latitude=${geocode.coords.longitude}&longitude=${geocode.coords.longitude}`); 
             
             setLocationState({
-                locality: address[0].district
+                locality: address[0].district,
+                latitude: String(geocode.coords.latitude),
+                longitude: String(geocode.coords.longitude)
             });
 
             return response;
