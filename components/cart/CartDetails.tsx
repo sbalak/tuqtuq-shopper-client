@@ -6,13 +6,15 @@ import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import {API_URL} from '@env';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function CartDetails() {
+  const { authState } = useAuth();
     const [cart, setCart] = useState([]);
     
   const load = async() => {
     try {
-      const response = await axios.get(`${API_URL}/Cart/Details?userId=1`);
+      const response = await axios.get(`${API_URL}/Cart/Details?userId=${authState.userId}`);
       setCart(response.data);
     }
     catch(error) {
@@ -20,31 +22,19 @@ export default function CartDetails() {
     } 
   }
   
-  const handleCheckout = async(userId: string) => {
+  const handleCheckout = async() => {
     try {
-      const response = await axios.get(`${API_URL}/Order/Confirm`,
-        {
-          params: {
-            userId: '1'
-          },
-        });
-        router.replace('/order');
+      await axios.get(`${API_URL}/Order/Confirm?userId=${authState.userId}`);
+      router.replace('/order');
     }
     catch(error) {
       console.log(error);
     } 
   }
   
-  const handleAddItem = async(userId: string, restaurantId: string, foodId: string) => {
+  const handleAddItem = async(restaurantId: string, foodId: string) => {
     try {
-      const response = await axios.get(`${API_URL}/Cart/Add`,
-        {
-          params: {
-            userId: '1',
-            restaurantId: restaurantId,
-            foodId: foodId
-          },
-        });
+      await axios.get(`${API_URL}/Cart/Add?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
       load();
     }
     catch(error) {
@@ -52,16 +42,9 @@ export default function CartDetails() {
     } 
   }
   
-  const handleRemoveItem = async(userId: string, restaurantId: string, foodId: string) => {
+  const handleRemoveItem = async(restaurantId: string, foodId: string) => {
     try {
-      const response = await axios.get(`${API_URL}/Cart/Remove`,
-        {
-          params: {
-            userId: '1',
-            restaurantId: restaurantId,
-            foodId: foodId
-          },
-        });
+      await axios.get(`${API_URL}/Cart/Remove?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
       load();
     }
     catch(error) {
@@ -95,11 +78,11 @@ export default function CartDetails() {
                           <View style={cartStyles.cartItem}>
                               <Text style={styles.itemPrice}>{item.price}</Text>
                               <View style={cartStyles.cartButtonContainer}>
-                                  <TouchableOpacity onPress={() => handleRemoveItem('1', cart.restaurantId, item.foodItemId)}>
+                                  <TouchableOpacity onPress={() => handleRemoveItem(cart.restaurantId, item.foodItemId)}>
                                       <Text style={cartStyles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
                                   <Text style={cartStyles.cartButtonText}>{item.quantity}</Text>
-                                  <TouchableOpacity onPress={() => handleAddItem('1', cart.restaurantId, item.foodItemId)}>
+                                  <TouchableOpacity onPress={() => handleAddItem(cart.restaurantId, item.foodItemId)}>
                                       <Text style={cartStyles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
                               </View>
@@ -130,7 +113,7 @@ export default function CartDetails() {
       </View>
       
       <View style={checkoutStyle.checkoutButton}>
-        <TouchableOpacity onPress={() => handleCheckout('1')}>
+        <TouchableOpacity onPress={() => handleCheckout()}>
           <Text style={checkoutStyle.checkoutButtonText}>Checkout</Text>
         </TouchableOpacity>
       </View>

@@ -4,13 +4,15 @@ import OrderCard from './OrderCard'
 import { useFocusEffect } from 'expo-router';
 import axios from 'axios';
 import {API_URL} from '@env';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function OrderList() {
+  const { authState } = useAuth();
     const [orders, setOrders] = useState([]);
   
     const load = async() => {
       try {
-        const response = await axios.get(`${API_URL}/order/list?userId=1`);
+        const response = await axios.get(`${API_URL}/order/list?userId=${authState.userId}`);
         setOrders(response.data);
       }
       catch(error) {

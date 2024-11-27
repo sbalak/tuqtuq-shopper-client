@@ -17,7 +17,7 @@ export default function OrderDetails() {
   
     const load = async() => {
       try {
-        const response = await axios.get(`${API_URL}/order/details?id=`+id);
+        const response = await axios.get(`${API_URL}/order/details?id=${id}`);
         setOrder(response.data);
       }
       catch(error) {
