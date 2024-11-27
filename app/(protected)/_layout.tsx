@@ -8,7 +8,6 @@ export default function _layout() {
       <Stack>
         <Stack.Screen name="cart" options={{ headerShown: false }} />
         <Stack.Screen name="order" options={{ headerShown: false }} />
-        <Stack.Screen name="search" options={{ headerShown: false }} />
         <Stack.Screen name="settings" options={{ headerShown: false }} />
         <Stack.Screen name="store" options={{ headerShown: false }} />
       </Stack>

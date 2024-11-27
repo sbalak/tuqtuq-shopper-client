@@ -1,13 +1,18 @@
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAuth } from '@/hooks/useAuth';
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/build/Ionicons';
 
 export default function index() {
 
   const { authState, logout } = useAuth();
+  const navigation = useNavigation();
+  
+  useEffect(() => {
+    navigation.setOptions({ headerTitle: 'Settings' });
+  }, []);
   
   const handleLogout = async () => {
     try {

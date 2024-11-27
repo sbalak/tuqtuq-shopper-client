@@ -1,19 +1,12 @@
 import React from 'react'
 import { Stack } from 'expo-router'
+import CommonHeader from '@/components/headers/CommonHeader'
 
 export default function _layout() {
   return (
-    <Stack 
-      screenOptions={({ route }) => ({
-        headerTitle: route.params.headerTitle,
-        headerTitleStyle: {
-          fontFamily: 'outfit-bold',
-          fontSize: 20
-        } 
-      })} 
-    >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="[id]" />
+    <Stack>
+      <Stack.Screen name="index" options={{ header: (props) => <CommonHeader props={props} {...props} /> }} />
+      <Stack.Screen name="[id]" options={{ header: (props) => <CommonHeader props={props} {...props} /> }} />
     </Stack>
   )
 }
