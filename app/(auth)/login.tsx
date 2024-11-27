@@ -12,12 +12,12 @@ export const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const result = await login(email, password);
       if (!email || !password) {
         Alert.alert('Error!', "Please enter your email and password.");
       }
       else{
-        if (result && result.error) {
+        const result = await login(email, password);
+        if (result && result.status === 401) {
           Alert.alert('Error!', "Unauthorized, please check your email and password.");
         }
       }      

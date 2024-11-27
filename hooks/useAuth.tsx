@@ -95,17 +95,35 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
     const login = async (email: string, password: string) => {
         try {
-            const response = await axios.post(`${AUTH_URL}/login`, { email, password });
-            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
-            await SecureStore.setItem('accessToken', response.data.accessToken);
-            await SecureStore.setItem('refreshToken', response.data.refreshToken);
+            const response = await fetch(`${AUTH_URL}/login`, {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    email: email, 
+                    password: password 
+                }),
+            });
+
+            const data = await response.json();
+
+            if (data.status === 401){
+                return data;
+            }
+            
+            await SecureStore.setItem('accessToken', data.accessToken);
+            await SecureStore.setItem('refreshToken', data.refreshToken);
+
+            axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`;
 
             setAuthState({
-                token: response.data.accessToken,
+                token: data.accessToken,
                 authenticated: true
             });
 
-            return response;
+            return data;
         } catch (error) {
             return { error: true, message: (error as any).response.data };
         }
