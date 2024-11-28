@@ -45,6 +45,9 @@ export default function RestaurantNearby() {
                 renderItem={({item, index})=>(<RestaurantNearbyCard restaurant={item} key={index} />)}
                 keyExtractor={(item, index) => String(index)} 
       />
+      <TouchableOpacity onPress={() => (router.navigate('/store/list'))}>
+        <Text style={styles.footer}>view more</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -63,5 +66,11 @@ const styles = StyleSheet.create({
   viewAll: {
     color: Colors.Primary, 
     fontFamily: 'nunito-bold'
+  },
+  footer: {
+    fontFamily: 'nunito-bold', 
+    color: Colors.Primary, 
+    textAlign: "center",
+    marginBottom:20
   }
 })
