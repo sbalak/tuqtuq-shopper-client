@@ -6,6 +6,7 @@ import { router, useFocusEffect } from 'expo-router';
 import axios from 'axios';
 import {API_URL} from '@env';
 import { useLocation } from '@/hooks/useLocation';
+import Ionicons from '@expo/vector-icons/build/Ionicons';
 
 export default function RestaurantRecent() {
   const { locationState } = useLocation();
@@ -31,10 +32,8 @@ export default function RestaurantRecent() {
     restaurants ? 
     <View>
         <View style={styles.titleContainer}>
+            <Ionicons name="star" size={24} color="#FFB300" />
             <Text style={styles.title}>Your Recent Visits</Text>
-            <TouchableOpacity onPress={() => (router.navigate('/store/recent'))}>
-              <Text style={styles.viewAll}>View All</Text>
-            </TouchableOpacity>
         </View>
         <FlatList data={restaurants} 
                   horizontal={true} 
@@ -51,15 +50,10 @@ const styles = StyleSheet.create({
   titleContainer: {
     marginVertical: 10,
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'row', gap: 5
   },
   title: {
     fontSize:20,
     fontFamily: 'outfit-bold'
-    },
-  viewAll: {
-    color: Colors.Primary, 
-    fontFamily: 'nunito-bold'
-  }
+    }
 })

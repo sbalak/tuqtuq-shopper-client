@@ -23,9 +23,6 @@ const StoreHeader = () => {
             <TouchableOpacity style={styles.orderButton} onPress={() => router.push('/order')}>
                 <Ionicons name='receipt' size={20} color={Colors.Primary} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.searchButton} onPress={() => router.push('/search')}>
-                <Ionicons name='search' size={20} color={Colors.Primary} />
-            </TouchableOpacity>
             <TouchableOpacity style={styles.profileButton} onPress={() => router.push('/settings')}>
                 <Ionicons name='person' size={20} color={Colors.Primary} />
             </TouchableOpacity>
@@ -72,10 +69,6 @@ const styles = StyleSheet.create({
       fontFamily: 'nunito-bold'
   },
   orderButton: {
-      padding: 10,
-      marginTop:7,
-  },
-  searchButton: {
       padding: 10,
       marginTop:7,
   },

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { router, useFocusEffect } from 'expo-router';
 import {API_URL} from '@env';
 import { useLocation } from '@/hooks/useLocation';
+import Ionicons from '@expo/vector-icons/build/Ionicons';
 
 export default function RestaurantNearby() {
   const { locationState } = useLocation();
@@ -30,10 +31,14 @@ export default function RestaurantNearby() {
   return (
     <View>
       <View style={styles.titleContainer}>
-          <Text style={styles.title}># Nearby Hotspots</Text>
-          <TouchableOpacity onPress={() => (router.navigate('/store/list'))}>
-            <Text style={styles.viewAll}>View All</Text>
-          </TouchableOpacity>
+        <View style={{flexDirection: 'row', gap: 5}}>
+          <Ionicons name="location-sharp" size={24} color={Colors.Primary} /> 
+          <Text style={styles.title}>Nearby Hotspots</Text>
+        </View>
+        <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => (router.navigate('/store/list'))}>
+          <Text style={styles.viewAll}>more</Text>
+          <Ionicons name="arrow-forward-outline" size={24} color={Colors.Primary} />
+        </TouchableOpacity>
       </View>
       <FlatList data={restaurants} 
                 scrollEnabled={false} 
