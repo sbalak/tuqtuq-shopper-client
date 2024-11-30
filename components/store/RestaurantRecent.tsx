@@ -14,7 +14,7 @@ export default function RestaurantRecent() {
 
   const loadRecentRestaurants = async() => {
     try {
-      const response = await axios.get(`${API_URL}/restaurant/recentlyvisited`);
+      const response = await axios.get(`${API_URL}/restaurant/recentlyvisited?latitude=${locationState.latitude}&longitude=${locationState.longitude}`);
       setRestaurants(response.data);
     }
     catch(error) {

@@ -6,8 +6,10 @@ import RestaurantNearbyCard from '@/components/store/RestaurantNearbyCard';
 import {API_URL} from '@env';
 import { useNavigation } from 'expo-router';
 import Ionicons from '@expo/vector-icons/build/Ionicons';
+import { useLocation } from '@/hooks/useLocation';
 
 export default function list() {
+  const { locationState } = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [restaurants, setRestaurants] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +23,7 @@ export default function list() {
   const loadRecentRestaurants = async() => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`${API_URL}/restaurant/list?page=${currentPage}&pageSize=10&query=${search}`);
+      const response = await axios.get(`${API_URL}/restaurant/list?latitude=${locationState.latitude}&longitude=${locationState.longitude}&page=${currentPage}&pageSize=10&query=${search}`);
       if (response.data.length > 0) {
         setRestaurants((items) => items.concat(response.data));
         setCurrentPage(currentPage + 1);
@@ -37,7 +39,7 @@ export default function list() {
   const searchRecentRestaurants = async(searchText: string) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`${API_URL}/restaurant/list?page=1&pageSize=10&query=${searchText}`);
+      const response = await axios.get(`${API_URL}/restaurant/list?latitude=${locationState.latitude}&longitude=${locationState.longitude}&page=1&pageSize=10&query=${searchText}`);
       setRestaurants(response.data);
       setCurrentPage(2);
       setIsLoading(false);
