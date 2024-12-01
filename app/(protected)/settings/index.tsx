@@ -24,20 +24,26 @@ export default function index() {
   }
 
   return (
-    <SafeAreaView>      
+    <SafeAreaView style={{ flex:1, paddingHorizontal: 10 }}>      
       <View style={styles.titleContainer}>
           <Text style={styles.title}>Your Profile</Text>
       </View>
-      <View style={styles.profileContainer}>
-        <Ionicons name="person-circle" size={80} color={Colors.Primary} style={styles.profileImage}/> 
-        <View style={styles.profileInfo}>
-            <Text style={styles.profileTitle}>Sidharth Balakrishnan</Text>
-            <Text style={styles.profileSubtitle} onPress={() => router.navigate("/settings/profile")}>Edit Profile</Text>
+      <View style={profile.container}>
+        <Ionicons name="person-circle" size={80} color={Colors.Primary}/> 
+        <View style={profile.info}>
+            <Text style={profile.title}>Sidharth Balakrishnan</Text>
+            <Text style={profile.subtitle} onPress={() => router.navigate("/settings/profile")}>Edit Profile</Text>
         </View>        
-      </View>      
-      <View style={styles.logoutButton}>
-        <TouchableOpacity onPress={() => handleLogout()}>
-          <Text style={styles.logoutButtonText}>Logout</Text>
+      </View>
+      <View style={{ marginVertical: 10, backgroundColor: '#fff', borderRadius: 10 }}>
+        <TouchableOpacity style={{ padding: 10, marginVertical:10, gap: 15, flexDirection: 'row' }} onPress={() => router.navigate('/order')}>
+          <Ionicons name="briefcase-outline" size={20} color={Colors.LightGrey} />
+          <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Orders</Text>
+        </TouchableOpacity>        
+        <View style={styles.divider}></View>
+        <TouchableOpacity style={{ padding: 10, marginVertical:10, gap: 15, flexDirection: 'row' }} onPress={handleLogout}>
+          <Ionicons name="log-out-outline" size={20} color={Colors.LightGrey} />
+          <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Logout</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -46,52 +52,37 @@ export default function index() {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    paddingLeft: 20,
-    paddingRight: 20,
     display: 'flex',
     flexDirection: 'row',
-    marginTop:20
+    paddingVertical: 10
   },
   title: {
     fontSize:20,
     fontFamily: 'outfit-bold'
-    },
-  profileContainer: {
-    margin: 20,
+  },
+  divider: {
+      height:1,
+      backgroundColor: Colors.LighterGrey, 
+  }
+})
+
+const profile = StyleSheet.create({
+  container: {
     padding: 10,
     backgroundColor: '#fff',
-    borderRadius: 15,
+    borderRadius: 10,
     flexDirection: 'row'
   },
-  profileImage: {
-      width: 80,
-      height: 80,
-      borderRadius:15
-  },
-  profileInfo: {
-      marginTop: 7,
+  info: {
+      marginTop: 15,
       marginLeft: 10
   },
-  profileTitle: {
+  title: {
       fontFamily: 'nunito-bold',
       fontSize: 18
   },
-  profileSubtitle: {
+  subtitle: {
       fontFamily: 'nunito-medium',
-      fontSize: 14,
       color: Colors.LightGrey
-  },
-  logoutButton: {
-    marginLeft: 20,
-    marginRight: 20,
-    borderRadius: 20,
-    padding:10,
-    backgroundColor: Colors.Primary,
-    justifyContent: "center", 
-    alignItems: "center"
-  },
-  logoutButtonText: {
-    fontFamily: 'nunito-medium',
-    color: Colors.Tertiary
   }
 })
