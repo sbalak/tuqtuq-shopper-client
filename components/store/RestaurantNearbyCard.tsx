@@ -25,13 +25,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     restaurantImage: {
-        width: 120,
-        height: 80,
+        width: 125,
+        height: 125,
         borderRadius:15
     },
     restaurantInfo: {
         marginTop: 7,
-        marginLeft: 10
+        marginLeft: 10,
+        width:240,
     },
     restaurantTitle: {
         fontFamily: 'outfit-bold',
@@ -39,7 +40,6 @@ const styles = StyleSheet.create({
     },
     restaurantSubtitle: {
         fontFamily: 'nunito-medium',
-        fontSize: 14,
         color: Colors.LightGrey
     }
 });

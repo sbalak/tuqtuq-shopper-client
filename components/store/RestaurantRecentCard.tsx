@@ -6,10 +6,11 @@ import { Colors } from '@/constants/Colors';
 export default function RestaurantRecentCard({restaurant}: {restaurant: any}) {
   return (    
     <TouchableOpacity style={styles.restaurantContainer} onPress={() => router.push('/store/'+restaurant.id)}>
-        <Image source={{uri:restaurant.photo}} style={styles.restaurantImage} />
         <View style={styles.restaurantInfo}>
             <Text style={styles.restaurantTitle}>{restaurant.name}</Text>
             <Text style={styles.restaurantSubtitle}>{restaurant.locality}</Text>
+            <Text style={styles.restaurantSubtitle}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
+            <Text style={styles.restaurantVisit}>Last ordered on {restaurant.formattedDateOrdered}</Text>
         </View>
     </TouchableOpacity>
   )
@@ -23,20 +24,25 @@ const styles = StyleSheet.create({
         borderRadius: 15
     },
     restaurantImage: {
-        width: 180,
-        height: 120,
+        width: 200,
+        height: 200,
         borderRadius:15
     },
     restaurantInfo: {
-        marginTop:7
     },
     restaurantTitle: {
         fontFamily: 'outfit-bold',
-        fontSize: 14
+        fontSize: 18
     },
     restaurantSubtitle: {
         fontFamily: 'nunito-medium',
-        fontSize: 12,
+        width:200,
+        color: Colors.LightGrey
+    },
+    restaurantVisit: {
+        fontFamily: 'nunito-medium',
+        fontSize: 10,
+        width:200,
         color: Colors.LightGrey
     }
 });

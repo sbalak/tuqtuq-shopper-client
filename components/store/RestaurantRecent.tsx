@@ -31,7 +31,7 @@ export default function RestaurantRecent() {
   );
 
   return (
-    restaurants ? 
+    restaurants.length > 0 ? 
     <View>
         <View style={styles.titleContainer}>
             <Ionicons name="star" size={24} color="#FFB300" />
