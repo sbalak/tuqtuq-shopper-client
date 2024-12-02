@@ -23,7 +23,7 @@ export default function OrderCard({order}: {order: any}) {
         </View>
         <View style={styles.divider}></View>
         <View>
-            <Text style={styles.orderSubtitle}>20th Nov 2024, 10:50 AM</Text>
+            <Text style={styles.orderSubtitle}>{order.dateOrdered}</Text>
         </View>
     </View>
   )
