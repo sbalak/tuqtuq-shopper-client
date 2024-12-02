@@ -34,7 +34,6 @@ export default function list() {
       console.log(error);
     } 
   }
-
   
   const searchRecentRestaurants = async(searchText: string) => {
     try {
