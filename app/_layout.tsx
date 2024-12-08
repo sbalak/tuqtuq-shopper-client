@@ -8,6 +8,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function _layout() {
   let [fontsLoaded] = useFonts({
+    'dynamix': require('./../assets/fonts/Dynamix.ttf'),
     'dynapuff-semi': require('./../assets/fonts/DynaPuff-SemiBold.ttf'),
     'nunito-medium': require('./../assets/fonts/NunitoSansMedium.ttf'),
     'nunito-bold': require('./../assets/fonts/NunitoSansBold.ttf'),

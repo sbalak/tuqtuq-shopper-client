@@ -3,15 +3,16 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
 import {AUTH_URL, API_URL} from '@env';
+import { jwtDecode } from 'jwt-decode';
 
 const initialState = {
-    authState: { token: null, userId: null, authenticated: null }, register: async () => {}, login: async () => {}, logout: async () => {}
+    authState: { token: null, userId: null, authenticated: null }, login: async () => {}, verify: async () => {}, logout: async () => {}
 }
 
 type AuthContextType = {
     authState: { token: string | null, userId: string | null, authenticated: boolean | null };
-    register: (email: string, password: string) => Promise<any>;
-    login: (email: string, password: string) => Promise<any>;
+    login: (username: string) => Promise<any>;
+    verify: (username: string, code: string) => Promise<any>;
     logout: () => Promise<any>;
 }
 
@@ -63,9 +64,10 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
                 const originalRequest = error.config;
                 let retry = 0;
                 if (error.response.status === 401 && !originalRequest._retry) {                    
+                    const accessToken = await SecureStore.getItemAsync('accessToken');                    
                     const refreshToken = await SecureStore.getItemAsync('refreshToken');
                     
-                    const response = await axios.post(`${AUTH_URL}/refresh`, { refreshToken });
+                    const response = await axios.post(`${AUTH_URL}/refresh`, { accessToken, refreshToken });
 
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
                     originalRequest.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
@@ -86,48 +88,43 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         loadAccessToken();
     }, []);
 
-    const register = async (email: string, password: string) => {
+    const login = async (username: string) => {
         try {
-            const response = await axios.post(`${AUTH_URL}/register`, { email, password });
+            const response = await axios.post(`${API_URL}/auth/login?username=${username}`);
+            const data = await response.data;
 
-            return response;
+            if (data.status === 401){
+                return data;
+            }
+
+            console.log(data);
+            
+            return data;
         } catch (error) {
             return { error: true, message: (error as any).response.data };
         }
     }
 
-    const login = async (email: string, password: string) => {
-        try {
-            const response = await fetch(`${AUTH_URL}/login`, {
-                method: 'POST',
-                headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ 
-                    email: email, 
-                    password: password 
-                }),
-            });
-
-            const data = await response.json();
+    const verify = async (username: string, code: string) => {
+        try {            
+            const response = await axios.post(`${API_URL}/auth/verify?username=${username}&code=${code}`);
+            const data = await response.data;
 
             if (data.status === 401){
                 return data;
             }
-            
+
+            const decoded = jwtDecode(data.accessToken);
+
             await SecureStore.setItem('accessToken', data.accessToken);
             await SecureStore.setItem('refreshToken', data.refreshToken);
+            await SecureStore.setItem('userId', String(decoded.Id));
 
             axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`;
 
-            const user = await axios.get(`${API_URL}/user/id?email=${email}`);
-
-            await SecureStore.setItem('userId', String(user.data));
-
             setAuthState({
                 token: data.accessToken,
-                userId: user.data,
+                userId: decoded.Id,
                 authenticated: true
             });
 
@@ -154,7 +151,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         }
     }
     
-    return <AuthContext.Provider value={{ authState, register, login, logout }}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{ authState, login, verify, logout }}>{children}</AuthContext.Provider>
 }
 
 export default AuthProvider;

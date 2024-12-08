@@ -33,6 +33,7 @@
       [
         "expo-font", {
           "fonts": [
+            "./assets/fonts/Dynamix.ttf",
             "./assets/fonts/DynaPuff-SemiBold.ttf",
             "./assets/fonts/NunitoSansBold.ttf",
             "./assets/fonts/NunitoSansMedium.ttf",

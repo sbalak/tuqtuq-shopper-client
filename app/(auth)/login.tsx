@@ -1,24 +1,27 @@
-import { View, TextInput, Text, TouchableOpacity, Alert, StyleSheet } from 'react-native'
+import { View, TextInput, Text, TouchableOpacity, Alert, StyleSheet, Image } from 'react-native'
 import React, { useState } from 'react'
 import { useAuth } from '@/hooks/useAuth';
-import { router } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 
 export const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [validPhone, setValidPhone] = useState(false);
   const { login } = useAuth();
 
   const handleLogin = async () => {
     try {
-      if (!email || !password) {
-        Alert.alert('Error!', "Please enter your email and password.");
+      if (!username) {
+        Alert.alert('Error!', "Please enter your phone number");
       }
       else{
-        const result = await login(email, password);
+        router.navigate('/verify?username='+username);
+        const result = await login(username);
+        console.log('throw from login: ' + result);
         if (result && result.status === 401) {
-          Alert.alert('Error!', "Unauthorized, please check your email and password.");
+          Alert.alert('Error!', "Unauthorized, please check your username and password.");
         }
       }      
     } catch (error) {
@@ -28,31 +31,62 @@ export const Login = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.brandContainer}>
-        <Text style={styles.brandTitle}>Takku</Text>
+      <View style={brand.container}>
+        <Text style={brand.title}>TAKKU!</Text>
       </View>
-      <View style={styles.loginContainer}>
-        <Text style={styles.title}>Login</Text>
-        <Text style={styles.subTitle}>Hello there, welcome back!</Text>
-        <View style={styles.textInputSection}>
-          <Text style={styles.textInputTitle}>Email Address</Text>
-          <View style={styles.textInput}>
-            <TextInput style={styles.textInputBox} placeholderTextColor={Colors.LightGrey} placeholder='Enter your email address' value={email} onChangeText={(text: string) => setEmail(text)}></TextInput>
+      <View style={signin.container}>
+        <Text style={signin.title}>India's First Food App for Pick-Up</Text>
+        <View style={signin.subTitleContainer}>
+          <View style={signin.subTitleDivider} />
+          <View>
+            <Text style={signin.subTitleText}>Log in or sign up</Text>
           </View>
+          <View style={signin.subTitleDivider} />
         </View>
-        <View style={styles.textInputSection}>
-          <Text style={styles.textInputTitle}>Password</Text>
-          <View style={styles.textInput}>
-            <TextInput style={styles.textInputBox} placeholderTextColor={Colors.LightGrey} placeholder='Enter your password' value={password} onChangeText={(text: string) => setPassword(text)} secureTextEntry={true}></TextInput>
-          </View>        
-        </View>              
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+        <View style={signin.inputSection}>
+          <View style={signin.countryInput}>  
+            <Image style={signin.countryInputImage} source={require('@/assets/images/flag.png')} />
+          </View>
+          <View style={signin.textInput}>
+            <TextInput style={signin.textInputBox}
+                       keyboardType="numeric" 
+                       placeholderTextColor={Colors.LighterGrey} 
+                       placeholder='9999999999' 
+                       value={username} 
+                       onChangeText={(text: string) => {
+                          const regex = new RegExp(/^[123456789]\d{9}$/);
+                          const isValid = regex.test(text);
+
+                          if (text.includes('.')) {
+                            text = text.replace('.', '');
+                          }
+
+                          if (text.length > 10) {
+                            return;
+                          }
+
+                          if(isValid){
+                            setUsername(text);
+                            if (text.length === 10 && isValid){
+                              setValidPhone(true);
+                            }
+                          } else{
+                            setUsername(text);
+                            setValidPhone(false);
+                          }
+                       }}
+            />
+          </View>
+        </View>         
+      </View>
+      <View style={logon.container}>
+        <TouchableOpacity style={logon.button} onPress={handleLogin}>
           <Ionicons name="log-in-outline" size={24} color={Colors.White} /> 
-          <Text style={styles.loginButtonText}>
-            Login
-          </Text>
+          <Text style={logon.buttonText}>Continue with OTP</Text>
         </TouchableOpacity>
-        <Text style={styles.registerText}>Don't have an account already? <Text style={styles.registerButton} onPress={() => router.navigate("/register")}>Register</Text></Text>
+      </View>
+      <View style={{ alignItems: 'center', paddingHorizontal: 10, paddingVertical: 10 }}>
+        <Text style={{fontFamily: 'nunito-medium', fontSize: 12, color: Colors.LightGrey }}>By continuing, you agree to our</Text><Text style={{fontFamily: 'nunito-medium', fontSize: 12,textDecorationLine: 'underline', color: Colors.LightGrey}}>Terms & Conditions</Text>
       </View>
     </View>
   )
@@ -63,80 +97,104 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex:1, 
-    backgroundColor: Colors.White
+    backgroundColor: Colors.White,
   },
-  brandContainer: {
+});
+
+const brand = StyleSheet.create({
+  container: {
     alignItems: "center",
     backgroundColor: Colors.Primary,
-    paddingTop: 70,
-    paddingBottom: 30
+    paddingHorizontal: 10,
+    paddingVertical: 80
   },
-  brandTitle: {
+  title: {
     color: Colors.White,
-    fontFamily: 'dynapuff-semi',
+    fontFamily: 'dynamix',
     fontSize: 40,
-  },
-  loginContainer: {
-    fontFamily: 'nunito-medium',
+  }
+});
+
+const signin = StyleSheet.create({
+  container: {
     backgroundColor: Colors.White,
-    padding: 20
+    padding: 10
   },
   title: { 
     fontFamily: 'outfit-bold',
-    fontSize: 28, 
-    marginVertical: 10,
+    fontSize: 24,
+    textAlign: 'center', 
+    marginVertical: 25,
   },
-  subTitle: {
-    fontFamily: 'nunito-bold',
-    fontSize: 20,
-    marginBottom: 20
+  subTitleContainer: {
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    paddingBottom: 20
   },
-  textInputSection: {
-    marginBottom: 20
+  subTitleText: {
+    width: 140, 
+    textAlign: 'center', 
+    fontFamily: 'nunito-bold', 
+    color: Colors.LightGrey
   },
-  textInputTitle: {
-    fontFamily: 'nunito-medium',
-    fontSize: 16,  
-    marginVertical: 10
+  subTitleDivider: {
+    flex: 1, 
+    height: 1, 
+    backgroundColor: Colors.Tertiary
+  },
+  inputSection: {
+    display: 'flex',
+    flexDirection: 'row', 
+    marginBottom: 10
+  },
+  countryInput: {
+    width: "15%",
+    borderColor: Colors.Tertiary, 
+    borderWidth: 1, 
+    borderRadius: 10,
+    marginRight: 19
+  },
+  countryInputImage: {
+    height:30, 
+    width: 41,
+    marginTop:9, 
+    marginLeft: 7, 
+    borderRadius: 5
   },
   textInput: {
-    width: "100%", 
+    width: "80%", 
     height: 50, 
     borderColor: Colors.Tertiary, 
     borderWidth: 1, 
-    borderRadius: 10, 
+    borderRadius: 10,
+    paddingHorizontal: 20,
     alignItems: 'center', 
-    justifyContent: 'center', 
-    paddingLeft: 20, 
-    paddingRight: 20 
+    justifyContent: 'center'
   },
   textInputBox: {
-    fontFamily: 'nunito-medium',
-    width: "100%"
+    width: "100%",
+    fontSize: 22
   },
-  loginButton: {
+}) 
+
+const logon = StyleSheet.create({
+  container: {
+    paddingHorizontal:10
+  },
+  button: {
     marginBottom: 20,
     height: 50,
     width: "100%",
-    backgroundColor: Colors.Primary,
     borderRadius: 10,
+    backgroundColor: Colors.Primary,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
   },
-  loginButtonText: {
+  buttonText: {
     fontFamily: 'nunito-medium',
     color: Colors.White,
     fontSize: 18,
-    marginLeft: 10,
-    fontWeight: 'bold'
-  },
-  registerText: {
-    fontFamily: 'nunito-medium',
-    fontSize: 16, 
-    textAlign: 'center'
-  },
-  registerButton: {
-    color: Colors.Primary
+    marginLeft: 10
   }
 });
