@@ -61,13 +61,16 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         axios.interceptors.response.use(
             response => response, 
             async (error) => {
+                console.log("error occured");
                 const originalRequest = error.config;
+                console.log(error.response);
                 let retry = 0;
-                if (error.response.status === 401 && !originalRequest._retry) {                    
+                if (error.response.status === 401 && !originalRequest._retry) {           
+                    console.log('Entering here')         
                     const accessToken = await SecureStore.getItemAsync('accessToken');                    
                     const refreshToken = await SecureStore.getItemAsync('refreshToken');
                     
-                    const response = await axios.post(`${AUTH_URL}/refresh`, { accessToken, refreshToken });
+                    const response = await axios.post(`${API_URL}/auth/refresh`, { accessToken, refreshToken });
 
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
                     originalRequest.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
