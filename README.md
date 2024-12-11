@@ -15,4 +15,4 @@ DEPENDENCIES
 4. npx expo install expo-location
 5. npx expo install react-native-safe-area-context
 6. npm install -g npm-check-updates
-7. npm install react-native-dotenv
+7. npm install react-native-dotenv - NOT NEEDED

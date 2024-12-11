@@ -17,9 +17,9 @@ export const Login = () => {
         Alert.alert('Error!', "Please enter your phone number");
       }
       else{
-        router.navigate('/verify?username='+username);
         const result = await login(username);
         console.log('throw from login: ' + result);
+        router.navigate('/verify?username='+username);
         if (result && result.status === 401) {
           Alert.alert('Error!', "Unauthorized, please check your username and password.");
         }

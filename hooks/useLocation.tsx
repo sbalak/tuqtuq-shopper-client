@@ -1,7 +1,6 @@
 import  { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import * as Location from "expo-location";
-import {API_URL} from '@env';
 import { useAuth } from './useAuth';
 
 const initialState = {
@@ -42,7 +41,7 @@ const LocationProvider: React.FC<Props> = ({ children }) => {
               latitude: geocode.coords.latitude
             });
             
-            const response = await axios.post(`${API_URL}/User/SetCoordinates?userId=${authState.userId}&latitude=${geocode.coords.latitude}&longitude=${geocode.coords.longitude}`); 
+            const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/User/SetCoordinates?userId=${authState.userId}&latitude=${geocode.coords.latitude}&longitude=${geocode.coords.longitude}`); 
             
             setLocationState({
                 locality: address[0].district,

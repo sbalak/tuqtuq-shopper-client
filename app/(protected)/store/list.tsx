@@ -1,9 +1,8 @@
-import { View, Text, FlatList, StyleSheet, TextInput } from 'react-native'
+import { View, Text, FlatList, StyleSheet, TextInput, Platform } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import RestaurantNearbyCard from '@/components/store/RestaurantNearbyCard';
-import {API_URL} from '@env';
 import { useNavigation } from 'expo-router';
 import Ionicons from '@expo/vector-icons/build/Ionicons';
 import { useLocation } from '@/hooks/useLocation';
@@ -23,7 +22,7 @@ export default function list() {
   const loadRecentRestaurants = async() => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`${API_URL}/restaurant/list?latitude=${locationState.latitude}&longitude=${locationState.longitude}&page=${currentPage}&pageSize=10&query=${search}`);
+      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/restaurant/list?latitude=${locationState.latitude}&longitude=${locationState.longitude}&page=${currentPage}&pageSize=10&query=${search}`);
       if (response.data.length > 0) {
         setRestaurants((items) => items.concat(response.data));
         setCurrentPage(currentPage + 1);
@@ -38,7 +37,7 @@ export default function list() {
   const searchRecentRestaurants = async(searchText: string) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`${API_URL}/restaurant/list?latitude=${locationState.latitude}&longitude=${locationState.longitude}&page=1&pageSize=10&query=${searchText}`);
+      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/restaurant/list?latitude=${locationState.latitude}&longitude=${locationState.longitude}&page=1&pageSize=10&query=${searchText}`);
       setRestaurants(response.data);
       setCurrentPage(2);
       setIsLoading(false);
@@ -81,7 +80,7 @@ export default function list() {
                   <View>        
                     <View style={searchStyles.searchContainer}>
                       <View style={searchStyles.searchTextInputContainer}>
-                        <Ionicons name="search" size={20} style={{paddingTop:13}} color={Colors.LightGrey} /> 
+                        <Ionicons name="search" size={20} style={searchStyles.searchIcon} color={Colors.LightGrey} /> 
                         <TextInput style={searchStyles.searchTextInput} 
                                   placeholderTextColor={Colors.LightGrey} 
                                   placeholder='Search' 
@@ -111,6 +110,11 @@ const searchStyles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   searchTextInputContainer: { 
+    ...Platform.select({
+      ios: {
+        paddingVertical: 10
+      },
+    }),
     paddingHorizontal: 10,
     marginTop: 10,
     flexDirection: 'row',
@@ -122,6 +126,16 @@ const searchStyles = StyleSheet.create({
     flex:1,
     fontSize: 20,
     paddingRight:40
+  },
+  searchIcon: {
+    ...Platform.select({
+      ios: {
+        paddingTop:2
+      },
+      android: {
+        paddingTop:13
+      }
+    })
   }  
 });
 

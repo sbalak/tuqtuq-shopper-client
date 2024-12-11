@@ -4,7 +4,6 @@ import { router, useFocusEffect, useLocalSearchParams, useNavigation } from 'exp
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import {API_URL} from '@env';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function StoreDetails() {
@@ -18,7 +17,7 @@ export default function StoreDetails() {
 
   const loadRestaurantDetails = async() => {
     try {
-      const response = await axios.get(`${API_URL}/restaurant/details?userId=${authState.userId}&restaurantId=${id}`);
+      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/restaurant/details?userId=${authState.userId}&restaurantId=${id}`);
       setRestaurant(response.data);
     }
     catch(error) {
@@ -29,11 +28,11 @@ export default function StoreDetails() {
   const loadRestaurantMenu = async (searchText: string) => {
     try {
       if (!searchText) {
-        const response = await axios.get(`${API_URL}/restaurant/fooditems?userId=${authState.userId}&restaurantId=${id}`);
+        const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/restaurant/fooditems?userId=${authState.userId}&restaurantId=${id}`);
         setRestaurantMenu(response.data);
       }
       else {
-        const response = await axios.get(`${API_URL}/restaurant/fooditems?userId=${authState.userId}&restaurantId=${id}&searchText=${searchText}`);
+        const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/restaurant/fooditems?userId=${authState.userId}&restaurantId=${id}&searchText=${searchText}`);
         setRestaurantMenu(response.data);
       }
     }
@@ -44,7 +43,7 @@ export default function StoreDetails() {
   
   const loadCartValue = async() => {
     try {
-      const response = await axios.get(`${API_URL}/cart/value?userId=${authState.userId}&restaurantId=${id}`);
+      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/cart/value?userId=${authState.userId}&restaurantId=${id}`);
       setCartValue(response.data);
     }
     catch(error) {
@@ -54,7 +53,7 @@ export default function StoreDetails() {
 
   const handleAddItem = async(restaurantId: string, foodId: string) => {
     try {
-      await axios.get(`${API_URL}/Cart/Add?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
+      await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/Cart/Add?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
         
         loadRestaurantDetails();
         loadRestaurantMenu('');
@@ -67,7 +66,7 @@ export default function StoreDetails() {
   
   const handleRemoveItem = async(restaurantId: string, foodId: string) => {
     try {
-      await axios.get(`${API_URL}/Cart/Remove?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
+      await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/Cart/Remove?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
 
         loadRestaurantDetails();
         loadRestaurantMenu('');

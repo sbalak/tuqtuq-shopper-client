@@ -16,7 +16,7 @@ const verify = () => {
 
   const handleVerify = async () => {
     try {
-      console.log('called handleVerify')
+      console.log('called handleVerify - ' + username.toString() + ', ' + code)
       const result = await verify(username.toString(), code);
       console.log('Result' + JSON.stringify(result));
     } catch (error) {

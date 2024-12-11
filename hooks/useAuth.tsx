@@ -2,7 +2,6 @@ import  { createContext, PropsWithChildren, useContext, useEffect, useState } fr
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
-import {AUTH_URL, API_URL} from '@env';
 import { jwtDecode } from 'jwt-decode';
 
 const initialState = {
@@ -61,7 +60,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         axios.interceptors.response.use(
             response => response, 
             async (error) => {
-                console.log("error occured");
+                console.log("error occured" + process.env.EXPO_PUBLIC_API_URL);
                 const originalRequest = error.config;
                 console.log(error.response);
                 let retry = 0;
@@ -70,7 +69,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
                     const accessToken = await SecureStore.getItemAsync('accessToken');                    
                     const refreshToken = await SecureStore.getItemAsync('refreshToken');
                     
-                    const response = await axios.post(`${API_URL}/auth/refresh`, { accessToken, refreshToken });
+                    const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/auth/refresh`, { accessToken, refreshToken });
 
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
                     originalRequest.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
@@ -93,7 +92,9 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
     const login = async (username: string) => {
         try {
-            const response = await axios.post(`${API_URL}/auth/login?username=${username}`);
+            const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/auth/login?username=${username}`);
+            console.log("Loggin in...");
+            console.log(JSON.stringify(response));
             const data = await response.data;
 
             if (data.status === 401){
@@ -110,7 +111,9 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
     const verify = async (username: string, code: string) => {
         try {            
-            const response = await axios.post(`${API_URL}/auth/verify?username=${username}&code=${code}`);
+            console.log('entering verify');
+            const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/auth/verify?username=${username}&code=${code}`);
+            console.log('verify response ' + JSON.stringify(response))
             const data = await response.data;
 
             if (data.status === 401){

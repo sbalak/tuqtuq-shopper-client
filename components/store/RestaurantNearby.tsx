@@ -4,7 +4,6 @@ import { Colors } from '@/constants/Colors';
 import RestaurantNearbyCard from './RestaurantNearbyCard';
 import axios from 'axios';
 import { router, useFocusEffect } from 'expo-router';
-import {API_URL} from '@env';
 import { useLocation } from '@/hooks/useLocation';
 import Ionicons from '@expo/vector-icons/build/Ionicons';
 
@@ -15,7 +14,7 @@ export default function RestaurantNearby() {
   const loadNearbyRestaurants = async() => {
     try {
       if (locationState.latitude && locationState.longitude) {
-        const response = await axios.get(`${API_URL}/restaurant/list?latitude=${locationState.latitude}&longitude=${locationState.longitude}`);
+        const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/restaurant/list?latitude=${locationState.latitude}&longitude=${locationState.longitude}`);
         setRestaurants(response.data);
       }
     }

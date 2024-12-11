@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
-import {API_URL} from '@env';
 
 export default function OrderDetails() {
     const { id } = useLocalSearchParams();
@@ -17,7 +16,7 @@ export default function OrderDetails() {
   
     const load = async() => {
       try {
-        const response = await axios.get(`${API_URL}/order/details?id=${id}`);
+        const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/order/details?id=${id}`);
         setOrder(response.data);
       }
       catch(error) {

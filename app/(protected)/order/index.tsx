@@ -4,7 +4,6 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import OrderCard from '@/components/order/OrderCard';
 import { useAuth } from '@/hooks/useAuth';
 import axios from 'axios';
-import {API_URL} from '@env';
 import { Colors } from '@/constants/Colors';
 
 export default function Index() {
@@ -17,7 +16,7 @@ export default function Index() {
   const loadOrders = async() => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`${API_URL}/order/list?userId=${authState.userId}&page=${currentPage}&pageSize=10`);
+      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/order/list?userId=${authState.userId}&page=${currentPage}&pageSize=10`);
       if (response.data.length > 0) {
         setOrders((items) => items.concat(response.data));
         setCurrentPage(currentPage + 1);

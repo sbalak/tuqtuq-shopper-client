@@ -5,7 +5,6 @@ import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import {API_URL} from '@env';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function CartDetails() {
@@ -14,7 +13,7 @@ export default function CartDetails() {
     
   const load = async() => {
     try {
-      const response = await axios.get(`${API_URL}/Cart/Details?userId=${authState.userId}`);
+      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/Cart/Details?userId=${authState.userId}`);
       setCart(response.data);
     }
     catch(error) {
@@ -24,7 +23,7 @@ export default function CartDetails() {
   
   const handleCheckout = async() => {
     try {
-      await axios.get(`${API_URL}/Order/Confirm?userId=${authState.userId}`);
+      await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/Order/Confirm?userId=${authState.userId}`);
       router.replace('/order');
     }
     catch(error) {
@@ -34,7 +33,7 @@ export default function CartDetails() {
   
   const handleAddItem = async(restaurantId: string, foodId: string) => {
     try {
-      await axios.get(`${API_URL}/Cart/Add?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
+      await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/Cart/Add?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
       load();
     }
     catch(error) {
@@ -44,7 +43,7 @@ export default function CartDetails() {
   
   const handleRemoveItem = async(restaurantId: string, foodId: string) => {
     try {
-      await axios.get(`${API_URL}/Cart/Remove?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
+      await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/Cart/Remove?userId=${authState.userId}&restaurantId=${restaurantId}&foodId=${foodId}`);
       load();
     }
     catch(error) {
