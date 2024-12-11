@@ -5,10 +5,13 @@ import { OtpInput } from "react-native-otp-entry";
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '@/hooks/useAuth';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
 const verify = () => {
   const { username } = useLocalSearchParams();
-  const [code, setCode] = useState('');
+  const [ code, setCode ] = useState('');
+  const [ key, setKey ] = useState(1);
+  const [ expired, setExpired ] = useState(false);
   const { verify } = useAuth();
 
   const handleVerify = async () => {
@@ -19,6 +22,23 @@ const verify = () => {
     } catch (error) {
 
     }
+  }
+
+  const handleResend = async () => {
+    try {
+      setKey(prevKey => prevKey + 1)
+      setExpired(false);
+    } catch (error) {
+
+    }
+  }
+
+  const renderTime = ({ remainingTime }) => {
+    if (remainingTime === 0){ 
+      return <Text style={{fontFamily: 'nunito-bold', fontSize: 24, color: Colors.Primary }}>Too late...</Text>
+    }
+
+    return <Text style={{fontFamily: 'nunito-bold', fontSize: 24, color: Colors.Primary }}>{remainingTime}</Text>
   }
 
   return (
@@ -43,12 +63,35 @@ const verify = () => {
           containerStyle: otp.container,
           pinCodeTextStyle: otp.pinCodeText
         }}
+        disabled={expired}
       />
-      <View>
-        <TouchableOpacity>
-          <Text style={styles.text}>Didn't get OTP? Resend SMS</Text>
-        </TouchableOpacity>
+      <View style={{justifyContent: 'center', alignContent: 'center', flexDirection:'row', marginBottom: 30}}>
+        <CountdownCircleTimer
+          key={key}
+          isPlaying
+          duration={60}         
+          colors={Colors.Primary}
+          onComplete={() => {
+            setExpired(true)
+          }}
+        >
+          {renderTime}
+        </CountdownCircleTimer>
       </View>
+      { expired ?
+      (
+        <View>
+          <TouchableOpacity onPress={() => handleResend()}>
+            <Text style={styles.text}>Didn't get OTP? Resend SMS</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <TouchableOpacity disabled>
+            <Text style={styles.text}>Please enter your OTP to continue</Text>
+          </TouchableOpacity>
+        </View>
+      ) }
       <View style={goback.container}>
         <TouchableOpacity style={goback.button} onPress={() => router.back()}>
           <Ionicons name="chevron-back" size={24} color={Colors.White} /> 
