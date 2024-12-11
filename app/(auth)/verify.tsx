@@ -44,7 +44,7 @@ const verify = () => {
   return (
     <View style={{ flex: 1, backgroundColor: Colors.White }}>
       <View style={brand.container}>
-        <Text style={brand.title}>TAKKU!</Text>
+        <Text style={brand.title}>{"{ "}takku{" }"}</Text>
       </View>
       <Text style={styles.text}>We have sent a verification code to +91 {username}</Text>
       <OtpInput
@@ -117,12 +117,12 @@ const brand = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.White,
     paddingHorizontal: 10,
-    paddingVertical: 20
+    paddingVertical: 30
   },
   title: {
-    color: Colors.Primary,
-    fontFamily: 'dynamix',
-    fontSize: 40,
+    color: Colors.Black,
+    fontFamily: 'barcelona',
+    fontSize: 80,
   }
 });
 
@@ -155,7 +155,7 @@ const goback = StyleSheet.create({
     height: 50,
     width: "100%",
     borderRadius: 10,
-    backgroundColor: Colors.Primary,
+    backgroundColor: Colors.Black,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'

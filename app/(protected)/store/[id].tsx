@@ -189,7 +189,7 @@ const searchStyles = StyleSheet.create({
 
 const restaurantStyles = StyleSheet.create({
   restaurantcontainer: {
-    backgroundColor: Colors.Tertiary,
+    backgroundColor: Colors.Secondary,
     paddingVertical: 10,
   },
   restaurantCard: {
@@ -270,7 +270,7 @@ const checkoutStyles = StyleSheet.create({
   checkoutButtonText: {
     fontFamily: 'nunito-bold',
     fontSize: 18,
-    color: Colors.Tertiary,
+    color: Colors.Secondary,
   }
 });
 
@@ -280,7 +280,7 @@ const cartStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 15, 
-    backgroundColor: Colors.Tertiary, 
+    backgroundColor: Colors.Secondary, 
     paddingLeft: 15, 
     paddingRight: 15,
     borderBottomLeftRadius:15,

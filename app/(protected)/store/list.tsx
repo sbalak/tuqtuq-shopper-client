@@ -107,12 +107,12 @@ export default function list() {
 
 const searchStyles = StyleSheet.create({
   searchContainer: {
-    backgroundColor: Colors.White,
+    backgroundColor: Colors.Secondary,
     paddingHorizontal: 10,
   },
   searchTextInputContainer: { 
-    padding: 10,
-    marginVertical: 10,
+    paddingHorizontal: 10,
+    marginTop: 10,
     flexDirection: 'row',
     gap:10,
     borderRadius: 10,
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     padding: 10,
     marginBottom: 10,
-    backgroundColor: Colors.White,
+    backgroundColor: Colors.Secondary,
     gap: 5,
     display: 'flex',
     flexDirection: 'row',

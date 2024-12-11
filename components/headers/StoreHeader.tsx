@@ -69,13 +69,13 @@ const styles = StyleSheet.create({
       fontFamily: 'nunito-bold'
   },
   searchButton: {
-    backgroundColor: Colors.Tertiary,
+    backgroundColor: Colors.Secondary,
       padding: 10,
       marginTop:7,
       borderRadius: 50
   },
   profileButton: {
-      backgroundColor: Colors.Tertiary,
+      backgroundColor: Colors.Secondary,
       padding: 10,
       marginTop:7,
       borderRadius: 50

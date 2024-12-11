@@ -32,7 +32,7 @@ export const Login = () => {
   return (
     <View style={styles.container}>
       <View style={brand.container}>
-        <Text style={brand.title}>TAKKU!</Text>
+        <Text style={brand.title}>{"{ "}takku{" }"}</Text>
       </View>
       <View style={signin.container}>
         <Text style={signin.title}>India's First Food App for Pick-Up</Text>
@@ -110,8 +110,8 @@ const brand = StyleSheet.create({
   },
   title: {
     color: Colors.White,
-    fontFamily: 'dynamix',
-    fontSize: 40,
+    fontFamily: 'barcelona',
+    fontSize: 80,
   }
 });
 
@@ -140,7 +140,7 @@ const signin = StyleSheet.create({
   subTitleDivider: {
     flex: 1, 
     height: 1, 
-    backgroundColor: Colors.Tertiary
+    backgroundColor: Colors.Secondary
   },
   inputSection: {
     display: 'flex',
@@ -149,7 +149,7 @@ const signin = StyleSheet.create({
   },
   countryInput: {
     width: "15%",
-    borderColor: Colors.Tertiary, 
+    borderColor: Colors.Secondary, 
     borderWidth: 1, 
     borderRadius: 10,
     marginRight: 19
@@ -164,7 +164,7 @@ const signin = StyleSheet.create({
   textInput: {
     width: "80%", 
     height: 50, 
-    borderColor: Colors.Tertiary, 
+    borderColor: Colors.Secondary, 
     borderWidth: 1, 
     borderRadius: 10,
     paddingHorizontal: 20,
@@ -186,7 +186,7 @@ const logon = StyleSheet.create({
     height: 50,
     width: "100%",
     borderRadius: 10,
-    backgroundColor: Colors.Primary,
+    backgroundColor: Colors.Black,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'

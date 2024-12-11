@@ -172,7 +172,7 @@ const cartStyles = StyleSheet.create({
   cartButtonContainer: {
       flexDirection: 'row', 
       gap: 15, 
-      backgroundColor: Colors.Tertiary, 
+      backgroundColor: Colors.Secondary, 
       paddingHorizontal: 15,
       marginTop:5, 
       borderRadius: 15
@@ -218,6 +218,6 @@ const checkoutStyle = StyleSheet.create({
   },
   checkoutButtonText: {
     fontFamily: 'nunito-bold',
-    color: Colors.Tertiary,
+    color: Colors.Secondary,
   }
 });
