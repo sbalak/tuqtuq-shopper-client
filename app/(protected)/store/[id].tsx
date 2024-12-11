@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, SectionList, ListRenderItem } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, SectionList, ListRenderItem, Platform } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { router, useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
 import axios from 'axios';
@@ -139,7 +139,7 @@ export default function StoreDetails() {
       />
       <View style={searchStyles.searchContainer}>
         <View style={searchStyles.searchTextInputContainer}>
-          <Ionicons name="search" size={30} color={Colors.Primary} /> 
+          <Ionicons name="search" size={20} style={searchStyles.searchIcon}  color={Colors.Primary} /> 
           <TextInput style={searchStyles.searchTextInput} 
               placeholderTextColor={Colors.LightGrey} 
               placeholder='Search' 
@@ -157,7 +157,7 @@ export default function StoreDetails() {
             <Text style={checkoutStyles.checkoutButtonText}>{cartValue.quantity} item{cartValue.quantity > 1 ? 's': null} added</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push('/cart')}>
-            <Ionicons name="arrow-forward-circle" size={30} color={Colors.White} />
+            <Ionicons name="arrow-forward-circle" size={30} color={Colors.Secondary} />
           </TouchableOpacity>
         </View>
       ) : null}
@@ -167,11 +167,16 @@ export default function StoreDetails() {
 
 const searchStyles = StyleSheet.create({
   searchContainer: {
-    backgroundColor: Colors.White,
+    backgroundColor: Colors.Secondary,
     paddingHorizontal: 10,
   },
   searchTextInputContainer: { 
-    padding: 10,
+    ...Platform.select({
+      ios: {
+        paddingVertical: 10
+      },
+    }),
+    paddingHorizontal: 10,
     marginVertical: 10,
     flexDirection: 'row',
     gap:10,
@@ -180,10 +185,19 @@ const searchStyles = StyleSheet.create({
   },
   searchTextInput: {
     flex:1,
-    fontFamily: 'nunito-bold',
-    fontSize: 18,
+    fontSize: 20,
     paddingRight:40
-  }  
+  },
+  searchIcon: {
+    ...Platform.select({
+      ios: {
+        paddingTop:2
+      },
+      android: {
+        paddingTop:13
+      }
+    })
+  } 
 });
 
 const restaurantStyles = StyleSheet.create({
@@ -252,7 +266,8 @@ const sectionStyles = StyleSheet.create({
     fontFamily: 'outfit-bold',
     padding: 10,
     fontSize: 20,
-    backgroundColor: 'white'
+    backgroundColor: Colors.LighterGrey,
+    color: Colors.Primary
   }
 });
 
@@ -286,14 +301,13 @@ const cartStyles = StyleSheet.create({
     borderBottomRightRadius:15
   },
   cartButton: {
-    fontFamily: 'nunito-medium',
+    fontFamily: 'outfit-bold',
     fontSize: 20,
     color: Colors.Primary
   },
   cartButtonText: {
-    fontFamily: 'nunito-medium',
+    fontFamily: 'outfit-bold',
     marginTop: 4,
-    fontSize: 14,
     color: Colors.Primary
   }
 });

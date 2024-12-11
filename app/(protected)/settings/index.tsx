@@ -24,7 +24,7 @@ export default function index() {
   }
 
   return (
-    <SafeAreaView style={{ flex:1, paddingHorizontal: 10 }}>      
+    <View style={{ flex:1, paddingHorizontal: 10 }}>      
       <View style={styles.titleContainer}>
           <Text style={styles.title}>Your Profile</Text>
       </View>
@@ -46,7 +46,7 @@ export default function index() {
           <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Logout</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
