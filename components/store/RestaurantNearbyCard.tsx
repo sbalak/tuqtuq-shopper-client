@@ -2,13 +2,14 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Colors } from '@/constants/Colors';
 import { router } from 'expo-router';
+import { common } from '@/constants/Styles';
 
 export default function RestaurantNearbyCard({restaurant}: {restaurant: any}) {
   return (    
     <TouchableOpacity style={styles.restaurantContainer} onPress={() => router.push('/store/'+restaurant.id)}>
         <Image source={{uri:restaurant.photo}} style={styles.restaurantImage} />
         <View style={styles.restaurantInfo}>
-            <Text style={styles.restaurantTitle}>{restaurant.name}</Text>
+            <Text style={common.subHeading}>{restaurant.name}</Text>
             <Text style={styles.restaurantSubtitle}>{restaurant.locality}</Text>
             <Text style={styles.restaurantSubtitle}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
         </View>
@@ -33,10 +34,6 @@ const styles = StyleSheet.create({
         marginTop: 7,
         marginLeft: 10,
         width:240,
-    },
-    restaurantTitle: {
-        fontFamily: 'outfit-bold',
-        fontSize: 18
     },
     restaurantSubtitle: {
         fontFamily: 'nunito-medium',

@@ -35,7 +35,7 @@ export default function OrderDetails() {
         <SafeAreaView style={common.safeArea}>
             <ScrollView style={common.container}>
               <View style={{ backgroundColor: Colors.White, padding: 10, borderRadius: 10, marginTop: 10 }}>
-                <Text style={{ fontFamily: 'outfit-bold', fontSize: 20 }}>Delivered</Text>
+                <Text style={common.heading}>Delivered</Text>
                 <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Your order has been delivered</Text>
               </View>
 
@@ -44,7 +44,7 @@ export default function OrderDetails() {
                   <Text style={{ width: 190, fontFamily: 'nunito-bold' }}>Order ID</Text>
                   <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>PEEKY892732</Text>
                 </View>
-                <Text style={{ fontFamily: 'outfit-bold', fontSize: 20, marginVertical: 20 }}>PeeKay Coffee</Text>
+                <Text style={[common.heading, {marginVertical: 20}]}>PeeKay Coffee</Text>
                 <View style={{marginBottom: 10, height: 1, backgroundColor: Colors.LighterGrey}}></View>
                 <View style={{ flexDirection: 'row' }}>
                   <Text style={{ width: 190, fontFamily: 'nunito-medium' }}>Item</Text>
@@ -76,7 +76,7 @@ export default function OrderDetails() {
                 <View style={{marginVertical: 10, height: 1, backgroundColor: Colors.LighterGrey}}></View>
               </View>
 
-              <Text style={{ fontFamily: 'outfit-bold', paddingVertical: 10, fontSize: 20 }}>Payment Details</Text>
+              <Text style={[common.heading, {paddingVertical: 10}]}>Payment Details</Text>
               <View style={{ backgroundColor: Colors.White, padding: 10, borderRadius: 10 }}>
                 <View style={{ flexDirection: 'row', paddingBottom: 5 }}>
                   <Text style={{ width: 190, fontFamily: 'nunito-bold' }}>Paid Via</Text>

@@ -140,7 +140,7 @@ export default function StoreDetails() {
         ItemSeparatorComponent={() => <View style={{height: 1, backgroundColor: Colors.LighterGrey}} />}
         SectionSeparatorComponent={() => <View style={{height: 1, backgroundColor: Colors.LighterGrey}} />}
         renderSectionHeader={({section: {title, index}}) => (
-          <Text style={sectionStyles.sectionHeader}>{title}</Text>
+          <Text style={[common.heading, sectionStyles.sectionHeader]}>{title}</Text>
         )}
         ListHeaderComponent={() => (
           (search.length === 0 ?
@@ -249,13 +249,13 @@ const foodStyles = StyleSheet.create({
     marginTop:10
   },
   foodImage: {
-      width: 120,
-      height: 120,
+      width: 130,
+      height: 130,
       borderTopLeftRadius:15,
       borderTopRightRadius:15
   },  
   emptyImage: {
-    width: 120,
+    width: 130,
     height: 60,
     backgroundColor: Colors.LighterGrey,
     borderTopLeftRadius:15,
@@ -265,9 +265,7 @@ const foodStyles = StyleSheet.create({
 
 const sectionStyles = StyleSheet.create({
   sectionHeader: {
-    fontFamily: 'outfit-bold',
     padding: 10,
-    fontSize: 20,
     backgroundColor: Colors.LighterGrey,
     color: Colors.Primary
   }

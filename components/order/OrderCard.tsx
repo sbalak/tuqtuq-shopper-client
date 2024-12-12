@@ -3,11 +3,12 @@ import React from 'react'
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { common } from '@/constants/Styles';
 
 export default function OrderCard({order}: {order: any}) {
   return (    
     <View style={styles.container}>
-        <Text style={styles.orderTitle}>{order.restaurantName}</Text>
+        <Text style={common.subHeading}>{order.restaurantName}</Text>
         <Text style={styles.orderSubtitle}>{order.restaurantLocality}</Text>
         <FlatList data={order.orderItems} style={{paddingVertical:10}} scrollEnabled={false} renderItem={({item, index})=>(
             <View style={{flexDirection: 'row'}}>
@@ -35,10 +36,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding:10,
         marginBottom:10, 
-    },
-    orderTitle: {
-        fontFamily: 'outfit-bold',
-        fontSize: 18
     },
     orderSubtitle: {
         fontFamily: 'nunito-medium',

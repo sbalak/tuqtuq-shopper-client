@@ -8,5 +8,9 @@ export const common = {
     heading: {
         fontFamily: 'outfit-bold',
         fontSize:20,
-    }
+    },
+    subHeading: {
+        fontFamily: 'outfit-bold',
+        fontSize: 18
+    },
 }
