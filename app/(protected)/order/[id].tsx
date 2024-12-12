@@ -31,7 +31,7 @@ export default function OrderDetails() {
     );
     
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={{paddingHorizontal: 10}}>
               <View style={{ backgroundColor: Colors.White, padding: 10, borderRadius: 10, marginTop: 10 }}>
                 <Text style={{ fontFamily: 'outfit-bold', fontSize: 20 }}>Delivered</Text>

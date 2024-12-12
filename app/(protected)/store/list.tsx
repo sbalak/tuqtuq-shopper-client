@@ -1,4 +1,4 @@
-import { View, Text, FlatList, StyleSheet, TextInput, Platform } from 'react-native'
+import { View, Text, FlatList, StyleSheet, TextInput, Platform, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
@@ -64,7 +64,7 @@ export default function list() {
   }, []);
 
   return (
-    <View style={{flex:1}}>
+    <SafeAreaView style={{flex:1}}>
       <FlatList data={restaurants}
                 stickyHeaderIndices={[0]}
                 renderItem={({item, index})=>(
@@ -100,7 +100,7 @@ export default function list() {
                 }
                 ListFooterComponent={listFooterComponent}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 

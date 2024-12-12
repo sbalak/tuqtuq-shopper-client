@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, View } from 'react-native'
+import { SafeAreaView, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import CartDetails from '@/components/cart/CartDetails'
 import { useNavigation } from '@react-navigation/native';
@@ -11,7 +11,7 @@ export default function index() {
   }, []);
   
     return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <CartDetails />
       </ScrollView>

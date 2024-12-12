@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import { useAuth } from '@/hooks/useAuth';
 import { router, useNavigation } from 'expo-router';
@@ -24,33 +24,38 @@ export default function index() {
   }
 
   return (
-    <View style={{ flex:1, paddingHorizontal: 10 }}>      
-      <View style={styles.titleContainer}>
-          <Text style={styles.title}>Your Profile</Text>
-      </View>
-      <View style={profile.container}>
-        <Ionicons name="person-circle" size={80} color={Colors.Primary}/> 
-        <View style={profile.info}>
-            <Text style={profile.title}>Sidharth Balakrishnan</Text>
-            <Text style={profile.subtitle} onPress={() => router.navigate("/settings/profile")}>Edit Profile</Text>
-        </View>        
-      </View>
-      <View style={{ marginVertical: 10, backgroundColor: '#fff', borderRadius: 10 }}>
-        <TouchableOpacity style={{ padding: 10, marginVertical:10, gap: 15, flexDirection: 'row' }} onPress={() => router.navigate('/order')}>
-          <Ionicons name="briefcase-outline" size={20} color={Colors.LightGrey} />
-          <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Orders</Text>
-        </TouchableOpacity>        
-        <View style={styles.divider}></View>
-        <TouchableOpacity style={{ padding: 10, marginVertical:10, gap: 15, flexDirection: 'row' }} onPress={handleLogout}>
-          <Ionicons name="log-out-outline" size={20} color={Colors.LightGrey} />
-          <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Logout</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <SafeAreaView style={{ flex:1 }}>
+      <ScrollView style={styles.container}>
+        <View style={styles.titleContainer}>
+            <Text style={styles.title}>Your Profile</Text>
+        </View>
+        <View style={profile.container}>
+          <Ionicons name="person-circle" size={80} color={Colors.Primary}/> 
+          <View style={profile.info}>
+              <Text style={profile.title}>Sidharth Balakrishnan</Text>
+              <Text style={profile.subtitle} onPress={() => router.navigate("/settings/profile")}>Edit Profile</Text>
+          </View>        
+        </View>
+        <View style={{ marginVertical: 10, backgroundColor: '#fff', borderRadius: 10 }}>
+          <TouchableOpacity style={{ padding: 10, marginVertical:10, gap: 15, flexDirection: 'row' }} onPress={() => router.navigate('/order')}>
+            <Ionicons name="briefcase-outline" size={20} color={Colors.LightGrey} />
+            <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Orders</Text>
+          </TouchableOpacity>        
+          <View style={styles.divider}></View>
+          <TouchableOpacity style={{ padding: 10, marginVertical:10, gap: 15, flexDirection: 'row' }} onPress={handleLogout}>
+            <Ionicons name="log-out-outline" size={20} color={Colors.LightGrey} />
+            <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 10
+  },
   titleContainer: {
     display: 'flex',
     flexDirection: 'row',

@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, StyleSheet, View, Text } from 'react-native'
+import { FlatList, StyleSheet, View, Text, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import OrderCard from '@/components/order/OrderCard';
@@ -51,27 +51,31 @@ export default function Index() {
   }, []);
   
   return (
-    <View style={{ flex: 1, paddingHorizontal: 10 }}>
-          <FlatList data={orders} 
-                    renderItem={({item, index})=>(
-                      <OrderCard order={item} key={index} />
-                    )}
-                    keyExtractor={(item, index) => String(index)}
-                    showsVerticalScrollIndicator={false}
-                    onEndReached={onEndReached}
-                    onEndReachedThreshold={0.5}
-                    ListHeaderComponent={            
-                      <View style={styles.titleContainer}>
-                        <Text style={styles.title}>Past Orders</Text>
-                      </View>
-                    }
-                    ListFooterComponent={listFooterComponent}
-          />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <FlatList data={orders} 
+                style={styles.container}
+                renderItem={({item, index})=>(
+                  <OrderCard order={item} key={index} />
+                )}
+                keyExtractor={(item, index) => String(index)}
+                showsVerticalScrollIndicator={false}
+                onEndReached={onEndReached}
+                onEndReachedThreshold={0.5}
+                ListHeaderComponent={            
+                  <View style={styles.titleContainer}>
+                    <Text style={styles.title}>Past Orders</Text>
+                  </View>
+                }
+                ListFooterComponent={listFooterComponent}
+      />
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 10
+  },
   titleContainer: {
     paddingVertical:10
   },

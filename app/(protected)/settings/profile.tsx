@@ -10,7 +10,7 @@ export default function profile() {
   }, []); 
   
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Text>Profile Edit</Text>
     </SafeAreaView>
   )

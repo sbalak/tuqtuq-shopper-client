@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, SectionList, ListRenderItem, Platform } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, SectionList, ListRenderItem, Platform, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { router, useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
 import axios from 'axios';
@@ -116,7 +116,7 @@ export default function StoreDetails() {
   );
 
   return (
-    <View style={{flex:1}}>      
+    <SafeAreaView style={{flex:1}}>      
       <View style={searchStyles.searchContainer}>
         <View style={searchStyles.searchTextInputContainer}>
           <Ionicons name="search" size={20} style={searchStyles.searchIcon}  color={Colors.Primary} /> 
@@ -162,7 +162,7 @@ export default function StoreDetails() {
           </TouchableOpacity>
         </View>
       ) : null}
-    </View>
+    </SafeAreaView>
   )
 }
 
