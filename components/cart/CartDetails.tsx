@@ -6,6 +6,7 @@ import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useAuth } from '@/hooks/useAuth';
+import { common } from '@/constants/Styles';
 
 export default function CartDetails() {
   const { authState } = useAuth();
@@ -105,7 +106,7 @@ export default function CartDetails() {
       </View>
       
       <View style={titleStyle.container}>
-        <Text style={titleStyle.title}>Note</Text>
+        <Text style={common.heading}>Note</Text>
       </View>
       <View style={styles.detailsContainer}>
         <Text style={{ fontFamily:'nunito-medium' }}>Please review your cart carefully to avoid any cancellations</Text>
@@ -150,10 +151,6 @@ const styles = StyleSheet.create({
 const titleStyle = StyleSheet.create({
   container: {
       marginVertical:10
-  },
-  title: {
-      fontSize:20,
-      fontFamily: 'outfit-bold'
   },
   subTitle: {
       color: Colors.LightGrey, 

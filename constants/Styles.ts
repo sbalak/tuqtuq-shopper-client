@@ -4,5 +4,9 @@ export const common = {
     },
     container: {
         paddingHorizontal: 10
+    },
+    heading: {
+        fontFamily: 'outfit-bold',
+        fontSize:20,
     }
 }

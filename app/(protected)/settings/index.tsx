@@ -28,7 +28,7 @@ export default function index() {
     <SafeAreaView style={common.safeArea}>
       <ScrollView style={common.container}>
         <View style={styles.titleContainer}>
-            <Text style={styles.title}>Your Profile</Text>
+            <Text style={common.heading}>Your Profile</Text>
         </View>
         <View style={profile.container}>
           <Ionicons name="person-circle" size={80} color={Colors.Primary}/> 
@@ -58,10 +58,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     paddingVertical: 10
-  },
-  title: {
-    fontSize:20,
-    fontFamily: 'outfit-bold'
   },
   divider: {
       height:1,

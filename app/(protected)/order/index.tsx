@@ -64,7 +64,7 @@ export default function Index() {
                 onEndReachedThreshold={0.5}
                 ListHeaderComponent={            
                   <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Past Orders</Text>
+                    <Text style={common.heading}>Past Orders</Text>
                   </View>
                 }
                 ListFooterComponent={listFooterComponent}
@@ -76,10 +76,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   titleContainer: {
     paddingVertical:10
-  },
-  title: {
-    fontSize:20,
-    fontFamily: 'outfit-bold'
   },
   footer: {
     fontFamily: 'nunito-medium', 

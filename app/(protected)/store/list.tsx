@@ -95,7 +95,7 @@ export default function list() {
                     </View>
                     <View style={styles.titleContainer}>
                       <Ionicons name="location-sharp" size={24} color={Colors.Primary} /> 
-                      <Text style={styles.title}>Nearby Hotspots</Text>
+                      <Text style={common.heading}>Nearby Hotspots</Text>
                     </View>
                   </View> 
                 }
@@ -149,10 +149,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-  },
-  title: {
-    fontSize:20,
-    fontFamily: 'outfit-bold'
   },
   footer: {
     fontFamily: 'nunito-medium', 

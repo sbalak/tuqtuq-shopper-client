@@ -6,6 +6,7 @@ import { router, useFocusEffect } from 'expo-router';
 import axios from 'axios';
 import { useLocation } from '@/hooks/useLocation';
 import Ionicons from '@expo/vector-icons/build/Ionicons';
+import { common } from '@/constants/Styles';
 
 export default function RestaurantRecent() {
   const { locationState } = useLocation();
@@ -34,7 +35,7 @@ export default function RestaurantRecent() {
     <View>
         <View style={styles.titleContainer}>
             <Ionicons name="star" size={24} color="#FFB300" />
-            <Text style={styles.title}>Your Recent Visits</Text>
+            <Text style={common.heading}>Your Recent Visits</Text>
         </View>
         <FlatList data={restaurants} 
                   horizontal={true} 
@@ -52,9 +53,5 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     display: 'flex',
     flexDirection: 'row', gap: 5
-  },
-  title: {
-    fontSize:20,
-    fontFamily: 'outfit-bold'
-    }
+  }
 })
