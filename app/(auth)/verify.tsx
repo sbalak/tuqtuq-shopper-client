@@ -5,7 +5,8 @@ import { OtpInput } from "react-native-otp-entry";
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '@/hooks/useAuth';
-import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const verify = () => {
   const { username } = useLocalSearchParams();
@@ -13,6 +14,7 @@ const verify = () => {
   const [ key, setKey ] = useState(1);
   const [ expired, setExpired ] = useState(false);
   const { verify } = useAuth();
+  const { top } = useSafeAreaInsets();
 
   const handleVerify = async () => {
     try {
@@ -42,7 +44,7 @@ const verify = () => {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.White }}>
+    <View style={[styles.container, {paddingTop: top}]}>
       <View style={brand.container}>
         <Text style={brand.title}>{"{ "}takku{" }"}</Text>
       </View>
@@ -105,6 +107,9 @@ const verify = () => {
 export default verify
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1, backgroundColor: Colors.White
+  },
   text: {
     fontFamily: 'nunito-medium', 
     textAlign: 'center', 

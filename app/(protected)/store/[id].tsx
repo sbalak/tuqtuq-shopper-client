@@ -116,27 +116,7 @@ export default function StoreDetails() {
   );
 
   return (
-    <View style={{flex:1}}>
-      <SectionList 
-        keyExtractor={(item, index) => `${item.id + index}`} 
-        showsVerticalScrollIndicator={false}
-        sections={restaurantMenu}
-        renderItem={renderItem}
-        ItemSeparatorComponent={() => <View style={{height: 1, backgroundColor: Colors.LighterGrey}} />}
-        SectionSeparatorComponent={() => <View style={{height: 1, backgroundColor: Colors.LighterGrey}} />}
-        renderSectionHeader={({section: {title, index}}) => (
-          <Text style={sectionStyles.sectionHeader}>{title}</Text>
-        )}
-        ListHeaderComponent={() => (
-          <View style={restaurantStyles.restaurantcontainer}>
-            <View style={restaurantStyles.restaurantCard} >
-              <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.locality} • {restaurant.city} • 0.22 kms</Text>
-              <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.cuisine}</Text>
-            </View>
-          </View>
-        )}
-        stickySectionHeadersEnabled={true}
-      />
+    <View style={{flex:1}}>      
       <View style={searchStyles.searchContainer}>
         <View style={searchStyles.searchTextInputContainer}>
           <Ionicons name="search" size={20} style={searchStyles.searchIcon}  color={Colors.Primary} /> 
@@ -151,6 +131,27 @@ export default function StoreDetails() {
           ></TextInput>
         </View>
       </View>
+      <SectionList 
+        keyExtractor={(item, index) => `${item.id + index}`} 
+        showsVerticalScrollIndicator={false}
+        sections={restaurantMenu}
+        renderItem={renderItem}
+        ItemSeparatorComponent={() => <View style={{height: 1, backgroundColor: Colors.LighterGrey}} />}
+        SectionSeparatorComponent={() => <View style={{height: 1, backgroundColor: Colors.LighterGrey}} />}
+        renderSectionHeader={({section: {title, index}}) => (
+          <Text style={sectionStyles.sectionHeader}>{title}</Text>
+        )}
+        ListHeaderComponent={() => (
+          (search.length === 0 ?
+          (<View style={restaurantStyles.restaurantcontainer}>
+            <View style={restaurantStyles.restaurantCard} >
+              <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.locality} • {restaurant.city} • 0.22 kms</Text>
+              <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.cuisine}</Text>
+            </View>
+          </View>) : (<View></View>))
+        )}
+        stickySectionHeadersEnabled={true}
+      />
       {cartValue.quantity > 0 ? (
         <View style={checkoutStyles.checkoutButton}>
           <TouchableOpacity onPress={() => router.push('/cart')}>
@@ -167,7 +168,7 @@ export default function StoreDetails() {
 
 const searchStyles = StyleSheet.create({
   searchContainer: {
-    backgroundColor: Colors.Secondary,
+    backgroundColor: Colors.Primary,
     paddingHorizontal: 10,
   },
   searchTextInputContainer: { 

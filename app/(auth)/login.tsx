@@ -4,12 +4,14 @@ import { useAuth } from '@/hooks/useAuth';
 import { Link, router } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [validPhone, setValidPhone] = useState(false);
   const { login } = useAuth();
+  const { top } = useSafeAreaInsets();
 
   const handleLogin = async () => {
     try {
@@ -30,7 +32,7 @@ export const Login = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {paddingTop: top}]}>
       <View style={brand.container}>
         <Text style={brand.title}>{"{ "}takku{" }"}</Text>
       </View>
