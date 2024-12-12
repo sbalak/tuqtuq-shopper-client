@@ -6,6 +6,7 @@ import RestaurantNearbyCard from '@/components/store/RestaurantNearbyCard';
 import { useNavigation } from 'expo-router';
 import Ionicons from '@expo/vector-icons/build/Ionicons';
 import { useLocation } from '@/hooks/useLocation';
+import { common } from '@/constants/Styles';
 
 export default function list() {
   const { locationState } = useLocation();
@@ -64,11 +65,11 @@ export default function list() {
   }, []);
 
   return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={common.safeArea}>
       <FlatList data={restaurants}
                 stickyHeaderIndices={[0]}
                 renderItem={({item, index})=>(
-                  <View style={{paddingHorizontal: 10}}>
+                  <View style={common.container}>
                     <RestaurantNearbyCard restaurant={item} key={index} />
                   </View>
                 )}

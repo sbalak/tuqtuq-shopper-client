@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
+import { common } from '@/constants/Styles';
 
 export default function OrderDetails() {
     const { id } = useLocalSearchParams();
@@ -31,8 +32,8 @@ export default function OrderDetails() {
     );
     
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{paddingHorizontal: 10}}>
+        <SafeAreaView style={common.safeArea}>
+            <ScrollView style={common.container}>
               <View style={{ backgroundColor: Colors.White, padding: 10, borderRadius: 10, marginTop: 10 }}>
                 <Text style={{ fontFamily: 'outfit-bold', fontSize: 20 }}>Delivered</Text>
                 <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Your order has been delivered</Text>

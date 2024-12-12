@@ -5,6 +5,7 @@ import OrderCard from '@/components/order/OrderCard';
 import { useAuth } from '@/hooks/useAuth';
 import axios from 'axios';
 import { Colors } from '@/constants/Colors';
+import { common } from '@/constants/Styles';
 
 export default function Index() {
   const { authState } = useAuth();
@@ -51,9 +52,9 @@ export default function Index() {
   }, []);
   
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={common.safeArea}>
       <FlatList data={orders} 
-                style={styles.container}
+                style={common.container}
                 renderItem={({item, index})=>(
                   <OrderCard order={item} key={index} />
                 )}
@@ -73,9 +74,6 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 10
-  },
   titleContainer: {
     paddingVertical:10
   },

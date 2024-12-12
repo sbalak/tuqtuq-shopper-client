@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '@/hooks/useAuth';
+import { common } from '@/constants/Styles';
 
 export default function StoreDetails() {
   const { authState } = useAuth();
@@ -116,7 +117,7 @@ export default function StoreDetails() {
   );
 
   return (
-    <SafeAreaView style={{flex:1}}>      
+    <SafeAreaView style={common.safeArea}>      
       <View style={searchStyles.searchContainer}>
         <View style={searchStyles.searchTextInputContainer}>
           <Ionicons name="search" size={20} style={searchStyles.searchIcon}  color={Colors.Primary} /> 

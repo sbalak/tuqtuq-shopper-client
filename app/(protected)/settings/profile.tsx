@@ -1,6 +1,7 @@
-import { Text, SafeAreaView } from 'react-native'
+import { Text, SafeAreaView, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import { useNavigation } from 'expo-router';
+import { common } from '@/constants/Styles';
 
 export default function profile() {
   const navigation = useNavigation();
@@ -10,8 +11,10 @@ export default function profile() {
   }, []); 
   
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Text>Profile Edit</Text>
+    <SafeAreaView style={common.safeArea}>
+      <ScrollView style={common.container}>
+        <Text>Profile Edit</Text>
+      </ScrollView>
     </SafeAreaView>
   )
 }

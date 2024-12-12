@@ -122,7 +122,6 @@ export default function CartDetails() {
 
 const styles = StyleSheet.create({
     detailsContainer: {
-        marginHorizontal: 10,
         marginBottom: 10,
         padding: 10,
         backgroundColor: '#fff',
@@ -150,7 +149,6 @@ const styles = StyleSheet.create({
 
 const titleStyle = StyleSheet.create({
   container: {
-      paddingHorizontal: 10,
       marginVertical:10
   },
   title: {
@@ -205,7 +203,7 @@ const billStyles = StyleSheet.create({
 
 const checkoutStyle = StyleSheet.create({
   checkoutButton: {
-    margin: 10,
+    marginTop: 10,
     borderRadius: 10,
     padding:10,
     height: 50,
