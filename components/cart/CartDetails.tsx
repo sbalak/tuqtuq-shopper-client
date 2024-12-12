@@ -208,8 +208,9 @@ const billStyles = StyleSheet.create({
 const checkoutStyle = StyleSheet.create({
   checkoutButton: {
     margin: 10,
-    borderRadius: 15,
+    borderRadius: 10,
     padding:10,
+    height: 50,
     backgroundColor: Colors.Primary,
     flex: 1, 
     justifyContent: "center", 
@@ -217,6 +218,7 @@ const checkoutStyle = StyleSheet.create({
   },
   checkoutButtonText: {
     fontFamily: 'nunito-bold',
+    fontSize: 18,
     color: Colors.Secondary,
   }
 });
