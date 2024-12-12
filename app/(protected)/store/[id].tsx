@@ -302,8 +302,6 @@ const cartStyles = StyleSheet.create({
     borderBottomRightRadius:15
   },
   cartButton: {
-    fontFamily: 'outfit-bold',
-    fontSize: 20,
     color: Colors.Primary
   },
   cartButtonText: {

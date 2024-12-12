@@ -78,11 +78,11 @@ export default function CartDetails() {
                               <Text style={styles.itemPrice}>{item.price}</Text>
                               <View style={cartStyles.cartButtonContainer}>
                                   <TouchableOpacity onPress={() => handleRemoveItem(cart.restaurantId, item.foodItemId)}>
-                                      <Text style={cartStyles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
+                                      <Text style={cartStyles.cartButton}><Ionicons name="remove-circle" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
                                   <Text style={cartStyles.cartButtonText}>{item.quantity}</Text>
                                   <TouchableOpacity onPress={() => handleAddItem(cart.restaurantId, item.foodItemId)}>
-                                      <Text style={cartStyles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
+                                      <Text style={cartStyles.cartButton}><Ionicons name="add-circle" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
                               </View>
                           </View>
@@ -170,18 +170,16 @@ const cartStyles = StyleSheet.create({
   },
   cartButtonContainer: {
       flexDirection: 'row', 
-      gap: 15, 
+      gap: 20, 
       backgroundColor: Colors.Secondary, 
-      paddingHorizontal: 15,
       marginTop:5, 
       borderRadius: 15
   },
   cartButton: {
-      fontFamily: 'nunito-medium',
       color: Colors.Primary
   },
   cartButtonText: {
-      fontFamily: 'nunito-medium',
+      fontFamily: 'outfit-bold',
       marginTop: 4,
       color: Colors.Primary
   }
