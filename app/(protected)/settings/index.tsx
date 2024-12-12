@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useEffect } from 'react'
 import { useAuth } from '@/hooks/useAuth';
 import { router, useNavigation } from 'expo-router';
