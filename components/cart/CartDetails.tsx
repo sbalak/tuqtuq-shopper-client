@@ -61,7 +61,7 @@ export default function CartDetails() {
   return (
     <View>
       <View style={titleStyle.container}>
-          <Text style={titleStyle.title}>{cart.restaurantName}</Text>
+          <Text style={common.heading}>{cart.restaurantName}</Text>
           <Text style={common.text}>{cart.restaurantLocality}</Text>
       </View>
       <View style={styles.detailsContainer}>
@@ -92,7 +92,7 @@ export default function CartDetails() {
           />
       </View>
       <View style={titleStyle.container}>
-        <Text style={titleStyle.title}>Detailed Bill</Text>
+        <Text style={common.heading}>Detailed Bill</Text>
       </View>
       <View style={styles.detailsContainer}>
           <View style={billStyles.billColumn}>

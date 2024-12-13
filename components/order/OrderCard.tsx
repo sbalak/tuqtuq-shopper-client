@@ -9,15 +9,15 @@ export default function OrderCard({order}: {order: any}) {
   return (    
     <View style={styles.container}>
         <Text style={common.subHeading}>{order.restaurantName}</Text>
-        <Text style={styles.orderSubtitle}>{order.restaurantLocality}</Text>
+        <Text style={common.text}>{order.restaurantLocality}</Text>
         <FlatList data={order.orderItems} style={{paddingVertical:10}} scrollEnabled={false} renderItem={({item, index})=>(
             <View style={{flexDirection: 'row'}}>
                 <Image style={styles.foodType} source={require('@/assets/images/veg.png')} />
-                <Text style={styles.orderSubtitle}>{item.foodName} (x{item.quantity})</Text>
+                <Text style={common.text}>{item.foodName} (x{item.quantity})</Text>
             </View>
         )} />
         <View style={styles.amountRow}>
-            <Text style={[styles.orderSubtitle, {paddingTop:2.5}]}>{order.totalAmount}</Text>
+            <Text style={[common.text, {paddingTop:2.5}]}>{order.totalAmount}</Text>
             <TouchableOpacity onPress={() => router.navigate('/order/'+ order.orderId)}>
                 <Ionicons name="arrow-forward-circle" size={24} color={Colors.Primary} />
             </TouchableOpacity>
