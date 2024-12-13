@@ -7,7 +7,7 @@ import { common } from '@/constants/Styles';
 export default function RestaurantRecentCard({restaurant}: {restaurant: any}) {
   return (    
     <TouchableOpacity style={styles.restaurantContainer} onPress={() => router.push('/store/'+restaurant.id)}>
-        <View style={styles.restaurantInfo}>
+        <View>
             <Text style={common.subHeading}>{restaurant.name}</Text>
             <Text style={[common.text, styles.restaurantSubtitle]}>{restaurant.locality}</Text>
             <Text style={[common.text, styles.restaurantSubtitle]}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
@@ -28,8 +28,6 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         borderRadius:15
-    },
-    restaurantInfo: {
     },
     restaurantSubtitle: {
         width:200
