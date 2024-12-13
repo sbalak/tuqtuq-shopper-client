@@ -5,6 +5,7 @@ import { Colors } from '@/constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
 import { useLocation } from '@/hooks/useLocation'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { common } from '@/constants/Styles'
 
 const StoreHeader = () => {
     const { top } = useSafeAreaInsets();
@@ -16,8 +17,8 @@ const StoreHeader = () => {
                 <Image style={styles.locator} source={require('@/assets/images/location.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.titleContainer} onPress={setLocality}>
-                <Text style={styles.title}>Pickup • Now</Text>
-                <Text style={styles.subtitle}>{locationState.locality}</Text>
+                <Text style={[common.defaultTitle, {color: Colors.LightGrey}]}>Pickup • Now</Text>
+                <Text style={common.defaultTitle}>{locationState.locality}</Text>
             
             </TouchableOpacity>
             <TouchableOpacity style={styles.searchButton} onPress={() => router.push('/store/list')}>
@@ -60,13 +61,6 @@ const styles = StyleSheet.create({
   titleContainer: {
       flex: 1,
       paddingTop:7
-  },
-  title: {
-      fontFamily: 'nunito-bold',
-      color: Colors.LightGrey
-  },
-  subtitle: {
-      fontFamily: 'nunito-bold'
   },
   searchButton: {
     backgroundColor: Colors.Secondary,

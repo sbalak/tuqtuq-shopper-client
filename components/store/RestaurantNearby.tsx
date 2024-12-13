@@ -38,7 +38,7 @@ export default function RestaurantNearby() {
           <Text style={common.heading}>Nearby Hotspots</Text>
         </View>
         <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => (router.navigate('/store/list'))}>
-          <Text style={styles.viewAll}>more</Text>
+          <Text style={[common.defaultTitle, styles.viewAll]}>more</Text>
           <Ionicons name="arrow-forward-outline" size={24} color={Colors.Primary} />
         </TouchableOpacity>
       </View>
@@ -48,7 +48,7 @@ export default function RestaurantNearby() {
                 keyExtractor={(item, index) => String(index)} 
       />
       <TouchableOpacity onPress={() => (router.navigate('/store/list'))}>
-        <Text style={styles.footer}>view more</Text>
+        <Text style={[common.defaultTitle, styles.footer]}>view more</Text>
       </TouchableOpacity>
     </View>
   )
@@ -63,10 +63,8 @@ const styles = StyleSheet.create({
   },
   viewAll: {
     color: Colors.Primary, 
-    fontFamily: 'nunito-bold'
   },
   footer: {
-    fontFamily: 'nunito-bold', 
     color: Colors.Primary, 
     textAlign: "center",
     marginBottom:20

@@ -33,19 +33,19 @@ export default function index() {
         <View style={profile.container}>
           <Ionicons name="person-circle" size={80} color={Colors.Primary}/> 
           <View style={profile.info}>
-              <Text style={profile.title}>Sidharth Balakrishnan</Text>
-              <Text style={profile.subtitle} onPress={() => router.navigate("/settings/profile")}>Edit Profile</Text>
+              <Text style={[common.defaultTitle, profile.title]}>Sidharth Balakrishnan</Text>
+              <Text style={common.text} onPress={() => router.navigate("/settings/profile")}>Edit Profile</Text>
           </View>        
         </View>
         <View style={{ marginVertical: 10, backgroundColor: '#fff', borderRadius: 10 }}>
           <TouchableOpacity style={{ padding: 10, marginVertical:10, gap: 15, flexDirection: 'row' }} onPress={() => router.navigate('/order')}>
             <Ionicons name="briefcase-outline" size={20} color={Colors.LightGrey} />
-            <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Orders</Text>
+            <Text style={common.text}>Orders</Text>
           </TouchableOpacity>        
           <View style={styles.divider}></View>
           <TouchableOpacity style={{ padding: 10, marginVertical:10, gap: 15, flexDirection: 'row' }} onPress={handleLogout}>
             <Ionicons name="log-out-outline" size={20} color={Colors.LightGrey} />
-            <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Logout</Text>
+            <Text style={common.text}>Logout</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -77,11 +77,6 @@ const profile = StyleSheet.create({
       marginLeft: 10
   },
   title: {
-      fontFamily: 'nunito-bold',
       fontSize: 18
-  },
-  subtitle: {
-      fontFamily: 'nunito-medium',
-      color: Colors.LightGrey
   }
 })

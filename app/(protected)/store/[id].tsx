@@ -93,9 +93,9 @@ export default function StoreDetails() {
   const renderItem: ListRenderItem<any> = ({item, index}) => (
     <View style={{backgroundColor: Colors.White, padding: 10, flexDirection: 'row'}}>
       <View style={{flex: 1}}>
-        <Text style={foodStyles.foodTitle}>{item.name}</Text>
-        <Text style={foodStyles.foodSubtitle}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
-        <Text style={foodStyles.foodSubtitle}>₹{item.price}</Text>
+        <Text style={[common.defaultTitle, foodStyles.foodTitle]}>{item.name}</Text>
+        <Text style={[common.text, foodStyles.foodSubtitle]}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
+        <Text style={[common.text, foodStyles.foodSubtitle]}>₹{item.price}</Text>
         <Image style={foodStyles.foodType} source={require('@/assets/images/veg.png')} />
       </View>
       <View>
@@ -107,7 +107,7 @@ export default function StoreDetails() {
           <TouchableOpacity onPress={() => handleRemoveItem(restaurant.id, item.id)}>
               <Text style={cartStyles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
           </TouchableOpacity>
-          <Text style={cartStyles.cartButtonText}>{item.quantity}</Text>
+          <Text style={[common.defaultHeading, cartStyles.cartButtonText]}>{item.quantity}</Text>
           <TouchableOpacity onPress={() => handleAddItem(restaurant.id, item.id)}>
               <Text style={cartStyles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
           </TouchableOpacity>
@@ -146,8 +146,8 @@ export default function StoreDetails() {
           (search.length === 0 ?
           (<View style={restaurantStyles.restaurantcontainer}>
             <View style={restaurantStyles.restaurantCard} >
-              <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.locality} • {restaurant.city} • 0.22 kms</Text>
-              <Text style={restaurantStyles.restaurantSubtitle}>{restaurant.cuisine}</Text>
+              <Text style={common.text}>{restaurant.locality} • {restaurant.city} • 0.22 kms</Text>
+              <Text style={common.text}>{restaurant.cuisine}</Text>
             </View>
           </View>) : (<View></View>))
         )}
@@ -156,7 +156,7 @@ export default function StoreDetails() {
       {cartValue.quantity > 0 ? (
         <View style={checkoutStyles.checkoutButton}>
           <TouchableOpacity onPress={() => router.push('/cart')}>
-            <Text style={checkoutStyles.checkoutButtonText}>{cartValue.quantity} item{cartValue.quantity > 1 ? 's': null} added</Text>
+            <Text style={[common.defaultTitle, checkoutStyles.checkoutButtonText]}>{cartValue.quantity} item{cartValue.quantity > 1 ? 's': null} added</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push('/cart')}>
             <Ionicons name="arrow-forward-circle" size={30} color={Colors.Secondary} />
@@ -212,11 +212,6 @@ const restaurantStyles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 10,
     borderRadius: 10,
-  },
-  restaurantSubtitle: {
-    fontFamily: 'nunito-medium',
-    fontSize: 14,
-    color: Colors.LightGrey
   }
 });
 
@@ -232,16 +227,12 @@ const foodStyles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   foodTitle: {
-      fontFamily: 'nunito-bold',
       fontSize: 16,
       width:250,
   },
   foodSubtitle: {
-      fontFamily: 'nunito-medium',
-      fontSize: 14,
       width:250,
-      marginTop:5,
-      color: Colors.LightGrey
+      marginTop:5
   },
   foodType: {
     height:20, 
@@ -282,7 +273,6 @@ const checkoutStyles = StyleSheet.create({
     alignItems: "center"
   },
   checkoutButtonText: {
-    fontFamily: 'nunito-bold',
     fontSize: 18,
     color: Colors.Secondary,
   }
@@ -304,7 +294,6 @@ const cartStyles = StyleSheet.create({
     color: Colors.Primary
   },
   cartButtonText: {
-    fontFamily: 'outfit-bold',
     marginTop: 4,
     color: Colors.Primary
   }

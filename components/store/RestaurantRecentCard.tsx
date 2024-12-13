@@ -9,9 +9,9 @@ export default function RestaurantRecentCard({restaurant}: {restaurant: any}) {
     <TouchableOpacity style={styles.restaurantContainer} onPress={() => router.push('/store/'+restaurant.id)}>
         <View style={styles.restaurantInfo}>
             <Text style={common.subHeading}>{restaurant.name}</Text>
-            <Text style={styles.restaurantSubtitle}>{restaurant.locality}</Text>
-            <Text style={styles.restaurantSubtitle}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
-            <Text style={styles.restaurantVisit}>Last ordered on {restaurant.formattedDateOrdered}</Text>
+            <Text style={[common.text, styles.restaurantSubtitle]}>{restaurant.locality}</Text>
+            <Text style={[common.text, styles.restaurantSubtitle]}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
+            <Text style={[common.text, styles.restaurantVisit]}>Last ordered on {restaurant.formattedDateOrdered}</Text>
         </View>
     </TouchableOpacity>
   )
@@ -32,14 +32,10 @@ const styles = StyleSheet.create({
     restaurantInfo: {
     },
     restaurantSubtitle: {
-        fontFamily: 'nunito-medium',
-        width:200,
-        color: Colors.LightGrey
+        width:200
     },
     restaurantVisit: {
-        fontFamily: 'nunito-medium',
         fontSize: 10,
-        width:200,
-        color: Colors.LightGrey
+        width:200
     }
 });

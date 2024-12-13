@@ -37,7 +37,7 @@ export default function Index() {
 
   const listFooterComponent = () => {
     return (
-      <Text style={styles.footer}>You've reached the end</Text>
+      <Text style={[common.text, styles.footer]}>You've reached the end</Text>
     );
   }
   
@@ -78,8 +78,6 @@ const styles = StyleSheet.create({
     paddingVertical:10
   },
   footer: {
-    fontFamily: 'nunito-medium', 
-    color: Colors.LightGrey, 
     textAlign: "center",
     marginBottom:20
   }

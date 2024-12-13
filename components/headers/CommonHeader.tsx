@@ -4,6 +4,7 @@ import { router } from 'expo-router'
 import { Colors } from '@/constants/Colors'
 import { Ionicons } from '@expo/vector-icons'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { common } from '@/constants/Styles'
 
 const CommonHeader = (props: any) => {
   const { top } = useSafeAreaInsets();
@@ -13,7 +14,7 @@ const CommonHeader = (props: any) => {
       <TouchableOpacity onPress={() => {router.back()}}>
         <Ionicons name='arrow-back' style={styles.navigate} color={Colors.Primary} />
       </TouchableOpacity>
-      <Text style={styles.title}>{props.options.headerTitle}</Text>
+      <Text style={[common.defaultHeading, styles.title]}>{props.options.headerTitle}</Text>
     </View>
   )
 }
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   title: {
-    fontFamily: 'outfit-bold',
     fontSize: 22,
     paddingLeft:20,
     paddingTop: 10

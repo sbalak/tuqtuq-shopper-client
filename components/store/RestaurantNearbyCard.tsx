@@ -10,8 +10,8 @@ export default function RestaurantNearbyCard({restaurant}: {restaurant: any}) {
         <Image source={{uri:restaurant.photo}} style={styles.restaurantImage} />
         <View style={styles.restaurantInfo}>
             <Text style={common.subHeading}>{restaurant.name}</Text>
-            <Text style={styles.restaurantSubtitle}>{restaurant.locality}</Text>
-            <Text style={styles.restaurantSubtitle}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
+            <Text style={common.text}>{restaurant.locality}</Text>
+            <Text style={common.text}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
         </View>
     </TouchableOpacity>
   )
@@ -34,9 +34,5 @@ const styles = StyleSheet.create({
         marginTop: 7,
         marginLeft: 10,
         width:240,
-    },
-    restaurantSubtitle: {
-        fontFamily: 'nunito-medium',
-        color: Colors.LightGrey
     }
 });

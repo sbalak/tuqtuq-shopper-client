@@ -56,7 +56,7 @@ export default function list() {
 
   const listFooterComponent = () => {
     return (
-      <Text style={styles.footer}>You've reached the end</Text>
+      <Text style={[common.text, styles.footer]}>You've reached the end</Text>
     );
   }
 
@@ -151,8 +151,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   footer: {
-    fontFamily: 'nunito-medium', 
-    color: Colors.LightGrey, 
     textAlign: "center",
     marginBottom:20
   }

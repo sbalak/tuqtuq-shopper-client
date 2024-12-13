@@ -36,42 +36,42 @@ export default function OrderDetails() {
             <ScrollView style={common.container}>
               <View style={{ backgroundColor: Colors.White, padding: 10, borderRadius: 10, marginTop: 10 }}>
                 <Text style={common.heading}>Delivered</Text>
-                <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Your order has been delivered</Text>
+                <Text style={common.text}>Your order has been delivered</Text>
               </View>
 
               <View style={{ backgroundColor: Colors.White, padding: 10, borderRadius: 10, marginTop: 10 }}>
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ width: 190, fontFamily: 'nunito-bold' }}>Order ID</Text>
-                  <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>PEEKY892732</Text>
+                  <Text style={[common.defaultTitle, {width: 190}]}>Order ID</Text>
+                  <Text style={common.text}>PEEKY892732</Text>
                 </View>
                 <Text style={[common.heading, {marginVertical: 20}]}>PeeKay Coffee</Text>
                 <View style={{marginBottom: 10, height: 1, backgroundColor: Colors.LighterGrey}}></View>
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ width: 190, fontFamily: 'nunito-medium' }}>Item</Text>
-                  <Text style={{ width: 70, fontFamily: 'nunito-medium' }}>Qty.</Text>
-                  <Text style={{ width: 110, fontFamily: 'nunito-medium' }}>Price</Text>
+                  <Text style={[common.defaultText, {width: 190}]}>Item</Text>
+                  <Text style={[common.defaultText, {width: 70}]}>Qty.</Text>
+                  <Text style={[common.defaultText, {width: 110}]}>Price</Text>
                 </View>
                 <View style={{marginVertical: 10, height: 1, backgroundColor: Colors.LighterGrey}}></View>
                 <FlatList data={order.orderItems} scrollEnabled={false} renderItem={({item, index})=>(
                   <View style={{ flexDirection: 'row', paddingBottom: 5 }}>
-                    <Text style={{ width: 190, fontFamily: 'nunito-medium', color: Colors.LightGrey }}>{item.foodName}</Text>
-                    <Text style={{ width: 70, fontFamily: 'nunito-medium', color: Colors.LightGrey }}>x {item.quantity}</Text>
-                    <Text style={{ width: 110, fontFamily: 'nunito-medium', color: Colors.LightGrey }}>{item.amount}</Text>
+                    <Text style={[common.text, {width: 190}]}>{item.foodName}</Text>
+                    <Text style={[common.text, {width: 70}]}>x {item.quantity}</Text>
+                    <Text style={[common.text, {width: 110}]}>{item.amount}</Text>
                   </View>
                 )} />
                 
                 <View style={{marginVertical: 10, height: 1, backgroundColor: Colors.LighterGrey}}></View>
                 <View style={{ flexDirection: 'row', paddingBottom: 5 }}>
-                  <Text style={{ width: 260, fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Taxable Amount</Text>
-                  <Text style={{ width: 110, fontFamily: 'nunito-medium', color: Colors.LightGrey }}>{order.totalTaxableAmount}</Text>
+                  <Text style={[common.text, {width: 260}]}>Taxable Amount</Text>
+                  <Text style={[common.text, {width: 110}]}>{order.totalTaxableAmount}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', paddingBottom: 5 }}>
-                  <Text style={{ width: 260, fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Total Tax</Text>
-                  <Text style={{ width: 110, fontFamily: 'nunito-medium', color: Colors.LightGrey }}>{order.totalTaxAmount}</Text>
+                  <Text style={[common.text, {width: 260}]}>Total Tax</Text>
+                  <Text style={[common.text, {width: 110}]}>{order.totalTaxAmount}</Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ width: 260, fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Total Bill</Text>
-                  <Text style={{ width: 110, fontFamily: 'nunito-medium', color: Colors.LightGrey }}>{order.totalAmount}</Text>
+                  <Text style={[common.text, {width: 260}]}>Total Bill</Text>
+                  <Text style={[common.text, {width: 110}]}>{order.totalAmount}</Text>
                 </View>
                 <View style={{marginVertical: 10, height: 1, backgroundColor: Colors.LighterGrey}}></View>
               </View>
@@ -79,20 +79,20 @@ export default function OrderDetails() {
               <Text style={[common.heading, {paddingVertical: 10}]}>Payment Details</Text>
               <View style={{ backgroundColor: Colors.White, padding: 10, borderRadius: 10 }}>
                 <View style={{ flexDirection: 'row', paddingBottom: 5 }}>
-                  <Text style={{ width: 190, fontFamily: 'nunito-bold' }}>Paid Via</Text>
-                  <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>Google Pay</Text>
+                  <Text style={[common.defaultTitle, {width: 190}]}>Paid Via</Text>
+                  <Text style={common.text}>Google Pay</Text>
                 </View>
                 <View style={{ flexDirection: 'row', paddingBottom: 5 }}>
-                  <Text style={{ width: 190, fontFamily: 'nunito-bold' }}>Amount Paid</Text>
-                  <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>{order.totalAmount}</Text>
+                  <Text style={[common.defaultTitle, {width: 190}]}>Amount Paid</Text>
+                  <Text style={common.text}>{order.totalAmount}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', paddingBottom: 5 }}>
-                  <Text style={{ width: 190, fontFamily: 'nunito-bold' }}>Transaction ID</Text>
-                  <Text style={{ fontFamily: 'nunito-medium', color: Colors.LightGrey }}>PEETR892732</Text>
+                  <Text style={[common.defaultTitle, {width: 190}]}>Transaction ID</Text>
+                  <Text style={common.text}>PEETR892732</Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ width: 190, fontFamily: 'nunito-bold' }}>Status</Text>
-                  <Text style={{ fontFamily: 'nunito-medium', color: Colors.White, paddingHorizontal:5, paddingVertical:2.5, borderRadius:5,backgroundColor: 'green' }}>Success</Text>
+                  <Text style={[common.defaultTitle, {width: 190}]}>Status</Text>
+                  <Text style={[common.defaultText, {color: Colors.White, paddingHorizontal:5, paddingVertical:2.5, borderRadius:5,backgroundColor: 'green' }]}>Success</Text>
                 </View>
               </View>
             </ScrollView>

@@ -24,7 +24,7 @@ export default function OrderCard({order}: {order: any}) {
         </View>
         <View style={styles.divider}></View>
         <View>
-            <Text style={styles.orderSubtitle}>{order.dateOrdered}</Text>
+            <Text style={common.text}>{order.dateOrdered}</Text>
         </View>
     </View>
   )
@@ -32,14 +32,10 @@ export default function OrderCard({order}: {order: any}) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff',
+        backgroundColor: Colors.White,
         borderRadius: 10,
         padding:10,
         marginBottom:10, 
-    },
-    orderSubtitle: {
-        fontFamily: 'nunito-medium',
-        color: Colors.LightGrey
     },
     foodType: {
       height:20, 

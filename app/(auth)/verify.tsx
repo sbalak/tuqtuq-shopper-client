@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '@/hooks/useAuth';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { common } from '@/constants/Styles';
 
 const verify = () => {
   const { username } = useLocalSearchParams();
@@ -22,7 +23,6 @@ const verify = () => {
       const result = await verify(username.toString(), code);
       console.log('Result' + JSON.stringify(result));
     } catch (error) {
-
     }
   }
 
@@ -31,16 +31,15 @@ const verify = () => {
       setKey(prevKey => prevKey + 1)
       setExpired(false);
     } catch (error) {
-
     }
   }
 
   const renderTime = ({ remainingTime }) => {
     if (remainingTime === 0){ 
-      return <Text style={{fontFamily: 'nunito-bold', fontSize: 24, color: Colors.Primary }}>Too late...</Text>
+      return <Text style={[common.defaultTitle, styles.countdownText]}>Too late...</Text>
     }
 
-    return <Text style={{fontFamily: 'nunito-bold', fontSize: 24, color: Colors.Primary }}>{remainingTime}</Text>
+    return <Text style={[common.defaultTitle, styles.countdownText]}>{remainingTime}</Text>
   }
 
   return (
@@ -48,7 +47,7 @@ const verify = () => {
       <View style={brand.container}>
         <Text style={brand.title}>{"{ "}takku{" }"}</Text>
       </View>
-      <Text style={styles.text}>We have sent a verification code to +91 {username}</Text>
+      <Text style={[common.text, styles.text]}>We have sent a verification code to +91 {username}</Text>
       <OtpInput
         numberOfDigits={6}
         focusColor={Colors.Primary}
@@ -84,20 +83,20 @@ const verify = () => {
       (
         <View>
           <TouchableOpacity onPress={() => handleResend()}>
-            <Text style={styles.text}>Didn't get OTP? Resend SMS</Text>
+            <Text style={[common.text, styles.text]}>Didn't get OTP? Resend SMS</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <View>
           <TouchableOpacity disabled>
-            <Text style={styles.text}>Please enter your OTP to continue</Text>
+            <Text style={[common.text, styles.text]}>Please enter your OTP to continue</Text>
           </TouchableOpacity>
         </View>
       ) }
       <View style={goback.container}>
         <TouchableOpacity style={goback.button} onPress={() => router.back()}>
           <Ionicons name="chevron-back" size={24} color={Colors.White} /> 
-          <Text style={goback.buttonText}>Go Back</Text>
+          <Text style={[common.defaultText, goback.buttonText]}>Go Back</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -111,9 +110,11 @@ const styles = StyleSheet.create({
     flex: 1, backgroundColor: Colors.White
   },
   text: {
-    fontFamily: 'nunito-medium', 
-    textAlign: 'center', 
-    color: Colors.LightGrey
+    textAlign: 'center'
+  },
+  countdownText: {
+    fontSize: 24, 
+    color: Colors.Primary
   }
 });
 
@@ -135,18 +136,9 @@ const otp = StyleSheet.create({
   container: {
     padding: 40
   },
-  pinCodeContainer: {
-
-  },
   pinCodeText: {
     fontFamily: 'outfit-bold',
     color: Colors.Primary
-  },
-  focusStick: {
-
-  },
-  activePinCodeContainer: { 
-
   }
 })
 
@@ -166,7 +158,6 @@ const goback = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonText: {
-    fontFamily: 'nunito-medium',
     color: Colors.White,
     fontSize: 18,
     marginLeft: 10

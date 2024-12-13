@@ -5,6 +5,7 @@ import { Link, router } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { common } from '@/constants/Styles';
 
 export const Login = () => {
   const [username, setUsername] = useState('');
@@ -37,11 +38,11 @@ export const Login = () => {
         <Text style={brand.title}>{"{ "}takku{" }"}</Text>
       </View>
       <View style={signin.container}>
-        <Text style={signin.title}>India's First Food App for Pick-Up</Text>
+        <Text style={[common.defaultHeading, signin.title]}>India's First Food App for Pick-Up</Text>
         <View style={signin.subTitleContainer}>
           <View style={signin.subTitleDivider} />
           <View>
-            <Text style={signin.subTitleText}>Log in or sign up</Text>
+            <Text style={[common.defaultTitle, signin.subTitleText]}>Log in or sign up</Text>
           </View>
           <View style={signin.subTitleDivider} />
         </View>
@@ -84,11 +85,12 @@ export const Login = () => {
       <View style={logon.container}>
         <TouchableOpacity style={logon.button} onPress={handleLogin}>
           <Ionicons name="log-in-outline" size={24} color={Colors.White} /> 
-          <Text style={logon.buttonText}>Continue with OTP</Text>
+          <Text style={[common.defaultText, logon.buttonText]}>Continue with OTP</Text>
         </TouchableOpacity>
       </View>
       <View style={{ alignItems: 'center', paddingHorizontal: 10, paddingVertical: 10 }}>
-        <Text style={{fontFamily: 'nunito-medium', fontSize: 12, color: Colors.LightGrey }}>By continuing, you agree to our</Text><Text style={{fontFamily: 'nunito-medium', fontSize: 12,textDecorationLine: 'underline', color: Colors.LightGrey}}>Terms & Conditions</Text>
+        <Text style={[common.text, {fontSize: 12}]}>By continuing, you agree to our</Text>
+        <Text style={[common.text, {fontSize: 12,textDecorationLine: 'underline'}]}>Terms & Conditions</Text>
       </View>
     </View>
   )
@@ -123,7 +125,6 @@ const signin = StyleSheet.create({
     padding: 10
   },
   title: { 
-    fontFamily: 'outfit-bold',
     fontSize: 24,
     textAlign: 'center', 
     marginVertical: 25,
@@ -136,7 +137,6 @@ const signin = StyleSheet.create({
   subTitleText: {
     width: 140, 
     textAlign: 'center', 
-    fontFamily: 'nunito-bold', 
     color: Colors.LightGrey
   },
   subTitleDivider: {
@@ -194,7 +194,6 @@ const logon = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonText: {
-    fontFamily: 'nunito-medium',
     color: Colors.White,
     fontSize: 18,
     marginLeft: 10

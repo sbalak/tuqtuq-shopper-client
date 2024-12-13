@@ -62,7 +62,7 @@ export default function CartDetails() {
     <View>
       <View style={titleStyle.container}>
           <Text style={titleStyle.title}>{cart.restaurantName}</Text>
-          <Text style={titleStyle.subTitle}>{cart.restaurantLocality}</Text>
+          <Text style={common.text}>{cart.restaurantLocality}</Text>
       </View>
       <View style={styles.detailsContainer}>
           <FlatList data={cart.cartItems} 
@@ -71,17 +71,17 @@ export default function CartDetails() {
                     renderItem={({item, index})=>( 
                       <View>
                           <View style={styles.dataRow}>
-                              <Text style={styles.dataName}>{item.foodName}</Text>
-                              <Text style={styles.dataValue}>{item.amount}</Text>
+                              <Text style={common.defaultText}>{item.foodName}</Text>
+                              <Text style={common.text}>{item.amount}</Text>
                           </View>
                           
                           <View style={cartStyles.cartItem}>
-                              <Text style={styles.itemPrice}>{item.price}</Text>
+                              <Text style={[common.text, styles.itemPrice]}>{item.price}</Text>
                               <View style={cartStyles.cartButtonContainer}>
                                   <TouchableOpacity onPress={() => handleRemoveItem(cart.restaurantId, item.foodItemId)}>
                                       <Text style={cartStyles.cartButton}><Ionicons name="remove-circle" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
-                                  <Text style={cartStyles.cartButtonText}>{item.quantity}</Text>
+                                  <Text style={[common.defaultHeading, cartStyles.cartButtonText]}>{item.quantity}</Text>
                                   <TouchableOpacity onPress={() => handleAddItem(cart.restaurantId, item.foodItemId)}>
                                       <Text style={cartStyles.cartButton}><Ionicons name="add-circle" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
@@ -96,12 +96,12 @@ export default function CartDetails() {
       </View>
       <View style={styles.detailsContainer}>
           <View style={billStyles.billColumn}>
-            <Text style={billStyles.billName}>Total Tax</Text>
-            <Text style={billStyles.billName}>Total Bill</Text>
+            <Text style={[common.defaultText, billStyles.billName]}>Total Tax</Text>
+            <Text style={[common.defaultText, billStyles.billName]}>Total Bill</Text>
           </View>
           <View style={billStyles.billColumn}>
-            <Text style={billStyles.billValue}>{cart.totalTaxAmount}</Text>
-            <Text style={billStyles.billValue}>{cart.totalAmount}</Text>
+            <Text style={[common.text, billStyles.billValue]}>{cart.totalTaxAmount}</Text>
+            <Text style={[common.text, billStyles.billValue]}>{cart.totalAmount}</Text>
           </View>
       </View>
       
@@ -109,12 +109,12 @@ export default function CartDetails() {
         <Text style={common.heading}>Note</Text>
       </View>
       <View style={styles.detailsContainer}>
-        <Text style={{ fontFamily:'nunito-medium' }}>Please review your cart carefully to avoid any cancellations</Text>
+        <Text style={common.defaultText}>Please review your cart carefully to avoid any cancellations</Text>
       </View>
       
       <View style={checkoutStyle.checkoutButton}>
         <TouchableOpacity onPress={() => handleCheckout()}>
-          <Text style={checkoutStyle.checkoutButtonText}>Checkout</Text>
+          <Text style={[common.defaultTitle, checkoutStyle.checkoutButtonText]}>Checkout</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -134,27 +134,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    dataName: {
-        fontFamily: 'nunito-medium',
-    },
-    dataValue: {
-        fontFamily: 'nunito-medium',
-        color: Colors.LightGrey
-    },
     itemPrice: {
-        marginTop: 7,
-        fontFamily: 'nunito-medium',
-        color: Colors.LightGrey
+        marginTop: 7
     },
 });
 
 const titleStyle = StyleSheet.create({
   container: {
       marginVertical:10
-  },
-  subTitle: {
-      color: Colors.LightGrey, 
-      fontFamily: 'nunito-medium'
   }
 });
 
@@ -174,7 +161,6 @@ const cartStyles = StyleSheet.create({
       color: Colors.Primary
   },
   cartButtonText: {
-      fontFamily: 'outfit-bold',
       marginTop: 4,
       color: Colors.Primary
   }
@@ -188,12 +174,9 @@ const billStyles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   billName: {
-      fontFamily: 'nunito-medium',
       paddingBottom: 5,
   },
   billValue: {
-      fontFamily: 'nunito-medium',
-      color: Colors.LightGrey,
       textAlign: 'right'
   }
 });
@@ -210,7 +193,6 @@ const checkoutStyle = StyleSheet.create({
     alignItems: "center"
   },
   checkoutButtonText: {
-    fontFamily: 'nunito-bold',
     fontSize: 18,
     color: Colors.Secondary,
   }
