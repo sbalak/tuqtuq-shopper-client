@@ -58,7 +58,6 @@ export default function StoreDetails() {
         loadCartValue();
     }
     catch(error) {
-      console.log(error);
     } 
   }
   
@@ -71,7 +70,6 @@ export default function StoreDetails() {
         loadCartValue();
     }
     catch(error) {
-      console.log(error);
     } 
   }
 

@@ -1,20 +1,29 @@
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/hooks/useAuth';
-import { router, useNavigation } from 'expo-router';
+import { router, useFocusEffect, useNavigation } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/build/Ionicons';
 import { common } from '@/constants/Styles';
+import axios from 'axios';
 
 export default function index() {
-
   const { authState, logout } = useAuth();
   const navigation = useNavigation();
+  const [user, setUser] = useState([]);
   
   useEffect(() => {
     navigation.setOptions({ headerTitle: 'Settings' });
   }, []);
   
+  const loadUser = async() => {
+    try {
+      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/user/details?userId=${authState.userId}`);
+      setUser(response.data);
+    }
+    catch(error) {
+    } 
+  }
   const handleLogout = async () => {
     try {
       await logout();
@@ -22,6 +31,12 @@ export default function index() {
     catch (error) {
     }
   }
+  
+    useFocusEffect(
+      React.useCallback(() => {
+        loadUser();
+      }, [])
+    );
 
   return (
     <SafeAreaView style={common.safeArea}>
@@ -32,7 +47,15 @@ export default function index() {
         <View style={profile.container}>
           <Ionicons name="person-circle" size={80} color={Colors.Primary}/> 
           <View style={profile.info}>
-              <Text style={[common.defaultTitle, profile.title]}>Sidharth Balakrishnan</Text>
+              <Text style={[common.defaultTitle, profile.title]}>
+                {
+                  (!user.firstName || !user.lastName) ? (
+                    user.phone
+                  ) : (
+                    user.firstName + ' ' + user.lastName
+                  )
+                }
+              </Text>
               <Text style={common.text} onPress={() => router.navigate("/settings/profile")}>Edit Profile</Text>
           </View>        
         </View>
