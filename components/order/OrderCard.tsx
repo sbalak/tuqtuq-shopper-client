@@ -18,7 +18,7 @@ export default function OrderCard({order}: {order: any}) {
         )} />
         <View style={styles.amountRow}>
             <Text style={[common.text, {paddingTop:2.5}]}>{order.totalAmount}</Text>
-            <TouchableOpacity onPress={() => router.navigate('/order/'+ order.orderId)}>
+            <TouchableOpacity onPress={() => router.push('/order/'+ order.orderId)}>
                 <Ionicons name="arrow-forward-circle" size={24} color={Colors.Primary} />
             </TouchableOpacity>
         </View>

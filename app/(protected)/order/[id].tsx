@@ -49,7 +49,7 @@ export default function OrderDetails() {
                 
                 <View style={styles.divider}></View>
 
-                <View style={{ flexDirection: 'row' }}>
+                <View style={styles.dataRow}>
                   <Text style={[common.defaultText, styles.dataName]}>Item</Text>
                   <Text style={[common.defaultText, styles.dataQty]}>Qty.</Text>
                   <Text style={[common.defaultText, styles.dataAmount]}>Price</Text>
@@ -96,7 +96,7 @@ export default function OrderDetails() {
                   <Text style={[common.defaultTitle, styles.dataName]}>Transaction ID</Text>
                   <Text style={common.text}>PEETR892732</Text>
                 </View>
-                <View style={{ flexDirection: 'row' }}>
+                <View style={styles.dataRow}>
                   <Text style={[common.defaultTitle, styles.dataName]}>Status</Text>
                   <Text style={[common.defaultText, styles.success]}>Success</Text>
                 </View>
