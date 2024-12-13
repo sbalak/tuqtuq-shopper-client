@@ -20,7 +20,6 @@ export default function RestaurantNearby() {
       }
     }
     catch(error) {
-      console.log(error);
     } 
   }
 

@@ -18,7 +18,6 @@ export default function CartDetails() {
       setCart(response.data);
     }
     catch(error) {
-      console.log(error);
     } 
   }
   
@@ -28,7 +27,6 @@ export default function CartDetails() {
       router.replace('/order');
     }
     catch(error) {
-      console.log(error);
     } 
   }
   
@@ -38,7 +36,6 @@ export default function CartDetails() {
       load();
     }
     catch(error) {
-      console.log(error);
     } 
   }
   
@@ -48,7 +45,6 @@ export default function CartDetails() {
       load();
     }
     catch(error) {
-      console.log(error);
     } 
   }
 

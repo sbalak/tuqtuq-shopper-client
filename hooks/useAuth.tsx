@@ -60,12 +60,9 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
         axios.interceptors.response.use(
             response => response, 
             async (error) => {
-                console.log("error occured" + process.env.EXPO_PUBLIC_API_URL);
                 const originalRequest = error.config;
-                console.log(error.response);
                 let retry = 0;
-                if (error.response.status === 401 && !originalRequest._retry) {           
-                    console.log('Entering here')         
+                if (error.response.status === 401 && !originalRequest._retry) {
                     const accessToken = await SecureStore.getItemAsync('accessToken');                    
                     const refreshToken = await SecureStore.getItemAsync('refreshToken');
                     
@@ -93,15 +90,11 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     const login = async (username: string) => {
         try {
             const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/auth/login?username=${username}`);
-            console.log("Loggin in...");
-            console.log(JSON.stringify(response));
             const data = await response.data;
 
             if (data.status === 401){
                 return data;
             }
-
-            console.log(data);
             
             return data;
         } catch (error) {
@@ -110,10 +103,8 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     }
 
     const verify = async (username: string, code: string) => {
-        try {            
-            console.log('entering verify');
+        try {
             const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/auth/verify?username=${username}&code=${code}`);
-            console.log('verify response ' + JSON.stringify(response))
             const data = await response.data;
 
             if (data.status === 401){

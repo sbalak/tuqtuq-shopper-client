@@ -22,7 +22,6 @@ export default function StoreDetails() {
       setRestaurant(response.data);
     }
     catch(error) {
-      console.log(error);
     } 
   }
   
@@ -38,7 +37,6 @@ export default function StoreDetails() {
       }
     }
     catch(error) {
-      console.log(error);
     } 
   }
   
@@ -48,7 +46,6 @@ export default function StoreDetails() {
       setCartValue(response.data);
     }
     catch(error) {
-      console.log(error);
     } 
   }
 

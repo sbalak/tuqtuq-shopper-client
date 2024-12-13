@@ -24,7 +24,7 @@ const LocationProvider: React.FC<Props> = ({ children }) => {
         const loadLocality = async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status != 'granted') {
-              console.log("Please grant location permissions");
+              // Please grant location permissions
               return;
             }
             
@@ -51,7 +51,6 @@ const LocationProvider: React.FC<Props> = ({ children }) => {
 
             return response;
         } catch (error) {
-            console.log((error as any).response.data);
         }
     }
 

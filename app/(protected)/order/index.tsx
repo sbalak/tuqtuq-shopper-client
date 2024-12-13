@@ -20,11 +20,9 @@ export default function Index() {
       const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/order/list?userId=${authState.userId}&page=${currentPage}&pageSize=10`);
       if (response.data.length > 0) {
         if (currentPage === 1) {
-          console.log('Checking for page 1 - ' + currentPage + JSON.stringify(response.data));
           setOrders(response.data);
         }
         else {
-          console.log('Checking for page x - ' + currentPage + JSON.stringify(response.data));
           setOrders((items) => items.concat(response.data));
         }
         setCurrentPage(currentPage + 1);
@@ -32,7 +30,6 @@ export default function Index() {
       setIsLoading(false);
     }
     catch(error) {
-      console.log(error);
     } 
   }
 

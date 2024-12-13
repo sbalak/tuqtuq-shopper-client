@@ -20,7 +20,6 @@ export default function index() {
       await logout();
     }
     catch (error) {
-      console.log(error);
     }
   }
 

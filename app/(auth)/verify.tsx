@@ -19,9 +19,7 @@ const verify = () => {
 
   const handleVerify = async () => {
     try {
-      console.log('called handleVerify - ' + username.toString() + ', ' + code)
       const result = await verify(username.toString(), code);
-      console.log('Result' + JSON.stringify(result));
     } catch (error) {
     }
   }
@@ -54,7 +52,6 @@ const verify = () => {
         focusStickBlinkingDuration={500}
         onTextChange={(text) => setCode(text)}
         onFilled={(text) => {
-          console.log(text);
           handleVerify();
         }}
         textInputProps={{

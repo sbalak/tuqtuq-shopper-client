@@ -21,7 +21,6 @@ export const Login = () => {
       }
       else{
         const result = await login(username);
-        console.log('throw from login: ' + result);
         router.navigate('/verify?username='+username);
         if (result && result.status === 401) {
           Alert.alert('Error!', "Unauthorized, please check your username and password.");

@@ -21,7 +21,6 @@ export default function OrderDetails() {
         setOrder(response.data);
       }
       catch(error) {
-        console.log(error);
       } 
     }
   
