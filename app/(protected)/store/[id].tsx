@@ -21,11 +21,9 @@ export default function StoreDetails() {
   const loadRestaurantDetails = async() => {
     try {
       const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/restaurant/details?restaurantId=${id}&latitude=${locationState.latitude}&longitude=${locationState.longitude}`);
-      console.log(response);
       setRestaurant(response.data);
     }
     catch(error) {
-      console.log(error);
     } 
   }
   
