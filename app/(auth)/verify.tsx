@@ -11,16 +11,21 @@ import { common } from '@/constants/Styles';
 
 const verify = () => {
   const { username } = useLocalSearchParams();
-  const [ code, setCode ] = useState('');
   const [ key, setKey ] = useState(1);
   const [ expired, setExpired ] = useState(false);
+  const [ verificationFailed, setVerificationFailed ] = useState(false);
   const { verify } = useAuth();
   const { top } = useSafeAreaInsets();
 
-  const handleVerify = async () => {
+  const handleVerify = async (code: string) => {
     try {
       const result = await verify(username.toString(), code);
+      
+      if (!result.accessToken && !result.refreshToken) {
+        setVerificationFailed(true);
+      }
     } catch (error) {
+      setVerificationFailed(true);
     }
   }
 
@@ -46,13 +51,21 @@ const verify = () => {
         <Text style={brand.title}>{"{ "}takku{" }"}</Text>
       </View>
       <Text style={[common.text, styles.text]}>We have sent a verification code to +91 {username}</Text>
+      { verificationFailed ?  
+      (
+        <Text style={[common.text, styles.text, { marginTop: 10 }]}>Incorrect OTP, please try again</Text>
+      ) : (
+        ''
+      ) }
       <OtpInput
         numberOfDigits={6}
         focusColor={Colors.Primary}
         focusStickBlinkingDuration={500}
-        onTextChange={(text) => setCode(text)}
+        onTextChange={(text) => {
+          setVerificationFailed(false);
+        }}
         onFilled={(text) => {
-          handleVerify();
+          handleVerify(text);
         }}
         textInputProps={{
           accessibilityLabel: "One-Time Password",

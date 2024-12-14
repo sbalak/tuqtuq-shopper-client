@@ -112,7 +112,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
             }
 
             const decoded = jwtDecode(data.accessToken);
-
+            
             await SecureStore.setItem('accessToken', data.accessToken);
             await SecureStore.setItem('refreshToken', data.refreshToken);
             await SecureStore.setItem('userId', String(decoded.Id));

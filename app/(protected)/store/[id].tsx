@@ -6,9 +6,11 @@ import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '@/hooks/useAuth';
 import { common } from '@/constants/Styles';
+import { useLocation } from '@/hooks/useLocation';
 
 export default function StoreDetails() {
   const { authState } = useAuth();
+  const { locationState } = useLocation();
   const { id } = useLocalSearchParams();
   const [restaurant, setRestaurant] = useState([]);
   const [restaurantMenu, setRestaurantMenu] = useState([]);
@@ -18,10 +20,12 @@ export default function StoreDetails() {
 
   const loadRestaurantDetails = async() => {
     try {
-      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/restaurant/details?userId=${authState.userId}&restaurantId=${id}`);
+      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/restaurant/details?restaurantId=${id}&latitude=${locationState.latitude}&longitude=${locationState.longitude}`);
+      console.log(response);
       setRestaurant(response.data);
     }
     catch(error) {
+      console.log(error);
     } 
   }
   
@@ -141,7 +145,7 @@ export default function StoreDetails() {
           (search.length === 0 ?
           (<View style={restaurantStyles.restaurantcontainer}>
             <View style={restaurantStyles.restaurantCard} >
-              <Text style={common.text}>{restaurant.locality} • {restaurant.city} • 0.22 kms</Text>
+              <Text style={common.text}>{restaurant.locality} • {restaurant.city} • {restaurant.distance} kms</Text>
               <Text style={common.text}>{restaurant.cuisine}</Text>
             </View>
           </View>) : (<View></View>))

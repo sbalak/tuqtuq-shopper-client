@@ -16,7 +16,7 @@ export const Login = () => {
 
   const handleLogin = async () => {
     try {
-      if (!username) {
+      if (!username || username.length < 10) {
         Alert.alert('Error!', "Please enter your phone number");
       }
       else{
@@ -59,8 +59,9 @@ export const Login = () => {
                           const regex = new RegExp(/^[123456789]\d{9}$/);
                           const isValid = regex.test(text);
 
-                          if (text.includes('.')) {
+                          if (text.includes('.') || text.includes(',')) {
                             text = text.replace('.', '');
+                            text = text.replace(',', '');
                           }
 
                           if (text.length > 10) {
