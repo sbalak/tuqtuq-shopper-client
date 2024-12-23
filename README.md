@@ -16,3 +16,6 @@ DEPENDENCIES
 5. npx expo install react-native-safe-area-context
 6. npm install -g npm-check-updates
 7. npm install react-native-dotenv - NOT NEEDED
+8. npm install react-native-otp-entry
+9. npm install react-native-countdown-circle-timer
+10. npm install jwt-decode

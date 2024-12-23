@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet, Alert, Platform } from 'react-native'
+import { View, Text, TouchableOpacity, Image, StyleSheet, Alert, Platform, StatusBar } from 'react-native'
 import React from 'react'
 import { router } from 'expo-router'
 import { Colors } from '@/constants/Colors'
@@ -13,6 +13,7 @@ const StoreHeader = () => {
 
     return (
         <View style={[styles.container, {paddingTop: top}]}>
+          <StatusBar barStyle={'light-content'} backgroundColor={Colors.Primary} />
             <TouchableOpacity onPress={() => {}}>
                 <Image style={styles.locator} source={require('@/assets/images/location.png')} />
             </TouchableOpacity>
