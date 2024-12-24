@@ -3,6 +3,7 @@ import React from 'react'
 import { Colors } from '@/constants/Colors';
 import { router } from 'expo-router';
 import { common } from '@/constants/Styles';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function RestaurantNearbyCard({restaurant}: {restaurant: any}) {
   return (    
@@ -12,6 +13,10 @@ export default function RestaurantNearbyCard({restaurant}: {restaurant: any}) {
             <Text style={common.subHeading}>{restaurant.name}</Text>
             <Text style={common.text}>{restaurant.locality}</Text>
             <Text style={common.text}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
+            <View style={{flexDirection: 'row'}}>
+                <Ionicons name="timer-outline" size={14} color={Colors.LightGrey} style={{paddingTop: 2, paddingRight: 5}} /> 
+                <Text style={common.text}>Pickup in {restaurant.preparationTime} mins</Text>
+            </View>
         </View>
     </TouchableOpacity>
   )
