@@ -34,7 +34,7 @@ export const Login = () => {
   return (
     <View style={[styles.container, {paddingTop: top}]}>
       <View style={brand.container}>
-        <Text style={brand.title}>{"{"}tuqtuq{"}"}</Text>
+      <Text style={brand.title}>tuQ tuQ</Text>
       </View>
       <View style={signin.container}>
         <Text style={[common.defaultHeading, signin.title]}>India's First Food App for Pick-Up</Text>
@@ -114,7 +114,7 @@ const brand = StyleSheet.create({
   },
   title: {
     color: Colors.White,
-    fontFamily: 'barcelona',
+    fontFamily: 'WinterHalf',
     fontSize: 80,
   }
 });

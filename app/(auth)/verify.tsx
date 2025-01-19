@@ -48,7 +48,7 @@ const verify = () => {
   return (
     <View style={[styles.container, {paddingTop: top}]}>
       <View style={brand.container}>
-        <Text style={brand.title}>{"{"}tuqtuq{"}"}</Text>
+        <Text style={brand.title}>tuQ tuQ</Text>
       </View>
       <Text style={[common.text, styles.text]}>We have sent a verification code to +91 {username}</Text>
       { verificationFailed ?  
@@ -137,7 +137,7 @@ const brand = StyleSheet.create({
   },
   title: {
     color: Colors.Black,
-    fontFamily: 'barcelona',
+    fontFamily: 'WinterHalf',
     fontSize: 80,
   }
 });

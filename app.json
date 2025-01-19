@@ -37,8 +37,7 @@
       [
         "expo-font", {
           "fonts": [
-            "./assets/fonts/Barcelona.ttf",
-            "./assets/fonts/DynaPuff-SemiBold.ttf",
+            "./assets/fonts/WinterHalf.ttf",
             "./assets/fonts/NunitoSansBold.ttf",
             "./assets/fonts/NunitoSansMedium.ttf",
             "./assets/fonts/Outfit-Bold.ttf"
