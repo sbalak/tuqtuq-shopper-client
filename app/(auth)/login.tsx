@@ -34,7 +34,7 @@ export const Login = () => {
   return (
     <View style={[styles.container, {paddingTop: top}]}>
       <View style={brand.container}>
-        <Text style={brand.title}>{"{"}takku{"}"}</Text>
+        <Text style={brand.title}>{"{"}tuqtuq{"}"}</Text>
       </View>
       <View style={signin.container}>
         <Text style={[common.defaultHeading, signin.title]}>India's First Food App for Pick-Up</Text>

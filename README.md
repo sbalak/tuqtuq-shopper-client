@@ -1,6 +1,6 @@
 PROJECT SETUP
 
-1. npx create-expo-app@latest shopper-client
+1. npx create-expo-app@latest tuqtuq-shopper-client
 2. npm run reset-project
 3. delete app-example folder
 4. delete all components

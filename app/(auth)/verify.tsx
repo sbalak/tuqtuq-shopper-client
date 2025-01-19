@@ -48,7 +48,7 @@ const verify = () => {
   return (
     <View style={[styles.container, {paddingTop: top}]}>
       <View style={brand.container}>
-        <Text style={brand.title}>{"{"}takku{"}"}</Text>
+        <Text style={brand.title}>{"{"}tuqtuq{"}"}</Text>
       </View>
       <Text style={[common.text, styles.text]}>We have sent a verification code to +91 {username}</Text>
       { verificationFailed ?  
