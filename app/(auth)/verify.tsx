@@ -39,16 +39,16 @@ const verify = () => {
 
   const renderTime = ({ remainingTime }) => {
     if (remainingTime === 0){ 
-      return <Text style={[common.defaultHeading, styles.countdownText]}>Too late...</Text>
+      return <Text style={styles.countdownText}>Too late...</Text>
     }
 
-    return <Text style={[common.defaultHeading, styles.countdownText]}>{remainingTime}</Text>
+    return <Text style={styles.countdownText}>{remainingTime}</Text>
   }
 
   return (
     <View style={[styles.container, {paddingTop: top}]}>
       <View style={brand.container}>
-        <Text style={brand.title}>tuQ tuQ</Text>
+      <Text style={brand.title}>tuQ </Text><Text style={brand.title}>tuQ</Text>
       </View>
       <Text style={[common.text, styles.text]}>We have sent a verification code to +91 {username}</Text>
       { verificationFailed ?  
@@ -106,7 +106,7 @@ const verify = () => {
       <View style={goback.container}>
         <TouchableOpacity style={goback.button} onPress={() => router.back()}>
           <Ionicons name="chevron-back" size={24} color={Colors.White} /> 
-          <Text style={[common.defaultText, goback.buttonText]}>Go Back</Text>
+          <Text style={goback.buttonText}>Go Back</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   countdownText: {
+    fontFamily: common.defaultHeading,
     fontSize: 24, 
     color: Colors.Primary
   }
@@ -130,7 +131,8 @@ const styles = StyleSheet.create({
 
 const brand = StyleSheet.create({
   container: {
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: "center",
     backgroundColor: Colors.White,
     paddingHorizontal: 10,
     paddingVertical: 30
@@ -138,7 +140,8 @@ const brand = StyleSheet.create({
   title: {
     color: Colors.Black,
     fontFamily: 'WinterHalf',
-    fontSize: 80,
+    fontSize: 60,
+    transform: [{ rotate: '-10deg' }]
   }
 });
 
@@ -147,7 +150,7 @@ const otp = StyleSheet.create({
     padding: 40
   },
   pinCodeText: {
-    fontFamily: 'outfit-bold',
+    fontFamily: common.defaultTitle,
     color: Colors.Primary
   }
 })
@@ -168,6 +171,7 @@ const goback = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonText: {
+    fontFamily: common.defaultText,
     color: Colors.White,
     fontSize: 18,
     marginLeft: 10

@@ -7,25 +7,23 @@ export const common = {
     container: {
         paddingHorizontal: 10
     },
-    defaultTitle: {
-        fontFamily: 'outfit-bold'
-    },
+    
+    defaultTitle: 'outfit-bold',
     title: {
         fontFamily: 'outfit-bold',
         fontSize:20,
     },
+    
     subTitle: {
         fontFamily: 'outfit-bold',
         fontSize: 18
     },
-    defaultHeading: {
-        fontFamily: 'nunito-bold'
-    },
+
+    defaultHeading: 'nunito-bold',
+    
+    defaultText: 'nunito-medium',
     text: {
         fontFamily: 'nunito-medium',
         color: Colors.LightGrey
     },
-    defaultText: {
-        fontFamily: 'nunito-medium',
-    }
 }

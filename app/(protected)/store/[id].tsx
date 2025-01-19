@@ -90,7 +90,7 @@ export default function StoreDetails() {
   const renderItem: ListRenderItem<any> = ({item, index}) => (
     <View style={{backgroundColor: Colors.White, padding: 10, flexDirection: 'row'}}>
       <View style={{flex: 1}}>
-        <Text style={[common.defaultHeading, foodStyles.foodTitle]}>{item.name}</Text>
+        <Text style={foodStyles.foodTitle}>{item.name}</Text>
         <Text style={[common.text, foodStyles.foodSubtitle]}>Flavourful biriyani with a twist of chilli and salty chicken fry</Text>
         <Text style={[common.text, foodStyles.foodSubtitle]}>₹{item.price}</Text>
         <Image style={foodStyles.foodType} source={require('@/assets/images/veg.png')} />
@@ -104,7 +104,7 @@ export default function StoreDetails() {
           <TouchableOpacity onPress={() => handleRemoveItem(restaurant.id, item.id)}>
               <Text style={cartStyles.cartButton}><Ionicons name="remove-sharp" size={24} color="{color}" /></Text>
           </TouchableOpacity>
-          <Text style={[common.defaultTitle, cartStyles.cartButtonText]}>{item.quantity}</Text>
+          <Text style={cartStyles.cartButtonText}>{item.quantity}</Text>
           <TouchableOpacity onPress={() => handleAddItem(restaurant.id, item.id)}>
               <Text style={cartStyles.cartButton}><Ionicons name="add-sharp" size={24} color="{color}" /></Text>
           </TouchableOpacity>
@@ -153,7 +153,7 @@ export default function StoreDetails() {
       {cartValue.quantity > 0 ? (
         <View style={checkoutStyles.checkoutButton}>
           <TouchableOpacity onPress={() => router.push('/cart')}>
-            <Text style={[common.defaultHeading, checkoutStyles.checkoutButtonText]}>{cartValue.quantity} item{cartValue.quantity > 1 ? 's': null} added</Text>
+            <Text style={checkoutStyles.checkoutButtonText}>{cartValue.quantity} item{cartValue.quantity > 1 ? 's': null} added</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push('/cart')}>
             <Ionicons name="arrow-forward-circle" size={30} color={Colors.Secondary} />
@@ -224,6 +224,7 @@ const foodStyles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   foodTitle: {
+    fontFamily: common.defaultHeading,
       fontSize: 16,
       width:250,
   },
@@ -270,6 +271,7 @@ const checkoutStyles = StyleSheet.create({
     alignItems: "center"
   },
   checkoutButtonText: {
+    fontFamily: common.defaultHeading,
     fontSize: 18,
     color: Colors.Secondary,
   }
@@ -291,6 +293,7 @@ const cartStyles = StyleSheet.create({
     color: Colors.Primary
   },
   cartButtonText: {
+    fontFamily: common.defaultTitle,
     marginTop: 4,
     color: Colors.Primary
   }

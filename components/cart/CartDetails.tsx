@@ -67,7 +67,7 @@ export default function CartDetails() {
                     renderItem={({item, index})=>( 
                       <View>
                           <View style={styles.dataRow}>
-                              <Text style={common.defaultText}>{item.foodName}</Text>
+                              <Text style={{fontFamily: common.defaultText}}>{item.foodName}</Text>
                               <Text style={common.text}>{item.amount}</Text>
                           </View>
                           
@@ -77,7 +77,7 @@ export default function CartDetails() {
                                   <TouchableOpacity onPress={() => handleRemoveItem(cart.restaurantId, item.foodItemId)}>
                                       <Text style={cartStyles.cartButton}><Ionicons name="remove-circle" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
-                                  <Text style={[common.defaultTitle, cartStyles.cartButtonText]}>{item.quantity}</Text>
+                                  <Text style={cartStyles.cartButtonText}>{item.quantity}</Text>
                                   <TouchableOpacity onPress={() => handleAddItem(cart.restaurantId, item.foodItemId)}>
                                       <Text style={cartStyles.cartButton}><Ionicons name="add-circle" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
@@ -92,12 +92,12 @@ export default function CartDetails() {
       </View>
       <View style={styles.detailsContainer}>
           <View style={billStyles.billColumn}>
-            <Text style={[common.defaultText, billStyles.billName]}>Total Tax</Text>
-            <Text style={[common.defaultText, billStyles.billName]}>Total Bill</Text>
+            <Text style={billStyles.billName}>Total Tax</Text>
+            <Text style={billStyles.billName}>Total Bill</Text>
           </View>
           <View style={billStyles.billColumn}>
-            <Text style={[common.text, billStyles.billValue]}>{cart.totalTaxAmount}</Text>
-            <Text style={[common.text, billStyles.billValue]}>{cart.totalAmount}</Text>
+            <Text style={billStyles.billValue}>{cart.totalTaxAmount}</Text>
+            <Text style={billStyles.billValue}>{cart.totalAmount}</Text>
           </View>
       </View>
       
@@ -105,12 +105,12 @@ export default function CartDetails() {
         <Text style={common.title}>Note</Text>
       </View>
       <View style={styles.detailsContainer}>
-        <Text style={common.defaultText}>Please review your cart carefully to avoid any cancellations</Text>
+        <Text style={{fontFamily: common.defaultText}}>Please review your cart carefully to avoid any cancellations</Text>
       </View>
       
       <View style={checkoutStyle.checkoutButton}>
         <TouchableOpacity onPress={() => handleCheckout()}>
-          <Text style={[common.defaultHeading, checkoutStyle.checkoutButtonText]}>Checkout</Text>
+          <Text style={checkoutStyle.checkoutButtonText}>Checkout</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -157,6 +157,7 @@ const cartStyles = StyleSheet.create({
       color: Colors.Primary
   },
   cartButtonText: {
+      fontFamily: common.defaultTitle,
       marginTop: 4,
       color: Colors.Primary
   }
@@ -170,9 +171,11 @@ const billStyles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   billName: {
+    fontFamily: common.defaultText,
       paddingBottom: 5,
   },
   billValue: {
+    fontFamily: common.defaultText,
       textAlign: 'right'
   }
 });
@@ -189,6 +192,7 @@ const checkoutStyle = StyleSheet.create({
     alignItems: "center"
   },
   checkoutButtonText: {
+    fontFamily: common.defaultHeading,
     fontSize: 18,
     color: Colors.Secondary,
   }

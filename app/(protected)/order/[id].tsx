@@ -41,7 +41,7 @@ export default function OrderDetails() {
 
               <View style={styles.detailsContainer}>
                 <View style={styles.dataRow}>
-                  <Text style={[common.defaultHeading, styles.dataName]}>Order ID</Text>
+                  <Text style={styles.dataName}>Order ID</Text>
                   <Text style={common.text}>PEEKY892732</Text>
                 </View>
                 <Text style={[common.title, styles.titleContainer]}>PeeKay Coffee</Text>
@@ -49,9 +49,9 @@ export default function OrderDetails() {
                 <View style={styles.divider}></View>
 
                 <View style={styles.dataRow}>
-                  <Text style={[common.defaultText, styles.dataName]}>Item</Text>
-                  <Text style={[common.defaultText, styles.dataQty]}>Qty.</Text>
-                  <Text style={[common.defaultText, styles.dataAmount]}>Price</Text>
+                  <Text style={styles.dataName}>Item</Text>
+                  <Text style={styles.dataQty}>Qty.</Text>
+                  <Text style={styles.dataAmount}>Price</Text>
                 </View>
                 
                 <View style={styles.divider}></View>
@@ -84,20 +84,20 @@ export default function OrderDetails() {
               <Text style={[common.title, styles.titleContainer]}>Payment Details</Text>
               <View style={styles.detailsContainer}>
                 <View style={styles.dataRow}>
-                  <Text style={[common.defaultHeading, styles.dataName]}>Paid Via</Text>
+                  <Text style={styles.dataName}>Paid Via</Text>
                   <Text style={common.text}>Google Pay</Text>
                 </View>
                 <View style={styles.dataRow}>
-                  <Text style={[common.defaultHeading, styles.dataName]}>Amount Paid</Text>
+                  <Text style={styles.dataName}>Amount Paid</Text>
                   <Text style={common.text}>{order.totalAmount}</Text>
                 </View>
                 <View style={styles.dataRow}>
-                  <Text style={[common.defaultHeading, styles.dataName]}>Transaction ID</Text>
+                  <Text style={styles.dataName}>Transaction ID</Text>
                   <Text style={common.text}>PEETR892732</Text>
                 </View>
                 <View style={styles.dataRow}>
-                  <Text style={[common.defaultHeading, styles.dataName]}>Status</Text>
-                  <Text style={[common.defaultText, styles.success]}>Success</Text>
+                  <Text style={styles.dataName}>Status</Text>
+                  <Text style={styles.success}>Success</Text>
                 </View>
               </View>
             </ScrollView>
@@ -128,15 +128,19 @@ export default function OrderDetails() {
     width: 260
   },
   dataName: {
+    fontFamily: common.defaultHeading,
     width: 190
   },
   dataQty: {
+    fontFamily: common.defaultText,
     width: 70
   },
   dataAmount: {
+    fontFamily: common.defaultText,
     width: 110
   },
   success: {
+    fontFamily: common.defaultText,
     color: Colors.White, 
     paddingHorizontal:5, 
     paddingVertical:2.5, 
