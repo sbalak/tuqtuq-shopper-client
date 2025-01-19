@@ -68,7 +68,7 @@ export default function Index() {
                 onEndReachedThreshold={0.5}
                 ListHeaderComponent={            
                   <View style={styles.titleContainer}>
-                    <Text style={common.heading}>Past Orders</Text>
+                    <Text style={common.title}>Past Orders</Text>
                   </View>
                 }
                 ListFooterComponent={listFooterComponent}

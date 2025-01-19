@@ -95,7 +95,7 @@ export default function list() {
                     </View>
                     <View style={styles.titleContainer}>
                       <Ionicons name="location-sharp" size={24} color={Colors.Primary} /> 
-                      <Text style={common.heading}>Nearby Hotspots</Text>
+                      <Text style={common.title}>Nearby Hotspots</Text>
                     </View>
                   </View> 
                 }

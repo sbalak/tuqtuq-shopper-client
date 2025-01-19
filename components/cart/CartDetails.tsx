@@ -57,7 +57,7 @@ export default function CartDetails() {
   return (
     <View>
       <View style={titleStyle.container}>
-          <Text style={common.heading}>{cart.restaurantName}</Text>
+          <Text style={common.title}>{cart.restaurantName}</Text>
           <Text style={common.text}>{cart.restaurantLocality}</Text>
       </View>
       <View style={styles.detailsContainer}>
@@ -77,7 +77,7 @@ export default function CartDetails() {
                                   <TouchableOpacity onPress={() => handleRemoveItem(cart.restaurantId, item.foodItemId)}>
                                       <Text style={cartStyles.cartButton}><Ionicons name="remove-circle" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
-                                  <Text style={[common.defaultHeading, cartStyles.cartButtonText]}>{item.quantity}</Text>
+                                  <Text style={[common.defaultTitle, cartStyles.cartButtonText]}>{item.quantity}</Text>
                                   <TouchableOpacity onPress={() => handleAddItem(cart.restaurantId, item.foodItemId)}>
                                       <Text style={cartStyles.cartButton}><Ionicons name="add-circle" size={24} color="{color}" /></Text>
                                   </TouchableOpacity>
@@ -88,7 +88,7 @@ export default function CartDetails() {
           />
       </View>
       <View style={titleStyle.container}>
-        <Text style={common.heading}>Detailed Bill</Text>
+        <Text style={common.title}>Detailed Bill</Text>
       </View>
       <View style={styles.detailsContainer}>
           <View style={billStyles.billColumn}>
@@ -102,7 +102,7 @@ export default function CartDetails() {
       </View>
       
       <View style={titleStyle.container}>
-        <Text style={common.heading}>Note</Text>
+        <Text style={common.title}>Note</Text>
       </View>
       <View style={styles.detailsContainer}>
         <Text style={common.defaultText}>Please review your cart carefully to avoid any cancellations</Text>
@@ -110,7 +110,7 @@ export default function CartDetails() {
       
       <View style={checkoutStyle.checkoutButton}>
         <TouchableOpacity onPress={() => handleCheckout()}>
-          <Text style={[common.defaultTitle, checkoutStyle.checkoutButtonText]}>Checkout</Text>
+          <Text style={[common.defaultHeading, checkoutStyle.checkoutButtonText]}>Checkout</Text>
         </TouchableOpacity>
       </View>
     </View>

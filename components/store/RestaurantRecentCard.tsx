@@ -9,7 +9,7 @@ export default function RestaurantRecentCard({restaurant}: {restaurant: any}) {
   return (    
     <TouchableOpacity style={styles.restaurantContainer} onPress={() => router.push('/store/'+restaurant.id)}>
         <View>
-            <Text style={common.subHeading}>{restaurant.name}</Text>
+            <Text style={common.subTitle}>{restaurant.name}</Text>
             <Text style={[common.text, styles.restaurantSubtitle]}>{restaurant.locality}</Text>
             <Text style={[common.text, styles.restaurantSubtitle]}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
             <View style={{flexDirection: 'row'}}>

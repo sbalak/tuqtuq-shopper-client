@@ -7,18 +7,18 @@ export const common = {
     container: {
         paddingHorizontal: 10
     },
-    defaultHeading: {
+    defaultTitle: {
         fontFamily: 'outfit-bold'
     },
-    heading: {
+    title: {
         fontFamily: 'outfit-bold',
         fontSize:20,
     },
-    subHeading: {
+    subTitle: {
         fontFamily: 'outfit-bold',
         fontSize: 18
     },
-    defaultTitle: {
+    defaultHeading: {
         fontFamily: 'nunito-bold'
     },
     text: {

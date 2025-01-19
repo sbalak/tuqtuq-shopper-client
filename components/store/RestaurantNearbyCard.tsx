@@ -10,7 +10,7 @@ export default function RestaurantNearbyCard({restaurant}: {restaurant: any}) {
     <TouchableOpacity style={styles.restaurantContainer} onPress={() => router.push('/store/'+restaurant.id)}>
         <Image source={{uri:restaurant.photo}} style={styles.restaurantImage} />
         <View style={styles.restaurantInfo}>
-            <Text style={common.subHeading}>{restaurant.name}</Text>
+            <Text style={common.subTitle}>{restaurant.name}</Text>
             <Text style={common.text}>{restaurant.locality}</Text>
             <Text style={common.text}>{restaurant.cuisine} • {restaurant.distance} kms</Text>
             <View style={{flexDirection: 'row'}}>

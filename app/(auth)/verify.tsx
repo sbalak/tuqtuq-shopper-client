@@ -39,10 +39,10 @@ const verify = () => {
 
   const renderTime = ({ remainingTime }) => {
     if (remainingTime === 0){ 
-      return <Text style={[common.defaultTitle, styles.countdownText]}>Too late...</Text>
+      return <Text style={[common.defaultHeading, styles.countdownText]}>Too late...</Text>
     }
 
-    return <Text style={[common.defaultTitle, styles.countdownText]}>{remainingTime}</Text>
+    return <Text style={[common.defaultHeading, styles.countdownText]}>{remainingTime}</Text>
   }
 
   return (

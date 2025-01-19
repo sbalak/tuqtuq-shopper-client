@@ -8,7 +8,7 @@ import { common } from '@/constants/Styles';
 export default function OrderCard({order}: {order: any}) {
   return (    
     <View style={styles.container}>
-        <Text style={common.subHeading}>{order.restaurantName}</Text>
+        <Text style={common.subTitle}>{order.restaurantName}</Text>
         <Text style={common.text}>{order.restaurantLocality}</Text>
         <FlatList data={order.orderItems} style={{paddingVertical:10}} scrollEnabled={false} renderItem={({item, index})=>(
             <View style={{flexDirection: 'row'}}>

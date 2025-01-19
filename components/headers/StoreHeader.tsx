@@ -18,8 +18,8 @@ const StoreHeader = () => {
                 <Image style={styles.locator} source={require('@/assets/images/location.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.titleContainer} onPress={setLocality}>
-                <Text style={[common.defaultTitle, {color: Colors.LightGrey}]}>Pickup • Now</Text>
-                <Text style={common.defaultTitle}>{locationState.locality}</Text>
+                <Text style={[common.defaultHeading, {color: Colors.LightGrey}]}>Pickup • Now</Text>
+                <Text style={common.defaultHeading}>{locationState.locality}</Text>
             
             </TouchableOpacity>
             <TouchableOpacity style={styles.searchButton} onPress={() => router.push('/store/list')}>

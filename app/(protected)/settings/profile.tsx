@@ -52,11 +52,11 @@ export default function profile() {
     <SafeAreaView style={common.safeArea}>
       <ScrollView style={common.container}>
         <View style={styles.titleContainer}>
-          <Text style={common.heading}>Edit Profile</Text>
+          <Text style={common.title}>Edit Profile</Text>
         </View>
         <View style={styles.detailsContainer}>
           <View style={styles.inputSection}>
-            <Text style={[styles.textInputLabel, common.defaultTitle]}>First Name</Text>
+            <Text style={[styles.textInputLabel, common.defaultHeading]}>First Name</Text>
             <View style={styles.textInput}>
             <TextInput 
                 style={[common.text, styles.textInputBox]} 
@@ -72,7 +72,7 @@ export default function profile() {
             </View>
           </View>
           <View style={styles.inputSection}>
-            <Text style={[styles.textInputLabel, common.defaultTitle]}>Last Name</Text>
+            <Text style={[styles.textInputLabel, common.defaultHeading]}>Last Name</Text>
             <View style={styles.textInput}>
               <TextInput 
                 style={[common.text, styles.textInputBox]} 
@@ -88,7 +88,7 @@ export default function profile() {
             </View>
           </View>
           <View style={styles.inputSection}>
-            <Text style={[styles.textInputLabel, common.defaultTitle]}>Phone</Text>
+            <Text style={[styles.textInputLabel, common.defaultHeading]}>Phone</Text>
             <View style={styles.textInput}>
               <TextInput style={[common.text, styles.textInputBox]} editable={false} value={user.phone} />
             </View>

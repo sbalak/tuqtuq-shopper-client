@@ -36,7 +36,7 @@ export default function RestaurantRecent() {
     <View>
         <View style={styles.titleContainer}>
             <Ionicons name="star" size={24} color="#FFB300" />
-            <Text style={common.heading}>Your Recent Visits</Text>
+            <Text style={common.title}>Your Recent Visits</Text>
         </View>
         <FlatList data={restaurants} 
                   horizontal={true} 

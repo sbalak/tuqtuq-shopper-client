@@ -37,11 +37,11 @@ export const Login = () => {
       <Text style={brand.title}>tuQ tuQ</Text>
       </View>
       <View style={signin.container}>
-        <Text style={[common.defaultHeading, signin.title]}>India's First Food App for Pick-Up</Text>
+        <Text style={[common.defaultTitle, signin.title]}>India's First Food App for Pick-Up</Text>
         <View style={signin.subTitleContainer}>
           <View style={signin.subTitleDivider} />
           <View>
-            <Text style={[common.defaultTitle, signin.subTitleText]}>Log in or sign up</Text>
+            <Text style={[common.defaultHeading, signin.subTitleText]}>Log in or sign up</Text>
           </View>
           <View style={signin.subTitleDivider} />
         </View>

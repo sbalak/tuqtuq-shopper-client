@@ -42,12 +42,12 @@ export default function index() {
     <SafeAreaView style={common.safeArea}>
       <ScrollView style={common.container}>
         <View style={styles.titleContainer}>
-            <Text style={common.heading}>Your Profile</Text>
+            <Text style={common.title}>Your Profile</Text>
         </View>
         <View style={profile.container}>
           <Ionicons name="person-circle" size={80} color={Colors.Primary}/> 
           <View style={profile.info}>
-              <Text style={[common.defaultTitle, profile.title]}>
+              <Text style={[common.defaultHeading, profile.title]}>
                 {
                   (!user.firstName || !user.lastName) ? (
                     user.phone
