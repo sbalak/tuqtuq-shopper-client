@@ -44,7 +44,7 @@ export default function OrderDetails() {
                   <Text style={styles.dataName}>Order ID</Text>
                   <Text style={common.text}>PEEKY892732</Text>
                 </View>
-                <Text style={[common.title, styles.titleContainer]}>PeeKay Coffee</Text>
+                <Text style={[common.subTitle, styles.titleContainer]}>PeeKay Coffee</Text>
                 
                 <View style={styles.divider}></View>
 

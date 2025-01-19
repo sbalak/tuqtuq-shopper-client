@@ -8,15 +8,15 @@ export const common = {
         paddingHorizontal: 10
     },
     
-    defaultTitle: 'outfit-bold',
+    defaultTitle: 'outfit-medium',
     title: {
-        fontFamily: 'outfit-bold',
-        fontSize:20,
+        fontFamily: 'outfit-medium',
+        fontSize:18,
     },
     
     subTitle: {
-        fontFamily: 'outfit-bold',
-        fontSize: 18
+        fontFamily: 'outfit-medium',
+        fontSize: 16
     },
 
     defaultHeading: 'nunito-bold',

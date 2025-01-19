@@ -40,7 +40,8 @@
             "./assets/fonts/WinterHalf.ttf",
             "./assets/fonts/NunitoSansBold.ttf",
             "./assets/fonts/NunitoSansMedium.ttf",
-            "./assets/fonts/Outfit-Bold.ttf"
+            "./assets/fonts/Outfit-Bold.ttf",
+            "./assets/fonts/Outfit-Medium.ttf"
           ]
         }
       ],

@@ -11,7 +11,8 @@ export default function _layout() {
     'WinterHalf': require('./../assets/fonts/WinterHalf.ttf'),
     'nunito-medium': require('./../assets/fonts/NunitoSansMedium.ttf'),
     'nunito-bold': require('./../assets/fonts/NunitoSansBold.ttf'),
-    'outfit-bold': require('./../assets/fonts/Outfit-Bold.ttf')
+    'outfit-bold': require('./../assets/fonts/Outfit-Bold.ttf'),
+    'outfit-medium': require('./../assets/fonts/Outfit-Medium.ttf')
   });
   
   if (!fontsLoaded) {
